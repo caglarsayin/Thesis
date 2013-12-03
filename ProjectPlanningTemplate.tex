@@ -1,0 +1,411 @@
+\newcommand{\comment}[1]{}
+
+%\documentclass[a4paper,twocolumn,12pt]{article}
+
+%\documentclass[a4wide,12pt]{report}
+
+%\documentclass[a4wide,12pt]{article}
+%\documentclass[informasjonssikkerhet]{gucmasterproject}
+\documentclass[informationsecurity]{gucmasterproject}
+
+%\usepackage{pslatex} %% Doesn't seem to work - i.e. convert .eps to .pdf
+ 
+\usepackage[utf8]{inputenc}     % For utf8 encoded .tex files
+%\usepackage[latin1]{inputenc}
+\usepackage[british]{babel}     % For chapter headings etc.
+%\usepackage[pdftex]{graphicx}           % For inclusion of graphics
+
+%From http://math.uib.no/it/tips/
+   %% For grafikk
+    \usepackage{ifpdf}
+    \ifpdf
+      \usepackage[pdftex]{graphicx}
+      \usepackage{epstopdf}
+    \else
+      \usepackage[dvips]{graphicx}
+    \fi
+    %% Her kan du putte dine vanlige pakker og definisjoner
+
+
+
+%\usepackage[dvips]{hyperref}    % For cross references in pdf
+\usepackage{hyperref}
+\usepackage{mdwlist}
+\usepackage{url}
+\usepackage{here}
+
+\def\UrlFont{\tt}
+
+\begin{document}
+
+\thesistitle{MSc project plan template}
+\thesisauthor{Einar Snekkenes}
+\thesisdate{\gucmasterthesisdate}
+\useyear{2007}
+\makefrontpages % make the frontpages
+%\thesistitlepage % make the ordinary titlepage
+
+
+\comment{
+Front page - including
+"   HIG technical report front page including logos etc.
+"   The text: "MSc project plan"
+"   Title of project
+"   Name of author and contact details
+"   Date
+"   Version
+
+email address
+"   MAIS students must include "NISlab" as their affiliation.
+Date:22.10.2003
+
+Structure of MSc thesis project plan
+Gj�vik University College
+}
+
+
+\chapter*{Revision history}
+
+\begin{center}
+\begin{tabular}[H]{|l|p{35em}|}
+\hline
+Version \#  & Description of change (why, what where - a few sentences)\\
+\hline
+      0.1   & First version is made available via Fronter\\
+\hline
+\end{tabular}
+\end{center}
+\newpage
+
+\begin{abstract}
+Abstract (1/2 page)
+This document provides format and guidelines  for the 
+MSc project descriptions. The document has been produced using MikTeX and TeXnicCenter.
+
+The objective of the abstract is to provide the reader with an understanding of the work to be done and put him in the position to make a 'correct' decision regarding  reading/not reading the report.
+
+The abstract of the project description
+{\em must} include
+\begin{itemize}
+\item a summary of the problem description,
+\item motivation and 
+\item a summary of the planned contribution from the master project in terms of {\em new} results.
+\end{itemize}
+
+\paragraph{Control questions}
+\begin{enumerate}
+\item Does the abstract have a 'reasonable' length?
+\item Is it clear to a non expert (e.g. a typical reader of a newspaper) what problem is addressed?
+\item Does a person that has been working in the field find the text informative?
+\item Do the results that might be obtained have the potential to be interesting to a lot of people? How interesting to how many and why?
+\item Would a decision maker/manager be willing to pay NOK 400.000 to have the project completed (estimated salary costs + overheads) after having read the abstract?  Why/why not?
+\end{enumerate}
+
+\end{abstract}
+
+
+\tableofcontents
+
+\chapter{Contents of the project description}
+The project description must use the gucmasterproject class file and contain the following elements/chapters:
+\begin{itemize}
+\item[] Front page
+\item[] Table of contents
+\item[] Abstract
+\item[1] Introduction
+\item[1.1] Topic covered
+\item[1.2] Keywords
+\item[1.3] Problem description
+\item[1.4] Justification motivation and benefits
+\item[1.5] Research questions
+\item[1.6] Planned contributions
+\item[2]Related work
+\item[3] Choice of methods
+\item[4]Milestones, deliverables and resources
+\item[5]Feasibility study
+\item[6]Risk analysis
+\item[7]Ethical and legal considerations
+\item[] Bibliography
+\item[] Appendix
+\item[A] Acronyms and abbreviations
+
+\end{itemize}
+
+Each chapter must contain the information specified in this document and further explained in 
+lectures or included in lecture notes.
+
+\chapter{Introduction (1-2 pages)}
+The introduction chapter should not include detailed information on
+how you intend to solve the problem, what you're going to do etc.
+This belongs more in the 'method' and 'feasibility study' section
+of the research proposal.
+
+Make sure you read several of the past project proposals.
+Make your own judgment on how 'good' they are.
+
+\section{Topic covered by the project}
+This section specifies the general area of the project.
+It should preferably be understandable by everybody,
+also those not familiar with the field. (e.g. all your relations and friends).
+
+The purpose of the topic section is to:
+\begin{itemize}
+\item Very quickly give the reader some idea of the perspective taken
+with respect to problem addressed.  
+\item Help a reader to decide if the project
+is within the readers area of interest and scope.
+\item Help the author (you!) to see if he has the necessary skills,
+if he/she needs to get access to specific expertise etc.
+Do you have the right skills/ background/ knowledge
+to be able to carry out the project?
+\end{itemize}
+
+\paragraph{Control questions:}
+\begin{enumerate}
+\item Does it have the right length?
+\item Is it focused or is it just a non-focused brain dump going all over the place?
+\item Is it clear from the text what skills would be required/beneficial in order to do/participate in the project?
+\end{enumerate}
+
+
+\section{Keywords}
+There are several sources of keywords. Rather than 'inventing your own' you should select an appropriate set of keywords from a reputable source such as the one published by the IEEE computer society (IEEE Computer Society - Keywords).
+%\protect\url{http://www.computer.org/portal/site/ieeecs/menuitem.c5efb9b8ade9096b8a9ca0108bcd45f3/index.jsp?&pName=ieeecs_level1&path=ieeecs/publications/author/keywords&file=ACMtaxonomy.xml&xsl=generic.xsl&},
+The taxonomy by Avizienis et al\cite{Avizienis2004} provides an overview of of the subject area and an alternative set of keywords/classifications.
+
+\paragraph{Control questions:}
+\begin{enumerate}
+\item Does the collection of keywords 'pin down' the project or is it to 'wide'?
+\item Are the keywords too specific, making it difficult  for people with a closely related interest to recognize the keywords?
+\item Why is it likely that a person working in the field would use the keywords you have selected when doing a search in this area?
+\item Is the number of keywords appropriate?
+\end{enumerate}
+
+\section{Problem description}
+The one of the main and indecipherable problem in security discipline is formulating general threat definition and recognizing malicious activity and all this problems unsurprisingly reflect on information and computer security concept. Security is defined by system’s identification, which involve with purpose, crowd, design structures, network model and so on, and today’s information system which is designed with various architectural forms is protected against malware by general purpose protection tools. In the market, The anti malware tools producers focused on pragmatic solutions to survive, but it leads to that most of these tools are utterly reverse engineering process which works on result instead of reason.
+
+With usual and pragmatic signature based methods, there are two mainstream techniques to detect malicious code which are called static and dynamic analysis.Static analysis identifies malwares mainly with code flow graph and data flow graph on stored file which is not processing. However, On the dynamic side it is a bit more tricky to analyze process, because you are working on the running pieces of codes without knowledge of structures and worse than this, it must concern race condition and memory coherency flaws. 
+
+The detection methods and techniques have been adequately worked so far because of the simplicity of architectures and usage of the massive generic computers, However, with increasing of the not standardized, parallel and popular devices like arm’s SoC, it is not hard to estimate their new challenges. It is really likely to evade and obfuscate properly your on-the-fly processes with using uncertain charactership of parallel processing, complexity of concurrent programming, and structure of “Non Uniform Memory Architecture”.
+
+
+\section{Justification, motivation and benefits}
+This section should be understandable by everybody including your family and relatives.
+In particular, it should be understandable to those who will benefit.
+NOTE : 'I want to do zz' does not count as a legitimate motivation!
+\begin{itemize}
+\item Why is important to solve the problem you have identified?
+\item Why would 'mankind' benefit from a solution to the problem identified?
+\item Who would benefit (the stakeholders)?
+\item What are the primary and secondary benefits - what's in it for the stakeholders?
+\end{itemize}
+You should try to find a journal, conference or newspaper article identifying the problem you will be adressing.
+This can be used to substantiate your claim that the problem you are adressing is significant.
+
+\paragraph{Control questions}
+\begin{enumerate}
+\item For each of the issues listed above, has the issue been addressed properly/thoroughly? 
+\item What is the information density of your text and why?
+\item If the project results was to be put in an auction when the project was completed - what price would it fetch and who would put in what bids? 
+\item What would be the overall ROI (Return On Investment) of your project if carried out?
+\end{enumerate}
+
+\section{Research questions}\label{research:questions}
+Describe the types of information you need in order to solve the research problem, e.g.
+We need to find out
+\begin{itemize}
+\item what factors affect  xx (where xx is the 'parameter' you want to improve, e.g. cost, time, usability, security, etc.)
+\item to what extent will activity/ method/procedure yy (where yy is some method of improving the parameter, e.g.  a program for simplifying access) improve factor xx?
+\item have somebody solved this or some closely related problem?
+\item how well has the problem been solved?
+\item what is the theoretically 'best' one can achieve?
+\end{itemize}
+
+\paragraph{Control questions:}
+\begin{enumerate}
+\item Are there any questions at all? Look for '?'...
+\item Why are the research questions relevant to the research problem?
+\item What other research questions might also be relevant?
+\item why/why not are the chosen research questions the most relevant?
+\end{enumerate}
+
+\section{Planned contributions}
+A short summary of what kind of {\em new} results the master thesis will produce.  
+Ideally,  the potential novelty of the results should be justified by means of references provided.
+E.g. if an article describes the problem you will be adressing as {\em unsolved},
+you should include this reference.  Similarly, if you e.g. have some ideas on how an 
+authentication method can be improved in terms of FAR/FRR, you should specify the best
+ FAR/FRR figures published and a reference to where this was published. 
+ The goal of the master thesis
+will be to produce the new results identified in this section.
+
+\paragraph{Control questions}
+\begin{enumerate}
+\item Is the length of the section appropriate and why?
+\item Why/why not are the contributions 'significant'?
+\item Why/why not is it realistic that the planned contribution can be achieved?  You may want to have a look at relevant literature/ other completed master thesis to answer this question.
+\end{enumerate}
+
+\chapter{Related work (3-10 pages)}
+The purpose of this chapter
+is to explain to the reader what knowledge is already
+available from the literature.
+
+The purpose of the related work chapter is to:
+\begin{itemize}
+\item Identify to what extent information identified in the 'Research questions'  section is provided in the literature.
+\item Give an overview of why/how the literature provides the answer to the research questions identified.
+\item Identify areas/ research questions where the literature appears to be weak or non-existent.
+\end{itemize}
+The Related Work Chapter is NOT:
+\begin{itemize}
+\item   A list of abstracts and summaries of more-or-less-relevant literature.
+\end{itemize}
+If you have
+\begin{itemize}
+\item   found some relevant literature
+\item   made summaries of what you have written
+\end{itemize}
+you should
+\begin{itemize}
+\item reorganize these summaries to focus on the research questions you have identified.
+\end{itemize}
+
+This chapter should include one subsection for each of the research
+questions identified in section \ref{research:questions}.  
+
+\section{Handling Potential problems}
+When searching for literature, you usually get too many hits or none at all...
+
+\paragraph{Question 1} I don't find any relevant literature.
+
+\paragraph{Answer 1.A}  Make a list of words, phrases, applications, abbreviations,
+organizations, terminology etc. relevant for your area of interest.
+Ask a librarian to sit with you for 20 minutes to formulate relevant
+queries to available databases.  Record your findings.
+
+\paragraph{Answer 1.B}  Go to the ACM (www.acm.org) or IEEE (www.ieee.org) web pages.
+Identify the SIGs (Special Interest Groups) of these organizations.
+Select the SIGs which looks the most interesting.
+Most SIGs publish one or more journals and/or organize workshops or conferences.
+Get hold of a few journals or proceedings and see if they're any interesting.
+
+
+\paragraph{Question 2}  I've found a lot of papers.
+They all look interesting, but I don't have time to read them all.
+
+\paragraph{Answer 2.A}  Narrow your search.  Be more specific in your search.  Read the abstracts of the relevant articles before you read the full papers.
+
+\paragraph{Answer 2B}  Find a citation index (e.g. \url{http://citeseer.ist.psu.edu/}.
+Read those papers with a high citation score first
+(a citation index rates papers according to 'academic popularity').  Alternatively,
+read those papers published in 'prestigious' conference proceedings or journals first.
+
+
+\paragraph{Control questions:}
+\begin{enumerate}
+\item Why can we have confidence that the most relevant literature has been identified?
+\item is the related literature grouped in a sensible way such that the reader gets a good understanding of 'existing knowledge' relating to th research questions/problem description?
+\item Is the chapter sufficiently comprehensive?
+\end{enumerate}
+
+\chapter{Choice of methods (2-5 pages)}
+This section is to include a description of the methods to be used,
+including references to literature describing the methods to be used
+(e.g. qualitative, quantitative, interviews, surveys,
+questionnaire,  model building etc.)
+For each of the research questions to be addressed,
+the chapter is to explain why the method is
+\begin{itemize}
+\item appropriate
+\item likely to provide the desired knowledge/information.
+\end{itemize}
+
+\chapter{Milestones, deliverables and resources (2-5 pages)}
+The purpose of this chapter is to convince the reader that you know exactly what to do.
+This chapter gives a description of how the project is to be
+broken down into smaller parts and activities.
+\begin{enumerate}
+\item  What is it you have to do in order to obtain the desired knowledge?
+\item  What deliverables are to be produced (MSc thesis report, software,...)
+\item  When are the various deliverables going to be available?
+\end{enumerate}
+
+For each deliverable, identify 4 versions, having an
+'increasing' degree of completeness/quality.
+Students are strongly recommended to review each others drafts.
+For each version of a deliverable explain why and how this version is to
+be better/more complete.  E.g. v1.0: my first draft -
+chapter text includes 1/2 page summaries only.
+v.2.0: Like v1.0, but comments by NN(who? fellow student)
+has been incorporated. v3.0:....
+
+This section is to include a preliminary table of contents for the MSc thesis
+(only include 2 levels).
+
+For each of the activities identified, specify
+\begin{enumerate}
+\item  the time you need to complete each activity both calendar time and 'man-hours'.
+\item  hours needed by you
+\item  things you need to buy (consumables)
+\item  equipment, lab space or facilities you need access to
+\item  contributions from others (e.g. survey/interview participants) and how much each will have to contribute in terms of resources (probably time)
+\end{enumerate}
+At the beginning of this section, provide a 2-3 line summary of the
+resource requirements.  This is particularly useful if you have broken
+down the task into a lot of small tasks.
+
+\chapter{Feasibility study (1/2-3 pages)}
+
+
+
+An analysis of why it is likely that the desired
+results can be produced within the given time and
+resource bounds.  This may include a description of
+\begin{itemize}
+\item similar projects completed by others and their 'resource consumption',
+\item an attempt to answer parts of the research questions
+\item the 'difficult' elements of the work and an explanation of why/how these problems can be solved.  
+Alternatively you can explain an 'approximate' solution.
+\end{itemize}
+
+\chapter{Risk analysis (1/2-2 pages)}
+In this project, there five inevitable risks which we can face during development.
+
+\begin{itemize}
+\item The thesis is highly dependent on the hardware, and the cost of the hardware constitute risk on its own. Any case of hardware defect leads to comprise obstacle.
+\item Hardware dependency is also leads to logistical and time consuming risk which could result with latency on submit time.
+\item Firmware codes which we are planning to work on are mostly undocumented. We could discover their usage by proper reverse engineering and fuzzing process when required, however it is obviously manpower.
+\item Most important and highlighting risk is there isn't proper research on this particular area. That means there are strongly possibly hidden risks which could cause other mental and physical result.
+\item During testing and purification part, Anti-malware tools could come out with unreliable result. To analyze result properly, we may need to inspect mentioned tools with reverse engineering process which could violate proper usage agreement. To mitigate that kind of risks, we could request research agreement from companies.  
+\end{itemize}
+
+\chapter{Ethical and legal considerations (1/4-1 page)}
+The content of this document could be used in order to malicious purpose, but any matter or information could be misused in the life and ignorance is not known well as a defense strategy. In this purpose, this thesis aims to enlighten security specialist and system developers against recent way of the possible attacks. 
+
+However, in order to act ethical responsibility, we tried to eliminate practice of tools and piece of codes which could leads malicious usage. In any case, there is no doubt that it is critical to discover and publish vulnerabilities which could cause deep impact before malicious people discover and abuse them.
+
+\begin{quote}
+
+"Virus don't harm, ignorance does."\\
+- VxHeaven
+\end{quote}
+
+
+%
+
+
+%\bibliographystyle{plain}
+\bibliographystyle{gucmasterthesis}
+\bibliography{imt4441}
+
+
+
+\end{document}
+
+
+
+
+
+IEEE computer society keywords
+http://www.computer.org/portal/site/ieeecs/menuitem.c5efb9b8ade9096b8a9ca0108bcd45f3/index.jsp?&pName=ieeecs_level1&path=ieeecs/publications/author/keywords&file=ACMtaxonomy.xml&xsl=generic.xsl&
