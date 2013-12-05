@@ -322,7 +322,7 @@ Use $\backslash$useyear\{<year>\} to set year.
 \newcommand\gmt@imttext{%
   \noindent
   Avdeling for\\
-  informatikk og medieteknikk\\
+  informasjonssikkerhet \\
   H\o{}gskolen i Gj\o{}vik\\
   Postboks 191\\
   2802 Gj\o{}vik
@@ -330,8 +330,7 @@ Use $\backslash$useyear\{<year>\} to set year.
   \vskip 3em%
 
   \noindent
-  Department of Computer Science\\
-  and Media Technology\\
+  Department of Information Security\\
   Gj\o{}vik University College\\
   Box 191\\
   N-2802 Gj\o{}vik\\

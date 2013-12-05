@@ -1,0 +1,29 @@
+\begin{thebibliography}{1}
+
+\bibitem{von1966theory}
+Von~Neumann, J., Burks, A.~W., et~al.
+\newblock 1966.
+\newblock Theory of self-reproducing automata.
+
+\bibitem{moser2007limits}
+Moser, A., Kruegel, C., \& Kirda, E.
+\newblock 2007.
+\newblock Limits of static analysis for malware detection.
+\newblock In {\em Computer Security Applications Conference, 2007. ACSAC 2007.
+  Twenty-Third Annual},  421--430. IEEE.
+
+\bibitem{cavallaro2008limits}
+Cavallaro, L., Saxena, P., \& Sekar, R.
+\newblock 2008.
+\newblock On the limits of information flow techniques for malware analysis and
+  containment.
+\newblock In {\em Detection of Intrusions and Malware, and Vulnerability
+  Assessment},  143--163. Springer.
+
+\bibitem{egele2012survey}
+Egele, M., Scholte, T., Kirda, E., \& Kruegel, C.
+\newblock 2012.
+\newblock A survey on automated dynamic malware-analysis techniques and tools.
+\newblock {\em ACM Computing Surveys (CSUR)}, 44(2), 6.
+
+\end{thebibliography}
