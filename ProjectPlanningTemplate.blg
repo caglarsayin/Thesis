@@ -1,5 +1,52 @@
-This is BibTeX, Version 0.99dThe top-level auxiliary file: ProjectPlanningTemplate.aux
+This is BibTeX, Version 0.99d (TeX Live 2013)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: ProjectPlanningTemplate.aux
 The style file: gucmasterthesis.bst
 Database file #1: imt4441.bib
+Warning--I didn't find a database entry for "Shevchenko2007detc"
 Warning--empty journal in von1966theory
-(There was 1 warning)
+Warning--empty year in internotsecurityteam
+Warning--empty year in anonymous1
+Warning--empty publisher in anonymous1
+You've used 29 entries,
+            1800 wiz_defined-function locations,
+            598 strings with 8322 characters,
+and the built_in function-call counts, 8085 in all, are:
+= -- 807
+> -- 275
+< -- 15
++ -- 104
+- -- 75
+* -- 406
+:= -- 1180
+add.period$ -- 123
+call.type$ -- 29
+change.case$ -- 30
+chr.to.int$ -- 0
+cite$ -- 33
+duplicate$ -- 424
+empty$ -- 805
+format.name$ -- 75
+if$ -- 1941
+int.to.chr$ -- 0
+int.to.str$ -- 29
+missing$ -- 27
+newline$ -- 172
+num.names$ -- 29
+pop$ -- 134
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 241
+stack$ -- 0
+substring$ -- 492
+swap$ -- 162
+text.length$ -- 15
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 4
+while$ -- 79
+width$ -- 31
+write$ -- 347
+(There were 5 warnings)

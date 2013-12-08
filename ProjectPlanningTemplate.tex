@@ -32,7 +32,9 @@
 \usepackage{hyperref}
 \usepackage{mdwlist}
 \usepackage{url}
-\usepackage{here}
+\usepackage{float}
+\usepackage{todonotes}
+
 
 \def\UrlFont{\tt}
 
@@ -123,7 +125,7 @@ Security, Concurrent Malware Design, Malware, Concurrent, Parallelism and Concur
 \section{Problem description}
 The one of the main and indecipherable problem in security discipline is formulating general threat definition and recognizing malicious activity and all this problems unsurprisingly reflect on information and computer security concept. Security is defined by system’s identification, which involve with purpose, crowd, design structures, network model and so on, and today’s information system which is designed with various architectural forms is protected against malware by general purpose protection tools. In the market, The anti malware tools producers focused on pragmatic solutions to survive, but it leads to that most of these tools are utterly reverse engineering process which works on result instead of reason.
 
-With usual and pragmatic signature based methods, there are two mainstream techniques to detect malicious code which are called static and dynamic analysis.Static analysis identifies malwares mainly with code flow graph and data flow graph on stored file which is not processing. However, On the dynamic side it is a bit more tricky to analyze process, because you are working on the running pieces of codes without knowledge of structures and worse than this, it must concern race condition and memory coherency flaws. 
+With usual and pragmatic signature based methods, there are two mainstream techniques to detect malicious code which are called static and dynamic analysis.Static analysis identifies malwares mainly with code flow graph and data flow graph on stored file which is not processing. However, On the dynamic side it is a bit more tricky to analyze process, because you are working on the running pieces of codes without knowledge of structures and worse than this, it must concern race condition and memory coherency flaws.
 
 The detection methods and techniques have been adequately worked so far because of the simplicity of architectures and usage of the massive generic computers, However, with increasing of the not standardized, parallel and popular devices like arm’s SoC, it is not hard to estimate their new challenges. It is really likely to evade and obfuscate properly your on-the-fly processes with using uncertain charactership of parallel processing, complexity of concurrent programming, and structure of “Non Uniform Memory Architecture”.
 
@@ -144,67 +146,56 @@ If malware designing is superficially considered, you could fall in usual fallac
 This Master thesis is looking for better understanding on concurrent malware abilities and their counter-measure. Especially, It will try to show how possible to abuse concurrent memory accessing and how durable recent detection kits. It is quite unique work which we have to consider on the future. Ultimate goal is to eliminate any uncertainties which detection methods encounter with concurrent memory accessing.
 
 \chapter{Related work (3-10 pages)}
-The purpose of this chapter
-is to explain to the reader what knowledge is already
-available from the literature.
+This chapter will give an overview of researches about Malware`s self-defense technique, the methods to analyze them, and their application on concurrent architecture. 
 
-The purpose of the related work chapter is to:
+\section{Malware Self-Defense}
+This section will try to give the literature about malware evasion techniques. This techniques are generally antonym solution which are found by malware authors, however, there are enough surveys about known technique. We classified all these methods in six categories which are code obfuscation, code reuse, anti debugging, anti emulator and visualization and covert channel over network traffic. This taxonomy is well defined by Jonathan A.P Marpaung, et al \cite{marpaung2012survey}, yet malware authors used them to protect their own properties. 
+
+
+Code obfuscation was originally  found for protecting intellectual property\cite{balakrishnan2005code}, but It aims to puzzle code`s binary against merely static analysis and disassembling\cite{nachenberg1996understanding}. The first known obfuscation method used encryption in order to hide its content. It was called Cascade which is seen first 1986\cite{you2010malware}. This simple architecture of the obfuscation is called packing\cite{internotsecurityteam}. It involve with two part of binary which are slub part, in order to decipher and encipher.\cite{marpaung2012survey}. Cascade was using simple XOR encryption and that was increasing performance.
+
+Early of the 1990s , oligomorphism and polimorphism started to show up\cite{you2010malware}. The main idea behind them is basicly transforming their slub part in each attempt of encryption process\cite{nachenberg1996understanding}. Today, there are two type of  polymorphic approach to generate different variants of slub.\cite{li2011mechanisms}
 \begin{itemize}
-\item Identify to what extent information identified in the 'Research questions'  section is provided in the literature.
-\item Give an overview of why/how the literature provides the answer to the research questions identified.
-\item Identify areas/ research questions where the literature appears to be weak or non-existent.
+  \item Rewriting the code each time from pseudo-code so it differs code synthetically which is actually transformation based obfuscation.
+  \item Self-cipher itself different, order of these ciphers and using different keys.
 \end{itemize}
-The Related Work Chapter is NOT:
-\begin{itemize}
-\item   A list of abstracts and summaries of more-or-less-relevant literature.
-\end{itemize}
-If you have
-\begin{itemize}
-\item   found some relevant literature
-\item   made summaries of what you have written
-\end{itemize}
-you should
-\begin{itemize}
-\item reorganize these summaries to focus on the research questions you have identified.
-\end{itemize}
+One of the other important milestone of polymorphic malware is Mutation Engine(MtE) is writen by a Bulgarian virus Author, called The Dark Avanger. It was automated obfuscation tool which actually considered impossible in those times.\cite{anonymous1}
 
-This chapter should include one subsection for each of the research
-questions identified in section \ref{research:questions}.  
+There are also several methods to prevent unpacking process. These methods are collected carefully by Peter Ferrie \cite{ferrie2008anti}. These methods are especially obstacle for automated analysis.
 
-\section{Handling Potential problems}
-When searching for literature, you usually get too many hits or none at all...
+Compare with polymorphic methods, metamorphic approach is more complicated. It is transformation based method instead of encryption  approach.\cite{konstantinou2008metamorphic} Fundamentally, it produce different codes which doing same blue printed semantic. That just mitigate detection possibility because of lack of static code. 
 
-\paragraph{Question 1} I don't find any relevant literature.
+Network traffic, which malware produce are generally Achilles heel for malware, because they are generally adequately unique traffics to be identified\cite{marpaung2012survey}. They usually cover their overt malicious traffic with covert channel methods.\cite{rutkowska2006rootkits}
 
-\paragraph{Answer 1.A}  Make a list of words, phrases, applications, abbreviations,
-organizations, terminology etc. relevant for your area of interest.
-Ask a librarian to sit with you for 20 minutes to formulate relevant
-queries to available databases.  Record your findings.
+Code reuse attacks are strong attacks because they do not inject any code in them as obfuscation methods did. They aim to use legitimate software to evade themselves. There are there well known applied version which are return-into-libc, return oriented programming and Frankenstein.
 
-\paragraph{Answer 1.B}  Go to the ACM (www.acm.org) or IEEE (www.ieee.org) web pages.
-Identify the SIGs (Special Interest Groups) of these organizations.
-Select the SIGs which looks the most interesting.
-Most SIGs publish one or more journals and/or organize workshops or conferences.
-Get hold of a few journals or proceedings and see if they're any interesting.
+Return into libc attacks were demonstrated by solar designer in 1997 as a method of bypassing non executable stack to executable libc libraries\cite{designer1997getting}. It's object is to change the "ret" infrastructure argument to the known address possibly libc library(stdio, system, etc). However, this attack is limited with libc libraries, which we improved with return oriented programming. 
+
+Return oriented programming is more flex version of retur-into-libc attack, which is introduced by Shacham in 2007\cite{shacham2007geometry}. Return oriented programming purpose a programming language with small gadgets(instruction bound) which involve all ability of Turing's machine\cite{roemer2012return}. Frankenstein is one of the novel application of return oriented programming by Vishwath Mohan and Kevin W. Hamlen\cite{mohan2012frankenstein}.
+
+Anti debugging and anti emulator methods are really usual for today's malware. The survey of Chen Xu et al. showed us in 2008, majority of 6900 on-the-air malware could evade their self with exhibiting benign behavior in sandboxes, debuggers, and virtual machines.\cite{chen2008towards}. VM and debuggers are most important element of dynamic analysis techniques in autonomous sector, because it must run the file just before it touch the working environment. Yet, it is not that knotty to determine whether working environment is virtual or not. Fuzzing cpu bechmarks and comparing results entropy is a good way to determine virtual machines.\cite{franklin2008remote}
+
+Rootkits are the piece of malicious code which aims integrity of the system state.
+\section{Malware analysis methods}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{alisa_1007_pic1_en.jpg}
+    \caption{Detection models \cite{Shevchenko2007detc}}
+    \label{fig:awesome_image}
+\end{figure}
+Malware analysis medhods could be considered two dimensional plane which are "anomaly, signature based detection technique" and "Statistic and dynamic analysis method". 
 
 
-\paragraph{Question 2}  I've found a lot of papers.
-They all look interesting, but I don't have time to read them all.
 
-\paragraph{Answer 2.A}  Narrow your search.  Be more specific in your search.  Read the abstracts of the relevant articles before you read the full papers.
-
-\paragraph{Answer 2B}  Find a citation index (e.g. \url{http://citeseer.ist.psu.edu/}.
-Read those papers with a high citation score first
-(a citation index rates papers according to 'academic popularity').  Alternatively,
-read those papers published in 'prestigious' conference proceedings or journals first.
-
-
-\paragraph{Control questions:}
-\begin{enumerate}
-\item Why can we have confidence that the most relevant literature has been identified?
-\item is the related literature grouped in a sensible way such that the reader gets a good understanding of 'existing knowledge' relating to th research questions/problem description?
-\item Is the chapter sufficiently comprehensive?
-\end{enumerate}
+There are also several applied techniques, which combine terminology above. 
+\begin{description}
+\item[N-gram] It is a anomaly  based heuristic detection method algorithm. It is a bit costly process and not practical for client side analysis. It could be fit for honey pot analysis \cite{reddy2006n} \cite{abou2004n} \cite{abou2004detection}. They are capable against to zero time malwares and that could makes it futures malware detection system. 
+\item[Sequential approach on system and funtion call] This approach is anomaly based dynamic analysis and observing and recording the flow graph of systems and function calls and  try to analysis anomaly behaviors.\cite{kendall2007practical}
+\item[Taint] It is also called data flow analysis or data flow graph. It is basic tracking marked data values during execution.\cite{saxena2008efficient}\cite{saxena2008efficient}\cite{smith2007principles}
+\item[Control Flow Graph] They are one of the most important arm of commercial autonomous malware detection tools\cite{lee2010detecting} \cite{christodorescu2006static} \cite{christodorescu2005semantics}. After the invention of the polymorphic and metamorphic, syntactic analysis could not bear with them. Then we moved to upper layer of information, semantic layer. Semantic can be representation of code flow, and the routes of the code are adequate to produce signature to identify malware. This methods are a member of static analysis and disassembling and source code analysis job.
+\item[Network Monitoring] Malware intention of the communication over network actually big clue to detect them. They generally use unique hostname, ip adress or specific protocol with particular way \cite{marpaung2012survey}.
+\end{description}
 
 \chapter{Choice of methods (2-5 pages)}
 This section is to include a description of the methods to be used,
