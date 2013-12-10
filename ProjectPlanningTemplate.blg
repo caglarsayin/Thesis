@@ -8,36 +8,36 @@ Warning--empty journal in von1966theory
 Warning--empty year in internotsecurityteam
 Warning--empty year in anonymous1
 Warning--empty publisher in anonymous1
-You've used 29 entries,
+You've used 30 entries,
             1800 wiz_defined-function locations,
-            598 strings with 8322 characters,
-and the built_in function-call counts, 8085 in all, are:
-= -- 807
-> -- 275
+            603 strings with 8459 characters,
+and the built_in function-call counts, 8204 in all, are:
+= -- 819
+> -- 279
 < -- 15
-+ -- 104
-- -- 75
-* -- 406
-:= -- 1180
-add.period$ -- 123
-call.type$ -- 29
-change.case$ -- 30
++ -- 106
+- -- 76
+* -- 408
+:= -- 1205
+add.period$ -- 126
+call.type$ -- 30
+change.case$ -- 31
 chr.to.int$ -- 0
-cite$ -- 33
-duplicate$ -- 424
-empty$ -- 805
-format.name$ -- 75
-if$ -- 1941
+cite$ -- 34
+duplicate$ -- 430
+empty$ -- 816
+format.name$ -- 76
+if$ -- 1966
 int.to.chr$ -- 0
-int.to.str$ -- 29
+int.to.str$ -- 30
 missing$ -- 27
-newline$ -- 172
-num.names$ -- 29
-pop$ -- 134
+newline$ -- 177
+num.names$ -- 30
+pop$ -- 136
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 241
+skip$ -- 243
 stack$ -- 0
 substring$ -- 492
 swap$ -- 162
@@ -46,7 +46,7 @@ text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 4
-while$ -- 79
-width$ -- 31
-write$ -- 347
+while$ -- 80
+width$ -- 32
+write$ -- 358
 (There were 5 warnings)

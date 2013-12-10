@@ -11,8 +11,17 @@
 \BOOKMARK [1][-]{section.2.1}{Malware Self-Defense}{section*.7}% 11
 \BOOKMARK [1][-]{section.2.2}{Malware analysis methods}{section*.7}% 12
 \BOOKMARK [0][-]{section*.8}{Choice of methods \(2-5 pages\)}{}% 13
-\BOOKMARK [0][-]{section*.9}{Milestones, deliverables and resources \(2-5 pages\)}{}% 14
-\BOOKMARK [0][-]{section*.10}{Feasibility study \(1/2-3 pages\)}{}% 15
-\BOOKMARK [0][-]{section*.11}{Risk analysis \(1/2-2 pages\)}{}% 16
-\BOOKMARK [0][-]{section*.12}{Ethical and legal considerations \(1/4-1 page\)}{}% 17
-\BOOKMARK [0][-]{section*.14}{Bibliography}{}% 18
+\BOOKMARK [0][-]{section*.12}{Milestones, deliverables and resources \(2-5 pages\)}{}% 14
+\BOOKMARK [1][-]{section.4.1}{Resources}{section*.12}% 15
+\BOOKMARK [1][-]{section.4.2}{Milestones}{section*.12}% 16
+\BOOKMARK [2][-]{subsection.4.2.1}{Pre Education and Utilization}{section.4.2}% 17
+\BOOKMARK [2][-]{subsection.4.2.2}{Attack Vector Planning}{section.4.2}% 18
+\BOOKMARK [2][-]{subsection.4.2.3}{Designing Software Depend on Attack Vector and Testing their result}{section.4.2}% 19
+\BOOKMARK [2][-]{subsection.4.2.4}{Designing Defense Against Successful Attack and Testing their result}{section.4.2}% 20
+\BOOKMARK [2][-]{subsection.4.2.5}{Complexity analysis and proofs}{section.4.2}% 21
+\BOOKMARK [2][-]{subsection.4.2.6}{Reporting}{section.4.2}% 22
+\BOOKMARK [1][-]{section.4.3}{Deliverables}{section*.12}% 23
+\BOOKMARK [0][-]{section*.13}{Feasibility study \(1/2-3 pages\)}{}% 24
+\BOOKMARK [0][-]{section*.14}{Risk analysis \(1/2-2 pages\)}{}% 25
+\BOOKMARK [0][-]{section*.15}{Ethical and legal considerations \(1/4-1 page\)}{}% 26
+\BOOKMARK [0][-]{section*.17}{Bibliography}{}% 27

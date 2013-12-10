@@ -13,8 +13,17 @@
 \contentsline {section}{\numberline {2.1}Malware Self-Defense}{3}{section.2.1}
 \contentsline {section}{\numberline {2.2}Malware analysis methods}{4}{section.2.2}
 \contentsline {chapter}{\numberline {3}Choice of methods (2-5 pages)}{7}{section*.8}
-\contentsline {chapter}{\numberline {4}Milestones, deliverables and resources (2-5 pages)}{9}{section*.9}
-\contentsline {chapter}{\numberline {5}Feasibility study (1/2-3 pages)}{11}{section*.10}
-\contentsline {chapter}{\numberline {6}Risk analysis (1/2-2 pages)}{13}{section*.11}
-\contentsline {chapter}{\numberline {7}Ethical and legal considerations (1/4-1 page)}{15}{section*.12}
-\contentsline {chapter}{Bibliography}{17}{section*.14}
+\contentsline {chapter}{\numberline {4}Milestones, deliverables and resources (2-5 pages)}{9}{section*.12}
+\contentsline {section}{\numberline {4.1}Resources}{9}{section.4.1}
+\contentsline {section}{\numberline {4.2}Milestones}{9}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Pre Education and Utilization}{9}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Attack Vector Planning}{9}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}Designing Software Depend on Attack Vector and Testing their result}{9}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.4}Designing Defense Against Successful Attack and Testing their result}{10}{subsection.4.2.4}
+\contentsline {subsection}{\numberline {4.2.5}Complexity analysis and proofs}{10}{subsection.4.2.5}
+\contentsline {subsection}{\numberline {4.2.6}Reporting}{10}{subsection.4.2.6}
+\contentsline {section}{\numberline {4.3}Deliverables}{10}{section.4.3}
+\contentsline {chapter}{\numberline {5}Feasibility study (1/2-3 pages)}{11}{section*.13}
+\contentsline {chapter}{\numberline {6}Risk analysis (1/2-2 pages)}{13}{section*.14}
+\contentsline {chapter}{\numberline {7}Ethical and legal considerations (1/4-1 page)}{15}{section*.15}
+\contentsline {chapter}{Bibliography}{17}{section*.17}

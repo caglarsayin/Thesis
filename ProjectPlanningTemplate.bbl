@@ -186,4 +186,9 @@ Christodorescu, M., Jha, S., Seshia, S.~A., Song, D., \& Bryant, R.~E.
 \newblock Semantics-aware malware detection.
 \newblock In {\em Security and Privacy, 2005 IEEE Symposium on},  32--46. IEEE.
 
+\bibitem{Tsopokis2012Concurrent}
+Tsopokis, C.~V.
+\newblock Cuncurrent memory inspection for intrution detection.
+\newblock Master's thesis, University of Holloway, 2012.
+
 \end{thebibliography}
