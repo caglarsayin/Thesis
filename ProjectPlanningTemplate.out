@@ -1,27 +1,27 @@
 \BOOKMARK [0][-]{section*.2}{Revision history}{}% 1
-\BOOKMARK [0][-]{section*.5}{Contents}{}% 2
-\BOOKMARK [0][-]{section*.6}{Introduction \(1-2 pages\)}{}% 3
-\BOOKMARK [1][-]{section.1.1}{Topic covered by the project}{section*.6}% 4
-\BOOKMARK [1][-]{section.1.2}{Keywords}{section*.6}% 5
-\BOOKMARK [1][-]{section.1.3}{Problem description}{section*.6}% 6
-\BOOKMARK [1][-]{section.1.4}{Justification, motivation and benefits}{section*.6}% 7
-\BOOKMARK [1][-]{section.1.5}{Research questions}{section*.6}% 8
-\BOOKMARK [1][-]{section.1.6}{Planned contributions}{section*.6}% 9
-\BOOKMARK [0][-]{section*.7}{Related work \(3-10 pages\)}{}% 10
-\BOOKMARK [1][-]{section.2.1}{Malware Self-Defense}{section*.7}% 11
-\BOOKMARK [1][-]{section.2.2}{Malware analysis methods}{section*.7}% 12
-\BOOKMARK [0][-]{section*.8}{Choice of methods \(2-5 pages\)}{}% 13
-\BOOKMARK [0][-]{section*.12}{Milestones, deliverables and resources \(2-5 pages\)}{}% 14
-\BOOKMARK [1][-]{section.4.1}{Resources}{section*.12}% 15
-\BOOKMARK [1][-]{section.4.2}{Milestones}{section*.12}% 16
+\BOOKMARK [0][-]{section*.4}{Contents}{}% 2
+\BOOKMARK [0][-]{section*.5}{Introduction \(1-2 pages\)}{}% 3
+\BOOKMARK [1][-]{section.1.1}{Topic covered by the project}{section*.5}% 4
+\BOOKMARK [1][-]{section.1.2}{Keywords}{section*.5}% 5
+\BOOKMARK [1][-]{section.1.3}{Problem description}{section*.5}% 6
+\BOOKMARK [1][-]{section.1.4}{Justification, motivation and benefits}{section*.5}% 7
+\BOOKMARK [1][-]{section.1.5}{Research questions}{section*.5}% 8
+\BOOKMARK [1][-]{section.1.6}{Planned contributions}{section*.5}% 9
+\BOOKMARK [0][-]{section*.6}{Related work \(3-10 pages\)}{}% 10
+\BOOKMARK [1][-]{section.2.1}{Malware Self-Defense}{section*.6}% 11
+\BOOKMARK [1][-]{section.2.2}{Malware analysis methods}{section*.6}% 12
+\BOOKMARK [0][-]{section*.7}{Choice of methods \(2-5 pages\)}{}% 13
+\BOOKMARK [0][-]{section*.11}{Milestones, deliverables and resources \(2-5 pages\)}{}% 14
+\BOOKMARK [1][-]{section.4.1}{Resources}{section*.11}% 15
+\BOOKMARK [1][-]{section.4.2}{Milestones}{section*.11}% 16
 \BOOKMARK [2][-]{subsection.4.2.1}{Pre Education and Utilization}{section.4.2}% 17
 \BOOKMARK [2][-]{subsection.4.2.2}{Attack Vector Planning}{section.4.2}% 18
 \BOOKMARK [2][-]{subsection.4.2.3}{Designing Software Depend on Attack Vector and Testing their result}{section.4.2}% 19
 \BOOKMARK [2][-]{subsection.4.2.4}{Designing Defense Against Successful Attack and Testing their result}{section.4.2}% 20
 \BOOKMARK [2][-]{subsection.4.2.5}{Complexity analysis and proofs}{section.4.2}% 21
 \BOOKMARK [2][-]{subsection.4.2.6}{Reporting}{section.4.2}% 22
-\BOOKMARK [1][-]{section.4.3}{Deliverables}{section*.12}% 23
-\BOOKMARK [0][-]{section*.13}{Feasibility study \(1/2-3 pages\)}{}% 24
-\BOOKMARK [0][-]{section*.14}{Risk analysis \(1/2-2 pages\)}{}% 25
-\BOOKMARK [0][-]{section*.15}{Ethical and legal considerations \(1/4-1 page\)}{}% 26
-\BOOKMARK [0][-]{section*.17}{Bibliography}{}% 27
+\BOOKMARK [1][-]{section.4.3}{Deliverables}{section*.11}% 23
+\BOOKMARK [0][-]{section*.12}{Feasibility study \(1/2-3 pages\)}{}% 24
+\BOOKMARK [0][-]{section*.13}{Risk analysis \(1/2-2 pages\)}{}% 25
+\BOOKMARK [0][-]{section*.14}{Ethical and legal considerations \(1/4-1 page\)}{}% 26
+\BOOKMARK [0][-]{section*.16}{Bibliography}{}% 27

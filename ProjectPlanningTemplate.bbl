@@ -129,6 +129,21 @@ Franklin, J., Luk, M., McCune, J.~M., Seshadri, A., Perrig, A., \& Van~Doorn,
 \newblock Remote detection of virtual machine monitors with fuzzy benchmarking.
 \newblock {\em ACM SIGOPS Operating Systems Review}, 42(3), 83--92.
 
+\bibitem{martin2008}
+Chris, M.
+\newblock 2008.
+\newblock What is rootkit and how to detect and protect from rootkits.
+
+\bibitem{Ducklin1991}
+Ducklin, P.
+\newblock 1991.
+\newblock Tequila.
+
+\bibitem{Adnan2011}
+Abdalla, A.
+\newblock 2011.
+\newblock Rootkits classification and their countermeasures.
+
 \bibitem{reddy2006n}
 Reddy, D. K.~S. \& Pujari, A.~K.
 \newblock 2006.

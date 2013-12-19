@@ -85,8 +85,7 @@ Have you ever realize how secure and safe environment they claim in security pro
 In this thesis, we will try to show vulnerabilities on concurrent and parallel cpu schedulers and non-uniform memory architecture. The weaknesses on hardware layer of the computer are hard to be observed by software solution. Therefore; It is time to pay attention for them, since it is not hard to predict that attackers will focus them.
 
 This thesis purpose an offensive security approach, how malware can be evade autonomous malware detection systems, and also purpose and experimental method to detect and mitigate them.
-
-
+\end{abstract}
 \tableofcontents
 
 \chapter{Introduction (1-2 pages)}
@@ -156,7 +155,10 @@ Return oriented programming is more flex version of retur-into-libc attack, whic
 
 Anti debugging and anti emulator methods are really usual for today's malware. The survey of Chen Xu et al. showed us in 2008, majority of 6900 on-the-air malware could evade their self with exhibiting benign behavior in sandboxes, debuggers, and virtual machines.\cite{chen2008towards}. VM and debuggers are most important element of dynamic analysis techniques in autonomous sector, because it must run the file just before it touch the working environment. Yet, it is not that knotty to determine whether working environment is virtual or not. Fuzzing cpu bechmarks and comparing results entropy is a good way to determine virtual machines.\cite{franklin2008remote}
 
-Rootkits are the piece of malicious code which aims integrity of the system state.
+Rootkits are the piece of malicious code which aims to crack integrity of the system state. The idea of the remaining invisible to the system state is traced backed one of the oldest virus "Brain"\cite{martin2008}. It was changing the boot process and activate virus during booting. "Tequila" and "1689" viruses followed "Brain" in 1991 and 1993\cite{Ducklin1991}. There are NTRootkit and HackerDeffender rootkits today. The proper classification of the rootkit are prepared by Adnan Abdakka\cite{Adnan2011}.
+
+
+
 \section{Malware analysis methods}
 
 \begin{figure}[h]
