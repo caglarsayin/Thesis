@@ -25,4 +25,4 @@
 \contentsline {chapter}{\numberline {5}Feasibility study (1/2-3 pages)}{11}{section*.12}
 \contentsline {chapter}{\numberline {6}Risk analysis (1/2-2 pages)}{13}{section*.13}
 \contentsline {chapter}{\numberline {7}Ethical and legal considerations (1/4-1 page)}{15}{section*.14}
-\contentsline {chapter}{Bibliography}{17}{section*.16}
+\contentsline {chapter}{\numberline {8}Background Studies}{17}{section*.15}
