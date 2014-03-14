@@ -66,8 +66,103 @@ Gj�vik University College
 }
 \include{chapter1}
 \chapter{Background Studies}
+\section{Concurrent Programming }
+\section{Caches}
+Solely, a cache is a small, fast, array of memory which is placed between lower level memory and higher one.  It store a special block of information, in order to increase performance of computer systems. It is like a buffer area which has some logic to exploit locality features of programming logic. Today, with increasing of processing ability of computer systems, memory access is bottle neck. 
+
+The "cache" is originally french rooted with meaning "concealed place for storage."\cite{sloss2004arm} We can move this definition basically to the computer science. The cache's design is definitely  isolated from software layer, however; if you know your caches feature and how caches working you could program a lot more efficient codes easily.
 
 
+
+\subsection{Motivation of Caches and Principle of Locality}
+The main motivation of caches is indisputably performance. As we mentioned,  Performance of high-speed computers is usually limited by memory bandwidth and latency. In order to increase, and turn around that, we use an small array of memory which is located close to the processors.  The location of chip is important and there are many design decision (e.g On chip, out of chip), but more crucial  properties of caches are their designs (e.g. Naive Capacitor , SRAM, DRAM) and their logic complexity\cite{hennessy2012computer}.Due to physical constrains, the size of the memory is limited which we can locate close to memory. On the other hand, these design choices are decisive factor about prices of memories.  Because of all these reasons, Multi-Layer Memory Hierarchy with several caches  between processor core and main memory is well-known option in order to improve performance. Nevertheless, In multilayer memory hierarchy, it is hard to know where the particular data reside in, and whether it is coherent or not. It also add many layer between memory and processor and in some cases it even decrease system performance,especially because of logical complexity of the line.
+
+The idea all the caches logic depending on is Principle of Locality. Principle of locality is actually a concern of information theory\cite{shannon2001mathematical}. It a conjecture of data distribution and processing order. The phenomenon assume that the the same data and related document will be accessed more frequently than other data\cite{denning2005locality}. Today, it is the one of the corner stone of computer science.  It was first developed with Atlas System with purpose to develop virtual memory systems work well\cite{kilburn1962one}. Then, it spread from search engines optimization to hardware caches. 
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{localitygraph2.jpg}
+    \caption{Principle of Locality}
+    \cite{ComputerArchCoursera}
+    \label{fig:principleoflocality}
+\end{figure}
+
+
+There are mainly two type of locality of reference:
+
+\begin{description}
+\item[Spacial Locality] Spacial locality propose if there is a particular of memory which is accessed on memory, then it is more likely to accessing memory locations around of it in near feature. Especially arrays and instructions are exploiting this locality. Arrays, formed structure and instructions on memory are laid out lineally over memory. On figure \ref{fig:principleoflocality}, we can see spacial locality simply.  For example, during instruction fetches part on the figure, n loop iterations accesses same memory locations for many times.  There are also subclass of spacial localities like Branch Locality and Equidistant Locality. They are designed locality types of indeterministic feature of program structure. Branch prediction and Special compiler designs aims to exploits this kind of locality more efficiently.
+\item[Temporal Locality] Temporal locality propose if there is a particular of memory location which is accessed recently, it will be accessed again more likely than any other location. Especially, variables, subroutines of stacks or other calls exploits this feature of locality. On figure \ref{fig:principleoflocality}, it is obviously seen that the values accessed once is possible to accessed again. 
+\end{description}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{cacheinternals.jpg}
+    \caption{4 KB 4-way set associative cache with 256 cache lines }
+    \cite{sloss2004arm}
+    \label{fig:cacheinternals}
+\end{figure}
+
+\subsection{The basic logic of caches}
+As we said in previous section, the basic logic behind caches is moving arranging caches with local data. In order to provide this feature as smooth as possible, we use a logic circuit called "Cache Controller". It does basic logic comparison and wiring the request and response into the right path. Thus, it intercept the write and read request from processor, replace its memory array with right scheduling method, and evict it safely and coherently. It processes with diving address of th request into three fields which are  Index set field, tag field, and block field. In figure \ref{fig:cacheinternals}, these fields showed. 
+
+At the beginning of cache process after it divided address fields, It first request right cache line which is shown in figure \ref{fig:principleoflocality}. So if we have $M$ byte memory and $N$ byte cache line, we must have $M/N = cache line$, then we can represent it with $p$ when $cache line = 2^{p}$ Thus, cache controller just wire corresponding line with given set index. 
+
+In traditional cache convention, first field belongs to tag id. Tag id is determined depending on other field i.e. the remaining part after index field and block field calculated is tag id length. Tag id is using to verify the stored line is actually belongs to right location of memory. The cache controller has comparison circuit(XOR) and compare the requested address and the address which is in the pointed line by set index field. If they are matched with each other, then it check valid byte and hit or miss. There is a simple AND circuit between tag comparison. 
+
+Final field is called data index or block index field. It will point in the cache line the smallest addressable memory location. Therefore, when processor want to read a value, cache fetch the whole block, and that makes cache to exploit spacial locality linearly. However, it will limit the access speed remarkable, if we increase block size. The optimum block size is about 64 byte for many system. As we mention before each cache line includes cache-tag field, valid bit, dirty bit, and some coherency bits in some special systems. The length of the data index field is equal to r if  $ word size = 2^{r}  $.
+
+When we increase the set index count it increase basically temporal locality, but not always. The cache conflict could happened when two memory location which uses same cache line could be used concurrently or twisted. Highly trashing can reduce cache performance. For this reason, associative caches are developed. Set associative caches are represented by their way number e.g 3 way associative caches or full associative caches, and there are group of cache arrays corresponding to the same set index. So that decrease the set index count but increase the performance during conflict miss in some cases. However, because of the complexity of the comparison circuit, it must be carefully chosen the number of ways. The associative caches are showed in figure \ref{fig:cacheinternals}. 
+
+The computer architecture we uses today actually first formulated by John Von Neumann  \cite{von1961collected}. On the first design of computer it was a single cycle instruction machine without any pipeline or superscalar idea. Then Hardward Mark I machine is designed with proposing two type of caches which are one for instruction, and one for data. Icache and Dcache are specified for their own purpose, because data and instruction on memories have different deterministic properties. Instruction are more tent to be linearly accessed by memory and they has branch locality which can be predict earlier. Icache also could be located more close to decode and fetch parts of processors when Dcache are instead closer to memory fetch parts. Yet, the most significant benefit of Harward design is concurrently usage both caches during pipelined architectures. 
+\subsection{Allocation, Write and Replacement Policies}
+There are three policy type determine a cache behaviours. They are write policy, read policy and reallocate policy. System's performance, coherency, and designs are determined depending on these rules. 
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{policies.jpg}
+    \caption{A. A Write-Through cache with No-Write Allocation B. A Write-Back cache with Write Allocation}
+    \cite{wikipolicies}
+    \label{fig:cachepolicies}
+\end{figure}
+
+\subsection*{Write Policies }
+\begin{description}
+\item[Write Through] When the cache controller designed based on $write through$ policy, it write the values into the memory and caches simultaneously, when the write request is arrived from processors. It does not depend on $write miss$ or $write hit$. It will reduce write performance, because writing data on memory is a lot slower, but it stay coherent all the times. It is performance could be increased a bit  with write buffer memories between memory and cache.
+\item[Write Back] The systems with that policies does not have same values in memory and corresponding cache line, so the coherency between memory and caches are provided by a trashing algorithm. Cache line always store more recent data, but if there is more than one cache it is hard to decide which one is more valid or whether there is a valid coherent one.  However, it effects performance quite remarkable (e.g. in ARM 15 cpu writing cycle to memory is around 200 cycle, but caches is about 4.) . The system with limited register numbers can overflow to the memory to store loop variables and that could increase write memory usage. $Write Back$ policy makes this kind of systems really effective. The dirty bit are stand for $WriteBack$ policy. If you write some value on any cache line, dirty bit must be set for eviction. During trashing process, you must first move dirt block back to memory. 
+\end{description}
+\subsection*{Replacement Policies }
+\begin{description}
+\item[Random] Random policies are designed to evict a random line in the associative caches. It is  not really random on implementation, but enough random to work with it. It sounds to weak and primitive approach but actually it could be really effective on highly associative caches. 
+\item[Least Recently Used ] Least recently used replacement policies are actually implemented in two types. Fully most recently used and Not most recently used random. It is probably the most efficient algorithm to replace cache index sets, but it is really hard to implement on highly associative caches. You must record history of schedule and update it each attempt of access. It could be most effective and easy method on 2 way associative caches and it just need one bit to record who used last. It actually increase temporal locality, because it offers the most recently used one is more likely to be used again. The most recently used but random is a hybrid solution of least recently used and random policies. It just record who accessed last and replace one random set except most recently one. 
+\item[First In First Out] It is also known Round robin. It is also mostly using with highly associative caches. In its implementation, it has one one tail pointer of stack and in each attempt of access it evict tail pointers set, and increment the the tail pointer to next set. 
+\end{description}
+\subsection*{Allocation Policies }
+\begin{description}
+\item[Write Allocate] $Write Allocate$ policy is also known as $Read Write Allocate$ policy. It refers that during write miss process, cache controller allocates the cache line with related address, as like as normal read miss process. It is mostly using with $WriteBack$ policies, because it assume it is more likely to access same data which you write before. 
+\item[No-Write Allocate] $No-Write Allocate$ policy is also known $Read Allocate$. It is an exotic implementation of caches. It is generally seen with $WriteThough$ policy. This systems can be special to read privileged and they do not hope to read or write subsequent write(or even read after write.) 
+\end{description}
+
+\subsection{Miss Type and Advance Cache Optimization Methods}
+\subsection*{Miss Type}
+\begin{description}
+\item[Cold Misses]  Cold misses are sometimes referred to as compulsory misses . If you never invoke related memory address and if you calling it first time,  You will encounter with that misses. It is natural misses, and really hard to mitigate them. Spacial locality is the one of the method to avoid this misses. As we mention before, when we increase the size of block, it will increase spacial locality.Also before initializing memory, pre-fetching algorithms and branch prediction algorithms can be useful to eliminate this kind of misses. In addition to this, usage of large amount of caches will naturally reduce this misses, but it is side effect of it.
+\item[Conflict Misses] Those misses are the one we are able to avoid. Conflict happens in systems set with lower associativity esp. with direct map systems. To reduce this you should increase associativity. In full associative caches, it all conflict misses are avoided. The change of conflict miss is $tagsize/memorysize$.
+\item[Capacity Misses] They are also natural misses related with size of the caches. We can not store every information in memory into cache. Those misses are based by definition of caches.  You can't solve it even with perfect replacement algorithm, but maybe you could decrease the rate of capacity miss with pre-fetching.
+\end{description}
+\subsection*{Advance Cache Optimization Methods}
+\begin{description}
+\item[Pipelined Caches] As we did in processors, we could divide cache organization in two separate stage which are decode and data. It will increase the writing efficiency because it will increase the bandwidth during subsequent requests. However the clock mechanism will decrease to hit time.  
+\item[Write Buffers] Write buffers are small fully associated buffer memories between caches and memories. They effects cache performance because the time between writing values to memory from cache, cache memories must lock if we do not use cache memories. Thus, Cache memories save values to buffer buffer will responsible with writing it. Buffer size is important, when consecutive write operation requested. When buffers is full, it will makes cache lock to get empty.
+\item[Multilayer Cache] Multilayer caches are game changer optimization decisions, because when we have level 2 caches, then we could have faster level 1 caches, because it could be smaller and simpler. Namely, we are adding systems higher level caches, in order to, decrease lower level caches miss time penalty and increase the hit response time, but it will decrease lower level caches hit rate. Level 2 or higher caches could be also on-chip (i.e fast as possible) and SRAM, yet lower level caches must always be faster closer and simpler.
+\item[Victim Caches] Victim caches are really useful and simple idea for decreasing miss penalty time. It is a buffer memory, fully associative and mostly 4 to 16 cache line. It stores recently evicted lines in it. It means it increase the associativity of recently used lines on other small buffer with cheap and flexible design.
+\item[Hardware Prefetching] There are many theoretical pre-fetching method, but there are a few example implemented. The most well known is prefetch the most recently values incremental block line. That targets to increase most recently used ones spacial locality. It is really efficient to applying it, because increasing block depth is expensive job for caches and increase hit time. If you implement one buffer memory, which prefetch next block of block you need, it automatically increase spacial locality. Also compiler based branch prediction methods are good example of instruction prefetching, however, generally, prefethers for instruction caches load all branches to decrease miss rate.
+\item[Non-Blocking Caches]
+\end{description}
+\section{Multi Processor Inter-connector and Cache Coherence and  Consistency}
+\subsubsection{Caches Coherency and consistency}
+\subsection{Bus Based Multi Processors}
+\subsection{Inter-connector Design Properties}
 \bibliographystyle{gucmasterthesis}
 \bibliography{imt4441}
 
