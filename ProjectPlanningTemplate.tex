@@ -153,16 +153,25 @@ There are three policy type determine a cache behaviours. They are write policy,
 \subsection*{Advance Cache Optimization Methods}
 \begin{description}
 \item[Pipelined Caches] As we did in processors, we could divide cache organization in two separate stage which are decode and data. It will increase the writing efficiency because it will increase the bandwidth during subsequent requests. However the clock mechanism will decrease to hit time.  
-\item[Write Buffers] Write buffers are small fully associated buffer memories between caches and memories. They effects cache performance because the time between writing values to memory from cache, cache memories must lock if we do not use cache memories. Thus, Cache memories save values to buffer buffer will responsible with writing it. Buffer size is important, when consecutive write operation requested. When buffers is full, it will makes cache lock to get empty.
+\item[Write Buffers] Write buffers are small fully associated buffer memories between caches and memories. They effects cache performance because the time between writing values to memory from cache, cache memories must lock if we do not use cache memories. Thus, Cache memories store values to buffer buffer will responsible with writing it. Buffer size is important, when consecutive write operation requested. When buffers is full, it will makes cache lock to get empty.
 \item[Multilayer Cache] Multilayer caches are game changer optimization decisions, because when we have level 2 caches, then we could have faster level 1 caches, because it could be smaller and simpler. Namely, we are adding systems higher level caches, in order to, decrease lower level caches miss time penalty and increase the hit response time, but it will decrease lower level caches hit rate. Level 2 or higher caches could be also on-chip (i.e fast as possible) and SRAM, yet lower level caches must always be faster closer and simpler.
 \item[Victim Caches] Victim caches are really useful and simple idea for decreasing miss penalty time. It is a buffer memory, fully associative and mostly 4 to 16 cache line. It stores recently evicted lines in it. It means it increase the associativity of recently used lines on other small buffer with cheap and flexible design.
 \item[Hardware Prefetching] There are many theoretical pre-fetching method, but there are a few example implemented. The most well known is prefetch the most recently values incremental block line. That targets to increase most recently used ones spacial locality. It is really efficient to applying it, because increasing block depth is expensive job for caches and increase hit time. If you implement one buffer memory, which prefetch next block of block you need, it automatically increase spacial locality. Also compiler based branch prediction methods are good example of instruction prefetching, however, generally, prefethers for instruction caches load all branches to decrease miss rate.
 \item[Non-Blocking Caches]
 \end{description}
-\section{Multi Processor Inter-connector and Cache Coherence and  Consistency}
-\subsubsection{Caches Coherency and consistency}
-\subsection{Bus Based Multi Processors}
+\section{Cache Coherence and  Consistency}
+Many modern computer systems with parallel processing ability have support of shared memory in hardware. Shared memory has lots of advantage over message based memory systems.  Each processor could access same address space, read and write them simultaneously with using their own caches. This features has lots of benefit such as; low power consumption, higher performance and lower prices. However, without consistency between processors, parallel processing can not use many advantage of parallel programming. It could be also insecure to use a system without consistency between processors. 
+
+To provide better understanding of shared memory correctness, we defined it in two separate them in two definition, which are consistency and coherency. Consistency provide a definition of memory access rules and how they will act around computer system. It must be more simple and easy to understand it. It could be something like "One writer, multiple reader". Memory consistency model, however, concerns memory load and stores, and also the ability of the ability of the disallowing and permitting request of store and write.
+\subsection{Snooping Coherence Protocols}
+\subsubsection{MSI - Basic}
+\subsubsection{MESI - Exclusive}
+\subsubsection{MOESI - Owned Exclusive}
 \subsection{Inter-connector Design Properties}
+\subsubsection{Switching}
+\subsubsection{Routing}
+\subsubsection{Topology}
+\subsubsection{Flow Control}
 \bibliographystyle{gucmasterthesis}
 \bibliography{imt4441}
 
