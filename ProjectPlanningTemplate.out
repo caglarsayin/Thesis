@@ -25,7 +25,7 @@
 \BOOKMARK [2][-]{subsection.2.2.2}{The basic logic of caches}{section.2.2}% 25
 \BOOKMARK [2][-]{subsection.2.2.3}{Allocation, Write and Replacement Policies}{section.2.2}% 26
 \BOOKMARK [2][-]{subsection.2.2.4}{Miss Type and Advance Cache Optimization Methods}{section.2.2}% 27
-\BOOKMARK [1][-]{section.2.3}{ Cache Coherence and Consistency}{section*.15}% 28
+\BOOKMARK [1][-]{section.2.3}{Cache Coherence and Consistency}{section*.15}% 28
 \BOOKMARK [2][-]{subsection.2.3.1}{Snooping Coherence Protocols}{section.2.3}% 29
 \BOOKMARK [2][-]{subsection.2.3.2}{Inter-connector Design Properties}{section.2.3}% 30
-\BOOKMARK [0][-]{section*.26}{Bibliography}{}% 31
+\BOOKMARK [0][-]{section*.29}{Bibliography}{}% 31

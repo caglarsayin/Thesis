@@ -162,7 +162,22 @@ There are three policy type determine a cache behaviours. They are write policy,
 \section{Cache Coherence and  Consistency}
 Many modern computer systems with parallel processing ability have support of shared memory in hardware. Shared memory has lots of advantage over message based memory systems.  Each processor could access same address space, read and write them simultaneously with using their own caches. This features has lots of benefit such as; low power consumption, higher performance and lower prices. However, without consistency between processors, parallel processing can not use many advantage of parallel programming. It could be also insecure to use a system without consistency between processors. 
 
-To provide better understanding of shared memory correctness, we defined it in two separate them in two definition, which are consistency and coherency. Consistency provide a definition of memory access rules and how they will act around computer system. It must be more simple and easy to understand it. It could be something like "One writer, multiple reader". Memory consistency model, however, concerns memory load and stores, and also the ability of the ability of the disallowing and permitting request of store and write.
+To provide better understanding of shared memory correctness, we defined it in two separate them in two definition, which are consistency and coherency. Consistency provide a definition of memory access rules and how they will act around computer system with store and load operations. When we compare it with coherency model, it must be more simple and easy to understand it. Therefore, it define a correct behaviours of the memory accesses of multiple threads by allowing or disallowing executions. On the other hand Coherency is a way of implementing a control protocol between memories and processors to support and provide consistency. Correct coherency provide a system which programmer or operator of the system can never determine behaviours (misbehaviours or correct behaviours) of caches\cite{sorin2011primer}.
+
+As mentioned, Mention Consistency is try to define to correct shared memory behaviour between many processor in term of loads and stores. It does not concern specific hardware issues, such as hardware level pipelines, write buffers, caches, Out-of-order processing schemes etc. 
+
+Mention Consistency Application
+
+Memory Coherency
+
+Mention Coherency Application
+
+
+
+
+
+\subsection{Consistency Models}
+
 \subsection{Snooping Coherence Protocols}
 \subsubsection{MSI - Basic}
 \subsubsection{MESI - Exclusive}
