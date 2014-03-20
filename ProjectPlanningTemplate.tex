@@ -164,25 +164,49 @@ Many modern computer systems with parallel processing ability have support of sh
 
 To provide better understanding of shared memory correctness, we defined it in two separate them in two definition, which are consistency and coherency. Consistency provide a definition of memory access rules and how they will act around computer system with store and load operations. When we compare it with coherency model, it must be more simple and easy to understand it. Therefore, it define a correct behaviours of the memory accesses of multiple threads by allowing or disallowing executions. On the other hand Coherency is a way of implementing a control protocol between memories and processors to support and provide consistency. Correct coherency provide a system which programmer or operator of the system can never determine behaviours (misbehaviours or correct behaviours) of caches\cite{sorin2011primer}.
 
-As mentioned, Mention Consistency is try to define to correct shared memory behaviour between many processor in term of loads and stores. It does not concern specific hardware issues, such as hardware level pipelines, write buffers, caches, Out-of-order processing schemes etc. 
+As mentioned, Mention Consistency is try to define to correct shared memory behaviour between many processor in term of loads and stores. It does not have to concern specific hardware issues, such as hardware level pipelines, write buffers, caches, Out-of-order processing schemes etc. However, in the market, there is no hardware provide consistency perfectly, because the reordering store and load operations is regular optimization techniques in out-of-order processors. In addition to out-of-order processors, the multi layer memory architecture makes consistency vague and subtle. Yet, most of the programmers assume memories are completely consistent. There are several level between inconsistent and sequentially consistent memory. 
 
-Mention Consistency Application
+\todo[inline]{Mention Consistency Application Summery.}
 
-Memory Coherency
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{cacheinconsistencywriteback.jpg}
+    \caption{Write-back Policy Cache Memory Inconsistency}
+    \label{fig:cacheinconsistencywriteback}
+\end{figure}
 
-Mention Coherency Application
+Memory Coherency (a.k.a. Cache Coherency) is actually to impose a protocol between caches to provide a specific consistency model on distributed shared memory systems. Unlikely consistency, it also concern hardware uncertainness and 
+subtle part such as write buffer, pre-fetcher. Typical consistency protocol has features which include instruction caches, multiple-level caches, virtual-physical address transaction, and coherent direct memory access. However, it is not enough to ensure consistency(depending on consistency model) by itself. It tries to makes caches synchronization in distributed shared memory systems invisible from software developer. However there are timing techniques to analysis cache architecture and coherency model of system. 
+
+In figure \ref{fig:cacheinconsistencywriteback} and \ref{fig:cacheinconsistencywritethrough}, the consistency issues on multi layer memory systems. Assume there is two cluster which has ability to process values with given instruction codes. LD and ST instruction refer to memory load and store request. In figure \ref{fig:cacheinconsistencywriteback}, there is a system with two caches which belongs each cluster and one shared memory block. x and y is represents a particular memory address. Contrast with figure \ref{fig:cacheinconsistencywritethrough}, figure \ref{fig:cacheinconsistencywriteback} uses write-back policy. In step 1, cluster A loaded x and y to the processor(it could be also pre-fetcher who load them to the cache block). In second step, somehow clusters stored 1 in memory location x and 10 in memory location y. In this step, memory is not consistent with memory but it is not hazard because they are not shared with cluster B. In step 3, caches evicted the block which include address x and later address x and y were loaded into the cache B. After this moment, they will never share the values which other cluster is actually using. Y was 10 at the end in the memory but it can't be seen by cluster B, even if it try to read it a million times. 
 
 
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{cacheinconsistencywritethrough.jpg}
+    \caption{Write-through Policy Cache Memory Inconsistency}
+    \label{fig:cacheinconsistencywritethrough}
+\end{figure}
 
+Write-through cache policy is intuitively perceived as solution of this problem, because it just write every values directly to the memory and it will be always synchronized with memory, yet it is not. In figure \ref{fig:cacheinconsistencywritethrough}, write-through cache policy inconsistency showed. The problem with write-through policy, clusters use values which in their cache instead of memory, so even if memory is consistent with clusters, it is not consistent with each caches. In step 1 of figure \ref{fig:cacheinconsistencywritethrough}, cluster A loaded x and y addresses into the its registers. Then, in step 2, cluster B loaded  values of x and y addresses. In step 3, system got in inconsistent state, because cluster A write values through memory, but Cluster B uses the old values, and it will never reach never values, even if it try to load many times. For this reason, many of the large systems which has more than 64 core use this type of cache coherence.
 
+In order to solve this problems, there are several coherency mechanisms and their protocols.  Depending on the case and the number of cluster or processor in the system, system could use Snooping and Directory based mechanism. These each protocol have their own benefits and drawbacks. Snooping protocol is tent to use a lot of bandwidth, however, it is faster and more synchronous. Its logic is to broadcast each state to every node on the system. However, directory based mechanism work with request and response. There is interconnector to forward message to the right address and it makes directory based mechanism slower because of the increased latency, lighter because of the decreased bandwidth.
 
 \subsection{Consistency Models}
 
 \subsection{Snooping Coherence Protocols}
+Snooping coherence (a.k.a. Bus Sniffing) is a technique to have caches to watch other processors caches and provide consistency depending on specified protocol.  It basically implemented with external port to the system bus. Therefore, it implemented over cache controller which has feature to watch bus. It makes cache controller bigger and waste more power, so lower layer caches could use less complex coherency protocols and vice versa. There are many snoopy cache coherency protocol also depending on consistency model, but we can categorize them in two class which are Write update and write invalidate. 
+
+In this both protocol, we try to get rid of stall data which are in different caches, but it is provided with different logics. Write-update protocol is a broadcast write protocol that in every write attempt, it will write the values into the corresponding cache block but also it broadcast the write message to the every caches on the connected bus. Thus, everyone on the bus which has the ability of interpreting the message of write-update protocol will update stall values with new ones. 
+
+Secondly, Write-invalidate is whenever you write, you invalidate other cache copies and reduce to possibility usage of stall data. Instead of sending whole data block, it just send the tag number and state of the tag. It could effectively be successful, if you have limited bandwidth and power source. Most processor with coherency is today using write-invalidate protocol. However, it is efficient if there a few writer and many reader clusters or processors. Comparing with write-update protocol, if there is many writer, it could be less efficient because of invalidation process validate-invalidate-forward hops.\cite{ComputerArchCoursera}
+
+There are many protocols for both write-invalidate and write-update to maintain coherence, such as MSI, MESI (aka Illinois), MOSI, MOESI, MESIF, write-once, and Synapse, Berkeley, Firefly and Dragon protocol. In this thesis, we will just focus on write-invalidate protocols because of their popularity, but basic principles are same as each other.
+
 \subsubsection{MSI - Basic}
 \subsubsection{MESI - Exclusive}
 \subsubsection{MOESI - Owned Exclusive}
-\subsection{Inter-connector Design Properties}
+\subsection{Inter-connector Design}
 \subsubsection{Switching}
 \subsubsection{Routing}
 \subsubsection{Topology}

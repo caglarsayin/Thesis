@@ -33,13 +33,14 @@
 \contentsline {subsection}{\numberline {2.2.3}Allocation, Write and Replacement Policies}{12}{subsection.2.2.3}
 \contentsline {subsection}{\numberline {2.2.4}Miss Type and Advance Cache Optimization Methods}{14}{subsection.2.2.4}
 \contentsline {section}{\numberline {2.3}Cache Coherence and Consistency}{15}{section.2.3}
-\contentsline {subsection}{\numberline {2.3.1}Snooping Coherence Protocols}{16}{subsection.2.3.1}
-\contentsline {subsubsection}{MSI - Basic}{16}{section*.21}
-\contentsline {subsubsection}{MESI - Exclusive}{16}{section*.22}
-\contentsline {subsubsection}{MOESI - Owned Exclusive}{16}{section*.23}
-\contentsline {subsection}{\numberline {2.3.2}Inter-connector Design Properties}{16}{subsection.2.3.2}
-\contentsline {subsubsection}{Switching}{16}{section*.24}
-\contentsline {subsubsection}{Routing}{16}{section*.25}
-\contentsline {subsubsection}{Topology}{16}{section*.26}
-\contentsline {subsubsection}{Flow Control}{16}{section*.27}
-\contentsline {chapter}{Bibliography}{17}{section*.29}
+\contentsline {subsection}{\numberline {2.3.1}Consistency Models}{17}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.2}Snooping Coherence Protocols}{17}{subsection.2.3.2}
+\contentsline {subsubsection}{MSI - Basic}{18}{section*.22}
+\contentsline {subsubsection}{MESI - Exclusive}{18}{section*.23}
+\contentsline {subsubsection}{MOESI - Owned Exclusive}{18}{section*.24}
+\contentsline {subsection}{\numberline {2.3.3}Inter-connector Design}{18}{subsection.2.3.3}
+\contentsline {subsubsection}{Switching}{18}{section*.25}
+\contentsline {subsubsection}{Routing}{18}{section*.26}
+\contentsline {subsubsection}{Topology}{18}{section*.27}
+\contentsline {subsubsection}{Flow Control}{18}{section*.28}
+\contentsline {chapter}{Bibliography}{19}{section*.30}
