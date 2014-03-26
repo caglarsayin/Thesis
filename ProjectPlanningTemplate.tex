@@ -175,8 +175,8 @@ As mentioned, Mention Consistency is try to define to correct shared memory beha
     \label{fig:cacheinconsistencywriteback}
 \end{figure}
 
-Memory Coherency (a.k.a. Cache Coherency) is actually to impose a protocol between caches to provide a specific consistency model on distributed shared memory systems. Unlikely consistency, it also concern hardware uncertainness and 
-subtle part such as write buffer, pre-fetcher. Typical consistency protocol has features which include instruction caches, multiple-level caches, virtual-physical address transaction, and coherent direct memory access. However, it is not enough to ensure consistency(depending on consistency model) by itself. It tries to makes caches synchronization in distributed shared memory systems invisible from software developer. However there are timing techniques to analysis cache architecture and coherency model of system. 
+Memory Coherency (a.k.a. Cache Coherency) is actually to impose a protocol between caches to provide a specific consistency model on shared memory systems. Unlikely consistency, it also concern hardware uncertainness and 
+subtle part such as write buffer, pre-fetcher. Typical consistency protocol has features which include instruction caches, multiple-level caches, virtual-physical address transaction, and coherent direct memory access. However, it is not enough to ensure consistency(depending on consistency model) by itself. It tries to makes caches synchronization in shared memory systems invisible from software developer. However there are timing techniques to analysis cache architecture and coherency model of system. 
 
 In figure \ref{fig:cacheinconsistencywriteback} and \ref{fig:cacheinconsistencywritethrough}, the consistency issues on multi layer memory systems. Assume there is two cluster which has ability to process values with given instruction codes. LD and ST instruction refer to memory load and store request. In figure \ref{fig:cacheinconsistencywriteback}, there is a system with two caches which belongs each cluster and one shared memory block. x and y is represents a particular memory address. Contrast with figure \ref{fig:cacheinconsistencywritethrough}, figure \ref{fig:cacheinconsistencywriteback} uses write-back policy. In step 1, cluster A loaded x and y to the processor(it could be also pre-fetcher who load them to the cache block). In second step, somehow clusters stored 1 in memory location x and 10 in memory location y. In this step, memory is not consistent with memory but it is not hazard because they are not shared with cluster B. In step 3, caches evicted the block which include address x and later address x and y were loaded into the cache B. After this moment, they will never share the values which other cluster is actually using. Y was 10 at the end in the memory but it can't be seen by cluster B, even if it try to read it a million times. 
 
@@ -203,9 +203,113 @@ Secondly, Write-invalidate is whenever you write, you invalidate other cache cop
 
 There are many protocols for both write-invalidate and write-update to maintain coherence, such as MSI, MESI (aka Illinois), MOSI, MOESI, MESIF, write-once, and Synapse, Berkeley, Firefly and Dragon protocol. In this thesis, we will just focus on write-invalidate protocols because of their popularity, but basic principles are same as each other.
 
+\todo[inline]{Mention Serialization of buses}
+
+
 \subsubsection{MSI - Basic}
+
+
+\begin{tabular}{|c|c|c|c|c|}
+\hline 
+• & Clean/Dirtiy & Write? & Unique? & Silent Transition to \\ 
+\hline 
+Invalid & Clean & No & No & - \\ 
+\hline 
+Shared & Clean & No & No & Invalid State \\ 
+\hline 
+Modified & Dirty & Yes & Yes & - \\ 
+\hline 
+\end{tabular} 
+
+
+Basic write-invalidate snoopy cache control protocol is MSI (a.k.a Modified-Shared-Invalid protocol). In this model, each cache block has cache tag, and two status bit as same as standard caches, but instead of dirt and valid status bit, MSI cache line has state bits to refer in which state it is. MSI has three state in state machine and they are "Modified", "Shared", "Invalid". two bits can represent four state, so definitely represent three state. The main idea behind this protocol is that one writer and many reader states provide always consistent memory sharing. Therefore, every cache in the system has different responsibilities when they read or write.
+
+\begin{description}
+\item[Invalid] Invalid state is exactly same state with standard caches' invalid state. When cache need to access a invalid block, it must act as cache miss, and  be fetched this block again.
+\item[Shared] When there is no writer processor on this line, and if  a processor request this line with purpose of read it, it will be in shared state.  It is read-only cache block, and processors are not allowed write without transforming state. The processor also can evict it without writing back to the upper layer memory, because that is for sure, it is clean block.
+\item[Modified] It is modified and also modifiable cache block. In a memory coherent system there can be at most one modified cache and all other cache must be invalidated. It is responsible with writing back cache to the upper layer memory. 
+\end{description}
+
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{MSIstatediagram.jpg}
+    \caption{MSI State Diagram for processor P1}
+    \label{fig:MSIstatediagram}
+\end{figure}
+
+In figure \ref{fig:MSIstatediagram}, MSI protocol's state diagram is showed. Cache memory launch with invalid cache block, and when a read miss is comprised,  cache controller will request memory block from memory. Then, the snooping control bus will broadcast the request of read. If there is a modified copy on the bus, it will abort request of memory block from memory. It will evict its line to memory, and change its state to shared state. Then, memory responds source of the request. After the fetching cache block to the source cache it, it sets the state as shared state. If there is a shared stated copies in the system, It does not matter who responds the request. In any case, It will fetch the memory block, and sets the state bits to shared.
+
+When write miss is compromised in invalid state or shared, It will fetch the data as same as read miss cases, but the difference is it will invalidate other case's corresponding block which are shared or modified. Modified stated block must evict blocks properly. At the end, source cache block fetches the block.
+
+Write hit can be compromise in modified state, and read hit can be compromise in shared state.
+
 \subsubsection{MESI - Exclusive}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{MESIstatediagram.jpg}
+    \caption{MESI State Diagram for processor P1}
+    \label{fig:MESIstatediagram}
+\end{figure}
+
+
+The MESI protocol (a.k.a Illinois protocol due to its development at the University of Illinois at Urbana-Champaign) is a widely used cache coherency protocol\cite{papamarcos1984low}. The idea behind the MESI is to use forth state we can use with 2 bits. In order to increase efficiency $exclusive$ state is developed by JH. Patel et. al. in 1984\cite{papamarcos1984low}. As showed in MSI protocol, there is modified, shared and invalid states but also we have exclusive state. This exclusive states also known unmodified exclusive state, if we refer modified state as modified exclusive. This is very similar to the shared state in MSI, and in fact, Shared state is split in two different states. That is because of reducing the communication on the bus and increasing efficiency. In this case, there is exclusive cache blocks which are in read mode and they are unique i.e there is no other cache controller on the system has this cache block. 
+
+\begin{description}
+\item[Exclusive] The cache line is only present in current cache memory, and it has not modified yet. It is not a state to provide coherency, but it is state for increasing efficiency of bus bandwidth usage. When a cache line in exclusive state the cache controller can decide the transaction of the line without communicating with other caches. When a cache is requested with load operation, it is loaded in exclusive state, if there is no other cache controller has the cache block.
+\end{description}
+
+
+
+\begin{tabular}{|c|c|c|c|c|}
+\hline 
+• & Clean/Dirtiy & Write? & Unique? & Silent Transition to \\ 
+\hline 
+Invalid & Clean & No & No & - \\ 
+\hline 
+Shared & Clean & No & No & Invalid State \\ 
+\hline 
+Excursive & Clean & No & Yes & Shared Modified Exclusive States \\ 
+\hline 
+Modified & Dirty & Yes & Yes & - \\ 
+\hline 
+\end{tabular} 
+
+In figure \ref{fig:MESIstatediagram}, state transactions are showed. Bus usage is bottle neck, low performance behaviour in cache coherency. Silent state transactions are transactions in cache controller without communicating with other caches. For example, there is no need to broadcast and occupy bus for invalidating shared state in MSI protocol. If a cache controller is in shared state, the other cache controller can be shared or invalidate in MSI, so there is no dependency in the system transaction from shared to invalidate. Exclusive state is to exploit the salient transactions. When a load request arrive to cache controller from a processor, it request the line from upper level memory controller and other child caches controller. If any child controller send a shared state broadcast message, it load it in shared state. If there is a exclusive cache controller on the bus, it will degrade its state to shared and broadcast it. If there is no other shared state on the bus. It load the cache line in excluded state. Then, in case of store operation from processor, it will transact its state from exclusive to modified. It does not need to broadcast it, because we know it is unique in system. Contrast with modified state, due to be cleanness of the line, it does not need to evict line to upper memory, it can  just invalidate it silently. The weakness of this protocol comparing with MSI, if there is many processor with the corresponding cache line, when it count the copies to test uniqueness, it occupy shared bus more in some cases. If there is n cache controller with corresponding cache line, it will send n broadcast message with this message, however, instead of sending whole line to upper memory it is mostly efficient to send this message.
+
 \subsubsection{MOESI - Owned Exclusive}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{MOESIstatediagram.jpg}
+    \caption{MOESI State Diagram for processor P1}
+    \label{fig:MOESIstatediagram}
+\end{figure}
+
+\begin{tabular}{|c|c|c|c|c|}
+\hline 
+• & Clean/Dirtiy & Write? & Unique? & Silent Transition to \\ 
+\hline 
+Invalid & Clean & No & No & - \\ 
+\hline 
+Shared & Either & No & No & Invalid State \\ 
+\hline 
+Excursive & Clean & No & Yes & Shared Modified Exclusive States \\ 
+\hline 
+Owned & Dirty & No & Yes & - \\ 
+\hline 
+Modified & Dirty & Yes & Yes & Owned \\ 
+\hline 
+\end{tabular} 
+
+Such processor producers AMD Opteron and Arm Cortex A are using MOESI protocol for cache sharing. In addition to the four states in MESI, a fifth state "Owned" appears here representing data that is both modified and shared. Using MOESI, instead of writing modified data back to main memory, it directly forward the dirty value from cache to cache before being shared, which could save bandwidth and gain much faster access to users to the cache.
+
+\begin{description}
+\item[Owned] Owned state is a state if and only if a cache line can transact in it, when a read request message snooped from another processors when the cache line is in modified state. It allows dirty line sharing between caches, and reduce the latency which is arisen due to the communication between memories and processors. The line is read only by all processors, when it is owned state.
+\end{description}
+
+In figure \ref{fig:MOESIstatediagram}, state transactions of MOESI protocol are showed. The relationships of states are almost same with MESI, but there is a state which supplants upper level memory with its own cache line. Hence, it is responsible with evicting lines and cleaning state. The cache line may be changed to the Modified state after invalidating all shared copies, or changed to the Shared state by writing the modifications back to main memory. If could increase efficiency sharply, if the line between upper memory and itself is long and bandwidth is limited. Mostly the L1 and L2 caches are located on-the-chip, and memory are located somewhere outside, the buses' bandwidth between in side and outside of chips are game changer. It can be efficient to use a chip as a forwarder in many system. However, in the MOESI protocol, it is not possible to forward the cache line which is not dirty but present on the chip. If there is a shared cache line in a cache, and if any other cache controller request to load the same cache line, it fetches it from memory.
+
+
 \subsection{Inter-connector Design}
 \subsubsection{Switching}
 \subsubsection{Routing}
