@@ -1,0 +1,98 @@
+%% This document gives an example on how to use the gucmasterthesis
+%% LaTeX document class.
+
+\documentclass[medieteknikk]{gucmasterthesis}
+\usepackage{ifpdf}
+\ifpdf
+	\usepackage[pdftex]{graphicx}
+    \usepackage{epstopdf}
+\else
+    \usepackage[dvips]{graphicx}
+	\usepackage[dvips]{hyperref}    % For cross references in pdf
+\fi
+\usepackage{mdwlist}
+\usepackage{url}
+\usepackage{float}
+\usepackage{todonotes}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}     % For utf8 encoded .tex files
+\usepackage[british]{babel}     % For chapter headings etc.
+
+
+
+\begin{document}
+
+\thesistitle{Evading Malicious Code with Concurrent Programming in Parallel Architectures and Their Protection Methods}
+\thesisauthor{Caglar SAYIN}
+\thesisdate{\gucmasterthesisdate}
+\useyear{2014}
+\makefrontpages % make the frontpages
+\thesistitlepage % make the ordinary titlepage
+
+\chapter*{Revision history}
+
+\begin{center}
+\begin{tabular}[H]{|l|p{35em}|}
+\hline
+Version \#  & Description of change (why, what where - a few sentences)\\
+\hline
+      0.1   & First version is made available via Fronter\\
+\hline
+\end{tabular}
+\end{center}
+
+\chapter*{Abstract}
+
+Have you ever realize how secure and safe environment they claim in security product companies' advertisement? Does Anti-Malware software really provide 100 percent security against Malware? As Everybody knows, It is not. Today, it is nothing more than cat and dog fight. Malware authors purpose an new architecture, an new approach and Anti Virus companies just try to fix vulnerabilities. Due to this fact, Parallel and concurrent architectures are elusive field for malware. They are new, trendy, popular, complex. 
+
+In this thesis, we will try to show vulnerabilities on concurrent and parallel cpu schedulers and non-uniform memory architecture. The weaknesses on hardware layer of the computer are hard to be observed by software solution. Therefore; It is time to pay attention for them, since it is not hard to predict that attackers will focus them.
+
+This thesis purpose an offensive security approach, how malware can be evade autonomous malware detection systems, and also purpose and experimental method to detect and mitigate them.
+
+\chapter*{Preface}
+
+I would like to thank Erik Hjelmås for encouraging me to write this
+small \LaTeX\ class for GUC's master's theses, and in particular for
+making sure that I will not be responsible for maintaining and
+supporting it\dots
+
+\vspace{\baselineskip}
+\noindent Ivar Farup, \gucmasterthesisdate
+ 
+\tableofcontents
+\listoffigures
+\listoftables
+
+\include{chapter1}
+\chapter{Related Works}
+\chapter{Malware Detection}
+\section{Taxonomy}
+\section{Scope of Model}
+\section{Scope of Methods}
+\section{Obfuscation Methods}
+\include{chapter2}
+\chapter{Deliberate Incontinence on Multi-Processing Architecture}
+\chapter{Exploiting Deliberate Incontinence to Evade Malicious Code}
+\chapter{Implementation for Hayward Computer Architecture}
+\chapter{Case Studies}
+\section{Simulation Tool}
+\section{Samsung Exynos 5420}
+\section{Comparison}
+\chapter{Implication and Discussion}
+\section{Theoretical Considerations}
+\section{Practical Implication Issues}
+\section{Summary}
+\chapter{Conclusion}
+\chapter{Further Works}
+
+
+\bibliographystyle{gucmasterthesis}
+\bibliography{gucmasterthesis}
+
+\appendix
+
+\chapter{Cache Memory Simulation}
+\chapter{The Inconsistency Example}
+
+
+\end{document}

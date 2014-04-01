@@ -1,0 +1,263 @@
+\chapter{Background Studies}
+\section{Concurrent Programming }
+\section{Caches}
+Solely, a cache is a small, fast, array of memory which is placed between lower level memory and higher one.  It store a special block of information, in order to increase performance of computer systems. It is like a buffer area which has some logic to exploit locality features of programming logic. Today, with increasing of processing ability of computer systems, memory access is bottle neck. 
+
+The "cache" is originally french rooted with meaning "concealed place for storage."\cite{sloss2004arm} We can move this definition basically to the computer science. The cache's design is definitely  isolated from software layer, however; if you know your caches feature and how caches working you could program a lot more efficient codes easily.
+
+
+
+\subsection{Motivation of Caches and Principle of Locality}
+The main motivation of caches is indisputably performance. As we mentioned,  Performance of high-speed computers is usually limited by memory bandwidth and latency. In order to increase, and turn around that, we use an small array of memory which is located close to the processors.  The location of chip is important and there are many design decision (e.g On chip, out of chip), but more crucial  properties of caches are their designs (e.g. Naive Capacitor , SRAM, DRAM) and their logic complexity\cite{hennessy2012computer}.Due to physical constrains, the size of the memory is limited which we can locate close to memory. On the other hand, these design choices are decisive factor about prices of memories.  Because of all these reasons, Multi-Layer Memory Hierarchy with several caches  between processor core and main memory is well-known option in order to improve performance. Nevertheless, In multilayer memory hierarchy, it is hard to know where the particular data reside in, and whether it is coherent or not. It also add many layer between memory and processor and in some cases it even decrease system performance,especially because of logical complexity of the line.
+
+The idea all the caches logic depending on is Principle of Locality. Principle of locality is actually a concern of information theory\cite{shannon2001mathematical}. It a conjecture of data distribution and processing order. The phenomenon assume that the the same data and related document will be accessed more frequently than other data\cite{denning2005locality}. Today, it is the one of the corner stone of computer science.  It was first developed with Atlas System with purpose to develop virtual memory systems work well\cite{kilburn1962one}. Then, it spread from search engines optimization to hardware caches. 
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{localitygraph2.jpg}
+    \caption{Principle of Locality}
+    \cite{ComputerArchCoursera}
+    \label{fig:principleoflocality}
+\end{figure}
+
+
+There are mainly two type of locality of reference:
+
+\begin{description}
+\item[Spacial Locality] Spacial locality propose if there is a particular of memory which is accessed on memory, then it is more likely to accessing memory locations around of it in near feature. Especially arrays and instructions are exploiting this locality. Arrays, formed structure and instructions on memory are laid out lineally over memory. On figure \ref{fig:principleoflocality}, we can see spacial locality simply.  For example, during instruction fetches part on the figure, n loop iterations accesses same memory locations for many times.  There are also subclass of spacial localities like Branch Locality and Equidistant Locality. They are designed locality types of indeterministic feature of program structure. Branch prediction and Special compiler designs aims to exploits this kind of locality more efficiently.
+\item[Temporal Locality] Temporal locality propose if there is a particular of memory location which is accessed recently, it will be accessed again more likely than any other location. Especially, variables, subroutines of stacks or other calls exploits this feature of locality. On figure \ref{fig:principleoflocality}, it is obviously seen that the values accessed once is possible to accessed again. 
+\end{description}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{cacheinternals.jpg}
+    \caption{4 KB 4-way set associative cache with 256 cache lines }
+    \cite{sloss2004arm}
+    \label{fig:cacheinternals}
+\end{figure}
+
+\subsection{The basic logic of caches}
+As we said in previous section, the basic logic behind caches is moving arranging caches with local data. In order to provide this feature as smooth as possible, we use a logic circuit called "Cache Controller". It does basic logic comparison and wiring the request and response into the right path. Thus, it intercept the write and read request from processor, replace its memory array with right scheduling method, and evict it safely and coherently. It processes with diving address of th request into three fields which are  Index set field, tag field, and block field. In figure \ref{fig:cacheinternals}, these fields showed. 
+
+At the beginning of cache process after it divided address fields, It first request right cache line which is shown in figure \ref{fig:principleoflocality}. So if we have $M$ byte memory and $N$ byte cache line, we must have $M/N = cache line$, then we can represent it with $p$ when $cache line = 2^{p}$ Thus, cache controller just wire corresponding line with given set index. 
+
+In traditional cache convention, first field belongs to tag id. Tag id is determined depending on other field i.e. the remaining part after index field and block field calculated is tag id length. Tag id is using to verify the stored line is actually belongs to right location of memory. The cache controller has comparison circuit(XOR) and compare the requested address and the address which is in the pointed line by set index field. If they are matched with each other, then it check valid byte and hit or miss. There is a simple AND circuit between tag comparison. 
+
+Final field is called data index or block index field. It will point in the cache line the smallest addressable memory location. Therefore, when processor want to read a value, cache fetch the whole block, and that makes cache to exploit spacial locality linearly. However, it will limit the access speed remarkable, if we increase block size. The optimum block size is about 64 byte for many system. As we mention before each cache line includes cache-tag field, valid bit, dirty bit, and some coherency bits in some special systems. The length of the data index field is equal to r if  $ word size = 2^{r}  $.
+
+When we increase the set index count it increase basically temporal locality, but not always. The cache conflict could happened when two memory location which uses same cache line could be used concurrently or twisted. Highly trashing can reduce cache performance. For this reason, associative caches are developed. Set associative caches are represented by their way number e.g 3 way associative caches or full associative caches, and there are group of cache arrays corresponding to the same set index. So that decrease the set index count but increase the performance during conflict miss in some cases. However, because of the complexity of the comparison circuit, it must be carefully chosen the number of ways. The associative caches are showed in figure \ref{fig:cacheinternals}. 
+
+The computer architecture we uses today actually first formulated by John Von Neumann  \cite{von1961collected}. On the first design of computer it was a single cycle instruction machine without any pipeline or superscalar idea. Then Hardward Mark I machine is designed with proposing two type of caches which are one for instruction, and one for data. Icache and Dcache are specified for their own purpose, because data and instruction on memories have different deterministic properties. Instruction are more tent to be linearly accessed by memory and they has branch locality which can be predict earlier. Icache also could be located more close to decode and fetch parts of processors when Dcache are instead closer to memory fetch parts. Yet, the most significant benefit of Harward design is concurrently usage both caches during pipelined architectures. 
+\subsection{Allocation, Write and Replacement Policies}
+There are three policy type determine a cache behaviours. They are write policy, read policy and reallocate policy. System's performance, coherency, and designs are determined depending on these rules. 
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{policies.jpg}
+    \caption{A. A Write-Through cache with No-Write Allocation B. A Write-Back cache with Write Allocation}
+    \cite{wikipolicies}
+    \label{fig:cachepolicies}
+\end{figure}
+
+\subsection*{Write Policies }
+\begin{description}
+\item[Write Through] When the cache controller designed based on $write through$ policy, it write the values into the memory and caches simultaneously, when the write request is arrived from processors. It does not depend on $write miss$ or $write hit$. It will reduce write performance, because writing data on memory is a lot slower, but it stay coherent all the times. It is performance could be increased a bit  with write buffer memories between memory and cache.
+\item[Write Back] The systems with that policies does not have same values in memory and corresponding cache line, so the coherency between memory and caches are provided by a trashing algorithm. Cache line always store more recent data, but if there is more than one cache it is hard to decide which one is more valid or whether there is a valid coherent one.  However, it effects performance quite remarkable (e.g. in ARM 15 cpu writing cycle to memory is around 200 cycle, but caches is about 4.) . The system with limited register numbers can overflow to the memory to store loop variables and that could increase write memory usage. $Write Back$ policy makes this kind of systems really effective. The dirty bit are stand for $WriteBack$ policy. If you write some value on any cache line, dirty bit must be set for eviction. During trashing process, you must first move dirt block back to memory. 
+\end{description}
+\subsection*{Replacement Policies }
+\begin{description}
+\item[Random] Random policies are designed to evict a random line in the associative caches. It is  not really random on implementation, but enough random to work with it. It sounds to weak and primitive approach but actually it could be really effective on highly associative caches. 
+\item[Least Recently Used ] Least recently used replacement policies are actually implemented in two types. Fully most recently used and Not most recently used random. It is probably the most efficient algorithm to replace cache index sets, but it is really hard to implement on highly associative caches. You must record history of schedule and update it each attempt of access. It could be most effective and easy method on 2 way associative caches and it just need one bit to record who used last. It actually increase temporal locality, because it offers the most recently used one is more likely to be used again. The most recently used but random is a hybrid solution of least recently used and random policies. It just record who accessed last and replace one random set except most recently one. 
+\item[First In First Out] It is also known Round robin. It is also mostly using with highly associative caches. In its implementation, it has one one tail pointer of stack and in each attempt of access it evict tail pointers set, and increment the the tail pointer to next set. 
+\end{description}
+\subsection*{Allocation Policies }
+\begin{description}
+\item[Write Allocate] $Write Allocate$ policy is also known as $Read Write Allocate$ policy. It refers that during write miss process, cache controller allocates the cache line with related address, as like as normal read miss process. It is mostly using with $WriteBack$ policies, because it assume it is more likely to access same data which you write before. 
+\item[No-Write Allocate] $No-Write Allocate$ policy is also known $Read Allocate$. It is an exotic implementation of caches. It is generally seen with $WriteThough$ policy. This systems can be special to read privileged and they do not hope to read or write subsequent write(or even read after write.) 
+\end{description}
+
+\subsection{Miss Type and Advance Cache Optimization Methods}
+\subsection*{Miss Type}
+\begin{description}
+\item[Cold Misses]  Cold misses are sometimes referred to as compulsory misses . If you never invoke related memory address and if you calling it first time,  You will encounter with that misses. It is natural misses, and really hard to mitigate them. Spacial locality is the one of the method to avoid this misses. As we mention before, when we increase the size of block, it will increase spacial locality.Also before initializing memory, pre-fetching algorithms and branch prediction algorithms can be useful to eliminate this kind of misses. In addition to this, usage of large amount of caches will naturally reduce this misses, but it is side effect of it.
+\item[Conflict Misses] Those misses are the one we are able to avoid. Conflict happens in systems set with lower associativity esp. with direct map systems. To reduce this you should increase associativity. In full associative caches, it all conflict misses are avoided. The change of conflict miss is $tagsize/memorysize$.
+\item[Capacity Misses] They are also natural misses related with size of the caches. We can not store every information in memory into cache. Those misses are based by definition of caches.  You can't solve it even with perfect replacement algorithm, but maybe you could decrease the rate of capacity miss with pre-fetching.
+\end{description}
+\subsection*{Advance Cache Optimization Methods}
+\begin{description}
+\item[Pipelined Caches] As we did in processors, we could divide cache organization in two separate stage which are decode and data. It will increase the writing efficiency because it will increase the bandwidth during subsequent requests. However the clock mechanism will decrease to hit time.  
+\item[Write Buffers] Write buffers are small fully associated buffer memories between caches and memories. They effects cache performance because the time between writing values to memory from cache, cache memories must lock if we do not use cache memories. Thus, Cache memories store values to buffer buffer will responsible with writing it. Buffer size is important, when consecutive write operation requested. When buffers is full, it will makes cache lock to get empty.
+\item[Multilayer Cache] Multilayer caches are game changer optimization decisions, because when we have level 2 caches, then we could have faster level 1 caches, because it could be smaller and simpler. Namely, we are adding systems higher level caches, in order to, decrease lower level caches miss time penalty and increase the hit response time, but it will decrease lower level caches hit rate. Level 2 or higher caches could be also on-chip (i.e fast as possible) and SRAM, yet lower level caches must always be faster closer and simpler.
+\item[Victim Caches] Victim caches are really useful and simple idea for decreasing miss penalty time. It is a buffer memory, fully associative and mostly 4 to 16 cache line. It stores recently evicted lines in it. It means it increase the associativity of recently used lines on other small buffer with cheap and flexible design.
+\item[Hardware Prefetching] There are many theoretical pre-fetching method, but there are a few example implemented. The most well known is prefetch the most recently values incremental block line. That targets to increase most recently used ones spacial locality. It is really efficient to applying it, because increasing block depth is expensive job for caches and increase hit time. If you implement one buffer memory, which prefetch next block of block you need, it automatically increase spacial locality. Also compiler based branch prediction methods are good example of instruction prefetching, however, generally, prefethers for instruction caches load all branches to decrease miss rate.
+\item[Non-Blocking Caches]
+\end{description}
+\section{Cache Coherence and  Consistency}
+Many modern computer systems with parallel processing ability have support of shared memory in hardware. Shared memory has lots of advantage over message based memory systems.  Each processor could access same address space, read and write them simultaneously with using their own caches. This features has lots of benefit such as; low power consumption, higher performance and lower prices. However, without consistency between processors, parallel processing can not use many advantage of parallel programming. It could be also insecure to use a system without consistency between processors. 
+
+To provide better understanding of shared memory correctness, we defined it in two separate them in two definition, which are consistency and coherency. Consistency provide a definition of memory access rules and how they will act around computer system with store and load operations. When we compare it with coherency model, it must be more simple and easy to understand it. Therefore, it define a correct behaviours of the memory accesses of multiple threads by allowing or disallowing executions. On the other hand Coherency is a way of implementing a control protocol between memories and processors to support and provide consistency. Correct coherency provide a system which programmer or operator of the system can never determine behaviours (misbehaviours or correct behaviours) of caches\cite{sorin2011primer}.
+
+As mentioned, Mention Consistency is try to define to correct shared memory behaviour between many processor in term of loads and stores. It does not have to concern specific hardware issues, such as hardware level pipelines, write buffers, caches, Out-of-order processing schemes etc. However, in the market, there is no hardware provide consistency perfectly, because the reordering store and load operations is regular optimization techniques in out-of-order processors. In addition to out-of-order processors, the multi layer memory architecture makes consistency vague and subtle. Yet, most of the programmers assume memories are completely consistent. There are several level between inconsistent and sequentially consistent memory. 
+
+\todo[inline]{Mention Consistency Application Summery.}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{cacheinconsistencywriteback.jpg}
+    \caption{Write-back Policy Cache Memory Inconsistency}
+    \label{fig:cacheinconsistencywriteback}
+\end{figure}
+
+Memory Coherency (a.k.a. Cache Coherency) is actually to impose a protocol between caches to provide a specific consistency model on shared memory systems. Unlikely consistency, it also concern hardware uncertainness and 
+subtle part such as write buffer, pre-fetcher. Typical consistency protocol has features which include instruction caches, multiple-level caches, virtual-physical address transaction, and coherent direct memory access. However, it is not enough to ensure consistency(depending on consistency model) by itself. It tries to makes caches synchronization in shared memory systems invisible from software developer. However there are timing techniques to analysis cache architecture and coherency model of system. 
+
+In figure \ref{fig:cacheinconsistencywriteback} and \ref{fig:cacheinconsistencywritethrough}, the consistency issues on multi layer memory systems. Assume there is two cluster which has ability to process values with given instruction codes. LD and ST instruction refer to memory load and store request. In figure \ref{fig:cacheinconsistencywriteback}, there is a system with two caches which belongs each cluster and one shared memory block. x and y is represents a particular memory address. Contrast with figure \ref{fig:cacheinconsistencywritethrough}, figure \ref{fig:cacheinconsistencywriteback} uses write-back policy. In step 1, cluster A loaded x and y to the processor(it could be also pre-fetcher who load them to the cache block). In second step, somehow clusters stored 1 in memory location x and 10 in memory location y. In this step, memory is not consistent with memory but it is not hazard because they are not shared with cluster B. In step 3, caches evicted the block which include address x and later address x and y were loaded into the cache B. After this moment, they will never share the values which other cluster is actually using. Y was 10 at the end in the memory but it can't be seen by cluster B, even if it try to read it a million times. 
+
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{cacheinconsistencywritethrough.jpg}
+    \caption{Write-through Policy Cache Memory Inconsistency}
+    \label{fig:cacheinconsistencywritethrough}
+\end{figure}
+
+Write-through cache policy is intuitively perceived as solution of this problem, because it just write every values directly to the memory and it will be always synchronized with memory, yet it is not. In figure \ref{fig:cacheinconsistencywritethrough}, write-through cache policy inconsistency showed. The problem with write-through policy, clusters use values which in their cache instead of memory, so even if memory is consistent with clusters, it is not consistent with each caches. In step 1 of figure \ref{fig:cacheinconsistencywritethrough}, cluster A loaded x and y addresses into the its registers. Then, in step 2, cluster B loaded  values of x and y addresses. In step 3, system got in inconsistent state, because cluster A write values through memory, but Cluster B uses the old values, and it will never reach never values, even if it try to load many times. For this reason, many of the large systems which has more than 64 core use this type of cache coherence.
+
+In order to solve this problems, there are several coherency mechanisms and their protocols.  Depending on the case and the number of cluster or processor in the system, system could use Snooping and Directory based mechanism. These each protocol have their own benefits and drawbacks. Snooping protocol is tent to use a lot of bandwidth, however, it is faster and more synchronous. Its logic is to broadcast each state to every node on the system. However, directory based mechanism work with request and response. There is interconnector to forward message to the right address and it makes directory based mechanism slower because of the increased latency, lighter because of the decreased bandwidth.
+
+\subsection{Consistency Models}
+
+\subsection{Snooping Coherence Protocols}
+Snooping coherence (a.k.a. Bus Sniffing) is a technique to have caches to watch other processors caches and provide consistency depending on specified protocol.  It basically implemented with external port to the system bus. Therefore, it implemented over cache controller which has feature to watch bus. It makes cache controller bigger and waste more power, so lower layer caches could use less complex coherency protocols and vice versa. There are many snoopy cache coherency protocol also depending on consistency model, but we can categorize them in two class which are Write update and write invalidate. 
+
+In this both protocol, we try to get rid of stall data which are in different caches, but it is provided with different logics. Write-update protocol is a broadcast write protocol that in every write attempt, it will write the values into the corresponding cache block but also it broadcast the write message to the every caches on the connected bus. Thus, everyone on the bus which has the ability of interpreting the message of write-update protocol will update stall values with new ones. 
+
+Secondly, Write-invalidate is whenever you write, you invalidate other cache copies and reduce to possibility usage of stall data. Instead of sending whole data block, it just send the tag number and state of the tag. It could effectively be successful, if you have limited bandwidth and power source. Most processor with coherency is today using write-invalidate protocol. However, it is efficient if there a few writer and many reader clusters or processors. Comparing with write-update protocol, if there is many writer, it could be less efficient because of invalidation process validate-invalidate-forward hops.\cite{ComputerArchCoursera}
+
+There are many protocols for both write-invalidate and write-update to maintain coherence, such as MSI, MESI (aka Illinois), MOSI, MOESI, MESIF, write-once, and Synapse, Berkeley, Firefly and Dragon protocol. In this thesis, we will just focus on write-invalidate protocols because of their popularity, but basic principles are same as each other.
+
+\todo[inline]{Mention Serialization of buses}
+
+
+\subsubsection{MSI - Basic}
+
+\begin{table}[position specifier]
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline 
+• & Clean/Dirtiy & Write? & Unique? & Silent Transition to \\ 
+\hline 
+Invalid & Clean & No & No & - \\ 
+\hline 
+Shared & Clean & No & No & Invalid State \\ 
+\hline 
+Modified & Dirty & Yes & Yes & - \\ 
+\hline 
+\end{tabular} 
+\caption{MSI states' properties}
+\label{tab:MSItable}
+\end{table}
+
+
+Basic write-invalidate snoopy cache control protocol is MSI (a.k.a Modified-Shared-Invalid protocol). In this model, each cache block has cache tag, and two status bit as same as standard caches, but instead of dirt and valid status bit, MSI cache line has state bits to refer in which state it is. MSI has three state in state machine and they are "Modified", "Shared", "Invalid". two bits can represent four state, so definitely represent three state. The main idea behind this protocol is that one writer and many reader states provide always consistent memory sharing. Therefore, every cache in the system has different responsibilities when they read or write.
+
+\begin{description}
+\item[Invalid] Invalid state is exactly same state with standard caches' invalid state. When cache need to access a invalid block, it must act as cache miss, and  be fetched this block again.
+\item[Shared] When there is no writer processor on this line, and if  a processor request this line with purpose of read it, it will be in shared state.  It is read-only cache block, and processors are not allowed write without transforming state. The processor also can evict it without writing back to the upper layer memory, because that is for sure, it is clean block.
+\item[Modified] It is modified and also modifiable cache block. In a memory coherent system there can be at most one modified cache and all other cache must be invalidated. It is responsible with writing back cache to the upper layer memory. 
+\end{description}
+
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{MSIstatediagram.jpg}
+    \caption{MSI State Diagram for processor P1}
+    \label{fig:MSIstatediagram}
+\end{figure}
+
+In figure \ref{fig:MSIstatediagram}, MSI protocol's state diagram is showed. Cache memory launch with invalid cache block, and when a read miss is comprised,  cache controller will request memory block from memory. Then, the snooping control bus will broadcast the request of read. If there is a modified copy on the bus, it will abort request of memory block from memory. It will evict its line to memory, and change its state to shared state. Then, memory responds source of the request. After the fetching cache block to the source cache it, it sets the state as shared state. If there is a shared stated copies in the system, It does not matter who responds the request. In any case, It will fetch the memory block, and sets the state bits to shared.
+
+When write miss is compromised in invalid state or shared, It will fetch the data as same as read miss cases, but the difference is it will invalidate other case's corresponding block which are shared or modified. Modified stated block must evict blocks properly. At the end, source cache block fetches the block.
+
+Write hit can be compromise in modified state, and read hit can be compromise in shared state.
+
+\subsubsection{MESI - Exclusive}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{MESIstatediagram.jpg}
+    \caption{MESI State Diagram for processor P1}
+    \label{fig:MESIstatediagram}
+\end{figure}
+
+
+The MESI protocol (a.k.a Illinois protocol due to its development at the University of Illinois at Urbana-Champaign) is a widely used cache coherency protocol\cite{papamarcos1984low}. The idea behind the MESI is to use forth state we can use with 2 bits. In order to increase efficiency $exclusive$ state is developed by JH. Patel et. al. in 1984\cite{papamarcos1984low}. As showed in MSI protocol, there is modified, shared and invalid states but also we have exclusive state. This exclusive states also known unmodified exclusive state, if we refer modified state as modified exclusive. This is very similar to the shared state in MSI, and in fact, Shared state is split in two different states. That is because of reducing the communication on the bus and increasing efficiency. In this case, there is exclusive cache blocks which are in read mode and they are unique i.e there is no other cache controller on the system has this cache block. 
+
+\begin{description}
+\item[Exclusive] The cache line is only present in current cache memory, and it has not modified yet. It is not a state to provide coherency, but it is state for increasing efficiency of bus bandwidth usage. When a cache line in exclusive state the cache controller can decide the transaction of the line without communicating with other caches. When a cache is requested with load operation, it is loaded in exclusive state, if there is no other cache controller has the cache block.
+\end{description}
+
+
+\begin{table}[position specifier]
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline 
+• & Clean/Dirtiy & Write? & Unique? & Silent Transition to \\ 
+\hline 
+Invalid & Clean & No & No & - \\ 
+\hline 
+Shared & Clean & No & No & Invalid State \\ 
+\hline 
+Excursive & Clean & No & Yes & Shared Modified Exclusive States \\ 
+\hline 
+Modified & Dirty & Yes & Yes & - \\ 
+\hline 
+\end{tabular} 
+\caption{MESI states' properties}
+\label{tab:MESItable}
+\end{table}
+
+In figure \ref{fig:MESIstatediagram}, state transactions are showed. Bus usage is bottle neck, low performance behaviour in cache coherency. Silent state transactions are transactions in cache controller without communicating with other caches. For example, there is no need to broadcast and occupy bus for invalidating shared state in MSI protocol. If a cache controller is in shared state, the other cache controller can be shared or invalidate in MSI, so there is no dependency in the system transaction from shared to invalidate. Exclusive state is to exploit the salient transactions. When a load request arrive to cache controller from a processor, it request the line from upper level memory controller and other child caches controller. If any child controller send a shared state broadcast message, it load it in shared state. If there is a exclusive cache controller on the bus, it will degrade its state to shared and broadcast it. If there is no other shared state on the bus. It load the cache line in excluded state. Then, in case of store operation from processor, it will transact its state from exclusive to modified. It does not need to broadcast it, because we know it is unique in system. Contrast with modified state, due to be cleanness of the line, it does not need to evict line to upper memory, it can  just invalidate it silently. The weakness of this protocol comparing with MSI, if there is many processor with the corresponding cache line, when it count the copies to test uniqueness, it occupy shared bus more in some cases. If there is n cache controller with corresponding cache line, it will send n broadcast message with this message, however, instead of sending whole line to upper memory it is mostly efficient to send this message.
+
+\subsubsection{MOESI - Owned Exclusive}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{MOESIstatediagram.jpg}
+    \caption{MOESI State Diagram for processor P1}
+    \label{fig:MOESIstatediagram}
+\end{figure}
+
+\begin{table}[position specifier]
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline 
+• & Clean/Dirtiy & Write? & Unique? & Silent Transition to \\ 
+\hline 
+Invalid & Clean & No & No & - \\ 
+\hline 
+Shared & Either & No & No & Invalid State \\ 
+\hline 
+Excursive & Clean & No & Yes & Shared Modified Exclusive States \\ 
+\hline 
+Owned & Dirty & No & Yes & - \\ 
+\hline 
+Modified & Dirty & Yes & Yes & Owned \\ 
+\hline 
+\end{tabular} 
+\caption{MEOSI states' properties}
+\label{tab:MSItable}
+\end{table}
+
+Such processor producers AMD Opteron and Arm Cortex A are using MOESI protocol for cache sharing. In addition to the four states in MESI, a fifth state "Owned" appears here representing data that is both modified and shared. Using MOESI, instead of writing modified data back to main memory, it directly forward the dirty value from cache to cache before being shared, which could save bandwidth and gain much faster access to users to the cache.
+
+\begin{description}
+\item[Owned] Owned state is a state if and only if a cache line can transact in it, when a read request message snooped from another processors when the cache line is in modified state. It allows dirty line sharing between caches, and reduce the latency which is arisen due to the communication between memories and processors. The line is read only by all processors, when it is owned state.
+\end{description}
+
+In figure \ref{fig:MOESIstatediagram}, state transactions of MOESI protocol are showed. The relationships of states are almost same with MESI, but there is a state which supplants upper level memory with its own cache line. Hence, it is responsible with evicting lines and cleaning state. The cache line may be changed to the Modified state after invalidating all shared copies, or changed to the Shared state by writing the modifications back to main memory. If could increase efficiency sharply, if the line between upper memory and itself is long and bandwidth is limited. Mostly the L1 and L2 caches are located on-the-chip, and memory are located somewhere outside, the buses' bandwidth between in side and outside of chips are game changer. It can be efficient to use a chip as a forwarder in many system. However, in the MOESI protocol, it is not possible to forward the cache line which is not dirty but present on the chip. If there is a shared cache line in a cache, and if any other cache controller request to load the same cache line, it fetches it from memory.
+
+
+\subsection{Inter-connector Design}
+\subsubsection{Switching}
+\subsubsection{Routing}
+\subsubsection{Topology}
+\subsubsection{Flow Control}
