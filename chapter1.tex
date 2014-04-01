@@ -1,26 +1,4 @@
-\chapter*{Revision history}
-
-\begin{center}
-\begin{tabular}[H]{|l|p{35em}|}
-\hline
-Version \#  & Description of change (why, what where - a few sentences)\\
-\hline
-      0.1   & First version is made available via Fronter\\
-\hline
-\end{tabular}
-\end{center}
-\newpage
-
-\begin{abstract}
-Have you ever realize how secure and safe environment they claim in security product companies' advertisement? Does Anti-Malware software really provide 100 percent security against Malware? As Everybody knows, It is not. Today, it is nothing more than cat and dog fight. Malware authors purpose an new architecture, an new approach and Anti Virus companies just try to fix vulnerabilities. Due to this fact, Parallel and concurrent architectures are elusive field for malware. They are new, trendy, popular, complex. 
-
-In this thesis, we will try to show vulnerabilities on concurrent and parallel cpu schedulers and non-uniform memory architecture. The weaknesses on hardware layer of the computer are hard to be observed by software solution. Therefore; It is time to pay attention for them, since it is not hard to predict that attackers will focus them.
-
-This thesis purpose an offensive security approach, how malware can be evade autonomous malware detection systems, and also purpose and experimental method to detect and mitigate them.
-\end{abstract}
-\tableofcontents
-
-\chapter{Introduction (1-2 pages)}
+\chapter{Introduction}
 The purpose of introduction chapter is giving the readers blueprint of the subject, the problems that we face, the change in the solutions, as well as motivation of its importance. In addition, It also purpose to form proper research question which will guide thesis. 
 
 \subsection{Topic covered by the project}
@@ -57,7 +35,7 @@ If malware designing is superficially considered, you could fall in usual fallac
 \subsection{Planned contributions}
 This Master thesis is looking for better understanding on concurrent malware abilities and their counter-measure. Especially, It will try to show how possible to abuse concurrent memory accessing and how durable recent detection kits. It is quite unique work which we have to consider on the future. Ultimate goal is to eliminate any uncertainties which detection methods encounter with concurrent memory accessing.
 
-\section{Related work (3-10 pages)}
+\section{Related work}
 This chapter will give an overview of researches about Malware`s self-defense technique, the methods to analyze them, and their application on concurrent architecture. 
 
 \subsection{Malware Self-Defense}
@@ -112,7 +90,7 @@ There are also several applied techniques, which combine terminology above.
 \item[Network Monitoring] Malware intention of the communication over network actually big clue to detect them. They generally use unique hostname, ip adress or specific protocol with particular way \cite{marpaung2012survey}.
 \end{description}
 
-\section{Choice of methods (2-5 pages)}
+\section{Choice of methods}
 This thesis will use a technical approach to the problem. It will use quantitative and model building approach. The methodology consist 8 circular step which are, asking question, building new hypothesis, planning methods, developing software, preparing genering testbed, testing, analyzing, reporting results. In addition to this, the large portion of the time will be given researching related topics, based architecture, and learning tools and technologies. Consequently, the accuracy of the thesis is lies on the proper scientific methodology.
 
 \todo[inline]{ circular diagram will be Drawn here}
@@ -125,58 +103,6 @@ If we can find successful hypothesis for first question, we observe them in seco
 
 The last question is a matter of measuring and analyzing algorithms complexity. It is totally mathematical scientific methodology. We have to analyze worst, best and average complexity rate. There are also several Quantitative approaches like measuring resource usage. It could be efficient some system like network which there are lots of uncertainties in.
 
-\section{Milestones, deliverables and resources (2-5 pages)}
-This chapter will describe that we plan to demand or supply during the project, such as, what we plan to delivery, how much time should we need.
-
-\subsection{Resources}
-This project is involved with only one master research student, one internal supervisor and one external supervisor. Internal supervisor is Prof. Stephan Wolthusen who is excessively capable of malware technologies and their theory. External supervisor is Emre Tinaztepe who is head of  research development department in Comodo AntiVirus. They will support intellectual property of this thesis.
-
-The hardware which we need during this project is quite various. First we need a development board with Samsung Exynos 5420 or 5410 chip which involve with Arm A15 little.Big technology. Arm`s little.Big is an heterogeneous approach for mobile technologies in order to decrease power consumption. There are two brand who produce this boards, Arndale and Odroid. We could also use another parallel architecture called FPGA. The cheapest and optimum FPGA board is Adaptive Parallela. This board has 16 FPGA processor with 1 Arm A7 CPU. We also need one host development computer, Google`s android emulator, IDA Pro software. In addition, We could use Coursera, online education service. In Coursera, Computer Architecture by Princeton University, Hardware software Interaction by Washington University, Heterogeneous Parallel programming by Illinois University.
-\subsection{Milestones}
-\subsubsection{Pre Education and Utilization}
-Pre-education part is the part which utilize us for the future of the project. some of the education topics consist of Kernel Development, Linux-kernel module development, Memory Hierarchy and related attacks, concurrent and parallel programming, return oriented programming, Process scheduling in parallel architectures. Listed Coursera courses is adequate to give relevant background
-
-The estimated time we need is 160 working hour, 4 supervising hour.
-\subsubsection{Attack Vector Planning}
-Attack planning part is the part which supervisors will be involve critically in. Attack planning is most critical and risk part, we will try to find novel approach to evade malware from anti malware`s scan. 
-
-The estimated time we need is 80 working hour, 4 supervising hour
-\subsubsection{Designing  Software Depend on Attack Vector and Testing their result}
-We will produce applied version of our theoretical attack vectors with the propose of test and analysis the success of hypothesis. It will require C, Assembly and Linux-Android intervals knowledge.
-
-The estimated time we need is 80 working hour, 2 supervising hour 
-\subsubsection{Designing  Defense Against Successful Attack and Testing their result}
-In this part, we will try to find answer for second question of the research. Depending on attack vector, it could require various skills. Probably, it will require Python, linux kernel knowledge.
-
-The estimated time we need is 80 working hour, 4 supervising hour 
-\subsubsection{Complexity analysis and proofs}
-The complexity Analysis and proofs will be calculated in this part. Some part of this analysis could be left to further work. 
-
-The estimated time we need is 80 working hour, 2 supervising hour 
-
-\subsubsection{Reporting}
-All knowledge related with thesis must be projected semantically in thesis report. The report will include what we found, what we mange to do, what we can not, also it must present related knowledge, figures, diagrams and charts. In order to use image files in the thesis we must request access and use right. Organization could be really puzzled work if you do not give enough care on. We should prepare first draft before final version and distribute reviewer.  
-
-The estimated time we need is 80 working hour, 2 supervising hour 
-
-\subsection{Deliverables}
-The main deliverable of the project is master thesis. There are two reviewer of this thesis Prof. Stephan Wolthusen and My fellow student, Oyvind Nordhaug. The reviewer are capable of relevant background and fortunately they will positively criticize thesis . We could classify the thesis in three part. Introduction, background, payload.
-
-Introduction part's first draft is actually written, when we wrote current sections. It include Abstraction, Introduction of the project, Problem Description, Research questions, and Related works. 
-
-Background part is include Concurrent, parallel architectures and programming such as Heterogeneous and FPGA, Non uniform memory architectures and their attacks, Malware analysis techniques and related evasion techniques.
-
-Payload is the part actually emphasis our work. It will consist attack vectors, their theory, applied source code, defense theory, metrics, and etc.
-
-
-\section{Feasibility study (1/2-3 pages)}
-
-This thesis will try to cover the gap in concurrent malware analysis. It was actually one of the unique research on this area, however; there is a master thesis belong last year which is supervised by Prof. Mr. Stephen Wolthusen\cite{Tsopokis2012Concurrent}. It gives us corpus collection about concurrent memory inspection and showed there could be vulnerabilities. 
-
-Vulnerability analysis is always risky work, but in the worst case, whole experiment is going to give particular knowledge whether succeed or not. 
-
-Also as we know from our computation experiment, concurrent and parallel architecture are the most baroque part which mean complicated but efficient. This complexity is always enemy of security and we do not suppose we are doing an Inexpedient job.
-\section{Risk analysis (1/2-2 pages)}
 In this project, there five inevitable risks which we can face during development.
 
 \begin{itemize}
@@ -187,13 +113,15 @@ In this project, there five inevitable risks which we can face during developmen
 \item During testing and purification part, Anti-malware tools could come out with unreliable result. To analyze result properly, we may need to inspect mentioned tools with reverse engineering process which could violate proper usage agreement. To mitigate that kind of risks, we could request research agreement from companies.  
 \end{itemize}
 
-\section{Ethical and legal considerations (1/4-1 page)}
-The content of this document could be used in order to malicious purpose, but any matter or information could be misused in the life and ignorance is not known well as a defense strategy. In this purpose, this thesis aims to enlighten security specialist and system developers against recent way of the possible attacks. 
-
-However, in order to act ethical responsibility, we tried to eliminate practice of tools and piece of codes which could leads malicious usage. In any case, there is no doubt that it is critical to discover and publish vulnerabilities which could cause deep impact before malicious people discover and abuse them.
-
+\section{Ethical and legal considerations}
 \begin{quote}
 
 "Virus don't harm, ignorance does."\\
 - VxHeaven
 \end{quote}
+
+The content of this document could be used in order to malicious purpose, but any matter or information could be misused in the life and ignorance is not known well as a defense strategy. In this purpose, this thesis aims to enlighten security specialist and system developers against recent way of the possible attacks. 
+
+However, in order to act ethical responsibility, we tried to eliminate practice of tools and piece of codes which could leads malicious usage. In any case, there is no doubt that it is critical to discover and publish vulnerabilities which could cause deep impact before malicious people discover and abuse them.
+
+
