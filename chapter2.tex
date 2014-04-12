@@ -124,10 +124,6 @@ Write-through cache policy is intuitively perceived as solution of this problem,
 
 In order to solve this problems, there are several coherency mechanisms and their protocols.  Depending on the case and the number of cluster or processor in the system, system could use Snooping and Directory based mechanism. These each protocol have their own benefits and drawbacks. Snooping protocol is tent to use a lot of bandwidth, however, it is faster and more synchronous. Its logic is to broadcast each state to every node on the system. However, directory based mechanism work with request and response. There is interconnector to forward message to the right address and it makes directory based mechanism slower because of the increased latency, lighter because of the decreased bandwidth.
 
-\subsection{Consistency Models}
-\subsubsection{Sequential Consistency}
-\subsubsection{Weak Consistency}
-\subsubsection{Release Consistency}
 \subsection{Snooping Coherence Protocols}
 Snooping coherence (a.k.a. Bus Sniffing) is a technique to have caches to watch other processors caches and provide consistency depending on specified protocol.  It basically implemented with external port to the system bus. Therefore, it implemented over cache controller which has feature to watch bus. It makes cache controller bigger and waste more power, so lower layer caches could use less complex coherency protocols and vice versa. There are many snoopy cache coherency protocol also depending on consistency model, but we can categorize them in two class which are Write update and write invalidate. 
 
@@ -258,7 +254,28 @@ In figure \ref{fig:MOESIstatediagram}, state transactions of MOESI protocol are 
 
 
 \subsection{Inter-connector Design}
+
 \subsubsection{Switching}
-\subsubsection{Routing}
+\begin{description}
+\item[Circuit Switching]
+\item[Packet Store and Forward Switching]
+\item[Packet Cut Through]
+\end{description}
 \subsubsection{Topology}
+\begin{description}
+\item[Buses]
+\item[Ring]
+\item[Fat Tree]
+\item[2D Networks: Meshes, Torses]
+\item[Multiple Dimensional Networks]
+\item[Star]
+\item[Omega]
+\end{description}
+\subsubsection{Routing}
+\begin{description}
+\item[Deterministic]
+\item[Non-Deterministic]
+\end{description}
+
 \subsubsection{Flow Control}
+
