@@ -254,6 +254,36 @@ In figure \ref{fig:MOESIstatediagram}, state transactions of MOESI protocol are 
 
 
 \subsection{Inter-connector Design}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{bus_primatives.png}
+    \caption{Primitive Multi-Drop Memory Bus }
+    \cite{ComputerArchCoursera}
+    \label{fig:bus_primative}
+\end{figure}
+Computer Bus which is the primitive version of the inter-connection network was designed to transfers data between components inside a computer, or between computers. They are defined to include all computer hardware components and software, included with communication protocols, in order to communicate devices. Devices is generally called as node or end node in taxonomy. However, this definition is quite broad and it covers from today's internet network to cloud computing network and evolved in many aspect to different direction.
+
+In figure \ref{fig:bus_primative}, There is an early multi-drop bus example. Multi-drop bus term is used for a bus line with many element on a line (not a ring), and there is an arbitration mechanism, so it is normal computer buses which is used in interconnection taxonomy. The multi-drop buses includes 5 separated wires which is distinguished by their purpose. Arbitration line decide actually how has right to speak, request. There is a logic devices to determine the arbitration and it is one of the most crucial research area in computer architecture and especially interconnector design\cite{hennessy2012computer}. Control wire is actually determine the purpose of the node. Generally, they are $store$ and $load$ operations. The address wire determine the requested address from corresponding place, in this case there is no cache controller so directly memory. Data wire carries the data which is stored or load, so the communication is synchronous, with consecutively request and reply. Lastly, clock wire provides a fixed, constant frequency to carry values.\cite{hennessy2012computer}
+
+On recent systems the communication mechanism between nodes are quite more complicated comparing with given primitive example. The pace in the development on parallel systems makes correlation and communication between notes chaotic. Systems comprise with many nodes and requires high bandwidths  to overcome and increase their bottleneck. Intercommunication is still the slowest part of mainframe and personal computers. On the other hand, with multi layer memory aspect, communication between nodes and parallel computing gets more and more complicated. It makes every cache controllers a member of interconnector and perhaps  more. Today, there are some coherent interconnector which are also responsible with traffic management (i.e. QoS), barriers between devices and memories, and coherency\cite{armcoherentinterconnector}.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{message_anatomy.jpg}
+    \caption{An example of interconnector message anatomy }
+    \label{fig:message_anatomy}
+\end{figure}
+
+There are two main category of computer interconnectors which are host based On-Chip and System/storage area network and remote over LAN and WAN networks inter-connectors. On-Chip networks purpose to mitigate the on-flight latency and chip-crossing wire delay problems related with increased technology scaling and transistor integration. Nevertheless, there is not enough space in a single chip to fill many cores. It is a good design for interconnecting ALU, registers caches, compute tiles, and perhaps several cores and memory. System/storage area networks are the most used interconnection systems between multi-processors, multi-computer, multi-thread systems and memory system interconnection between this cores. Because of physically constrains such as distance and density, it is usual the interconnector between systems and their I/O extensions (e.g DMA chips). LAN and WAN based systems are actually designed to connect enormous number of node together. This kind of networks distributed several locations and interconnecting PCs cluster of computers. Cloud computing is actually one of the good example to show the ability of this species. On of the other advantage of remote interconnectors is that they are generally build on well-known protocols which are tested and acknowledged protocols e.g. Ethernet, GSM, IP, TCP, UDP. All routing issues are tested for many years and solved properly.\cite{hennessy2012computer}.
+
+Modern interconncetors with advance switching and routing mechanism are using message protocols.  In figure \ref{fig:message_anatomy}, an example of simple interconnector message anatomy is shown. Alternatively, the bus anatomy we mention above, the message based protocols are packetized. However, this packetizing process has some overhead as latency\cite{ComputerArchCoursera}. Message anatomy of interconnectors comprises several layers\cite{0122007514}.
+\begin{description}
+\item[Message]The message is the unit of information which must be transmitted with a propose. If it is about cache coherency, It could be whole line of the cache to provide coherency.
+\item[Packet]Packets are the fixed maximum sized  smallest unit of information which include routing information in its header section. It can also include sequence number for flow control protocol. Its size is depending on the arbitration mechanism on the router or switches. It comprises with data flits which actually part of information in message.
+\item[Flit]The small unit of link layer is called flit. Flits size are depending on the switching algorithms. In circuit switching flit size are whole packed. They are typically 4 byte to 16 byte.
+\item[Phit]It is the unit of the physical layer of the interconnectors design. Its size is depending on the clock cycle. On the primitive bus example, the clock mechanism determine the phit size when it tick. They are around 8 bit to 32 bit.
+\end{description}
+ 
 
 \subsubsection{Switching}
 \begin{description}
@@ -276,6 +306,5 @@ In figure \ref{fig:MOESIstatediagram}, state transactions of MOESI protocol are 
 \item[Deterministic]
 \item[Non-Deterministic]
 \end{description}
-
 \subsubsection{Flow Control}
 
