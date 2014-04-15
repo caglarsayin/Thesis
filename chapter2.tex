@@ -269,7 +269,7 @@ On recent systems the communication mechanism between nodes are quite more compl
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=1\textwidth]{message_anatomy.jpg}
+    \includegraphics[width=1\textwidth]{Message_Anatomy.jpg}
     \caption{An example of interconnector message anatomy }
     \label{fig:message_anatomy}
 \end{figure}
@@ -281,7 +281,7 @@ Modern interconncetors with advance switching and routing mechanism are using me
 \item[Message]The message is the unit of information which must be transmitted with a propose. If it is about cache coherency, It could be whole line of the cache to provide coherency.
 \item[Packet]Packets are the fixed maximum sized  smallest unit of information which include routing information in its header section. It can also include sequence number for flow control protocol. Its size is depending on the arbitration mechanism on the router or switches. It comprises with data flits which actually part of information in message.
 \item[Flit]The small unit of link layer is called flit. Flits size are depending on the switching algorithms. In circuit switching flit size are whole packed. They are typically 4 byte to 16 byte.
-\item[Phit]It is the unit of the physical layer of the interconnectors design. Its size is depending on the clock cycle. On the primitive bus example, the clock mechanism determine the phit size when it tick. They are around 8 bit to 32 bit.
+\item[Phit]It is the unit of the physical layer in the interconnectors design. Its size is depending on the clock cycle of the interconnector. On the primitive bus example, the clock mechanism determine the phit size when it tick. They are around 8 bit to 32 bit.
 \end{description}
  
 

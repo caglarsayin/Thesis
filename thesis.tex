@@ -1,7 +1,7 @@
 %% This document gives an example on how to use the gucmasterthesis
 %% LaTeX document class.
 
-\documentclass[medieteknikk]{gucmasterthesis}
+\documentclass[informationsecurity]{gucmasterthesis}
 \usepackage{ifpdf}
 \ifpdf
 	\usepackage[pdftex]{graphicx}
@@ -29,17 +29,6 @@
 \makefrontpages % make the frontpages
 \thesistitlepage % make the ordinary titlepage
 
-\chapter*{Revision history}
-
-\begin{center}
-\begin{tabular}[H]{|l|p{35em}|}
-\hline
-Version \#  & Description of change (why, what where - a few sentences)\\
-\hline
-      0.1   & First version is made available via Fronter\\
-\hline
-\end{tabular}
-\end{center}
 
 \chapter*{Abstract}
 
@@ -64,31 +53,26 @@ supporting it\dots
 \listoftables
 
 \include{chapter1}
-\chapter{Related Works}
+\include{relatedworks}
 \chapter{Malware Detection}
-\section{Taxonomy}
-\section{Scope of Model}
-\section{Scope of Methods}
-\section{Obfuscation Methods}
-\include{chapter2}
-\chapter{Obfuscation on inconsistent systems}
+	\section{Taxonomy}
+	\section{Scope of Model}
+	\section{Scope of Methods}
+	\section{Obfuscation Methods}
+\include{background}
+\chapter{Cache Obfuscation on the Systems without Coherency}
 \chapter{Delay Attack}
 \chapter{Implementation for Hayward Computer Architecture}
 \chapter{Implication and Discussion}
-\section{Theoretical Considerations}
-\section{Practical Implication Issues}
-\section{Summary}
+	\section{Theoretical Considerations}
+	\section{Practical Implication Issues}
+	\section{Summary}
 \chapter{Conclusion and Further Works}
-
-
 
 \bibliographystyle{gucmasterthesis}
 \bibliography{gucmasterthesis}
 
 \appendix
-
-\chapter{Cache Memory Simulation}
-\chapter{Real Systems Cache Coherency Latency Simulation Results}
-
-
+\chapter{Cache Memory Simulation Codes}
+\chapter{Real Systems` Simulated Cache Coherency Latency Results}
 \end{document}
