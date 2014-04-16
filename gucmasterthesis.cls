@@ -62,13 +62,13 @@
 
 %% IDENTIFICATION
 
-\xdef\gucmasterthesisdate{2007/05/30}
+\xdef\gucmasterthesisdate{2014/06/01}
 \xdef\gucmasterthesisversion{0.7}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{gucmasterthesis}
   [\gucmasterthesisdate\space
    v\gucmasterthesisversion\space
-   Copyright (C) 2005 Ivar Farup]
+   Copyright (C) 2014 Caglar Sayin]
 
 %% CLASS FILE COMMANDS
 
