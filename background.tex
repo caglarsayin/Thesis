@@ -1,3 +1,4 @@
+%!TEX root = thesis.tex
 \chapter{Background Studies}
 \section{Caches}
 Solely, a cache is a small, fast, array of memory which is placed between lower level memory and higher one.  It store a special block of information, in order to increase performance of computer systems. It is like a buffer area which has some logic to exploit locality features of programming logic. Today, with increasing of processing ability of computer systems, memory access is bottle neck. 
@@ -13,7 +14,7 @@ The idea all the caches logic depending on is Principle of Locality. Principle o
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=1\textwidth]{localitygraph2.jpg}
+    \includegraphics[width=1\textwidth]{img/localitygraph2.jpg}
     \caption{Principle of Locality}
     \cite{ComputerArchCoursera}
     \label{fig:principleoflocality}
@@ -29,7 +30,7 @@ There are mainly two type of locality of reference:
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=1\textwidth]{cacheinternals.jpg}
+    \includegraphics[width=1\textwidth]{img/cacheinternals.jpg}
     \caption{4 KB 4-way set associative cache with 256 cache lines }
     \cite{sloss2004arm}
     \label{fig:cacheinternals}
@@ -52,7 +53,7 @@ There are three policy type determine a cache behaviours. They are write policy,
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=1\textwidth]{policies.jpg}
+    \includegraphics[width=1\textwidth]{img/policies.jpg}
     \caption{A. A Write-Through cache with No-Write Allocation B. A Write-Back cache with Write Allocation}
     \cite{wikipolicies}
     \label{fig:cachepolicies}
@@ -102,7 +103,7 @@ As mentioned, Mention Consistency is try to define to correct shared memory beha
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=1\textwidth]{cacheinconsistencywriteback.jpg}
+    \includegraphics[width=1\textwidth]{img/cacheinconsistencywriteback.jpg}
     \caption{Write-back Policy Cache Memory Inconsistency}
     \label{fig:cacheinconsistencywriteback}
 \end{figure}
@@ -115,7 +116,7 @@ In figure \ref{fig:cacheinconsistencywriteback} and \ref{fig:cacheinconsistencyw
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=1\textwidth]{cacheinconsistencywritethrough.jpg}
+    \includegraphics[width=1\textwidth]{img/cacheinconsistencywritethrough.jpg}
     \caption{Write-through Policy Cache Memory Inconsistency}
     \label{fig:cacheinconsistencywritethrough}
 \end{figure}
@@ -167,7 +168,7 @@ Basic write-invalidate snoopy cache control protocol is MSI (a.k.a Modified-Shar
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=1\textwidth]{MSIstatediagram.jpg}
+    \includegraphics[width=1\textwidth]{img/MSIstatediagram.jpg}
     \caption{MSI State Diagram for processor P1}
     \label{fig:MSIstatediagram}
 \end{figure}
@@ -181,7 +182,7 @@ Write hit can be compromise in modified state, and read hit can be compromise in
 \subsubsection{MESI - Exclusive}
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=1\textwidth]{MESIstatediagram.jpg}
+    \includegraphics[width=1\textwidth]{img/MESIstatediagram.jpg}
     \caption{MESI State Diagram for processor P1}
     \label{fig:MESIstatediagram}
 \end{figure}
@@ -218,7 +219,7 @@ In figure \ref{fig:MESIstatediagram}, state transactions are showed. Bus usage i
 \subsubsection{MOESI - Owned Exclusive}
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=1\textwidth]{MOESIstatediagram.jpg}
+    \includegraphics[width=1\textwidth]{img/MOESIstatediagram.jpg}
     \caption{MOESI State Diagram for processor P1}
     \label{fig:MOESIstatediagram}
 \end{figure}
@@ -256,7 +257,7 @@ In figure \ref{fig:MOESIstatediagram}, state transactions of MOESI protocol are 
 \subsection{Inter-connector Design}
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=1\textwidth]{bus_primatives.png}
+    \includegraphics[width=1\textwidth]{img/bus_primatives.png}
     \caption{Primitive Multi-Drop Memory Bus }
     \cite{ComputerArchCoursera}
     \label{fig:bus_primative}
@@ -269,7 +270,7 @@ On recent systems the communication mechanism between nodes are quite more compl
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=1\textwidth]{Message_Anatomy.jpg}
+    \includegraphics[width=1\textwidth]{img/Message_Anatomy.jpg}
     \caption{An example of interconnector message anatomy }
     \label{fig:message_anatomy}
 \end{figure}
@@ -283,7 +284,7 @@ Modern interconncetors with advance switching and routing mechanism are using me
 \item[Flit]The small unit of link layer is called flit. Flits size are depending on the switching algorithms. In circuit switching flit size are whole packed. They are typically 4 byte to 16 byte.
 \item[Phit]It is the unit of the physical layer in the interconnectors design. Its size is depending on the clock cycle of the interconnector. On the primitive bus example, the clock mechanism determine the phit size when it tick. They are around 8 bit to 32 bit.
 \end{description}
- 
+ In order to characterize interconnector device we will use several feature of networks which are switching mechanism, switching mechanism, routing algorithms, topology, and flow control of networks.
 
 \subsubsection{Switching}
 \begin{description}
