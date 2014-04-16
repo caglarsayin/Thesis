@@ -1,7 +1,8 @@
+%!TEX root = thesis.tex
 \chapter{Background Studies}
 \section{Caches}
 Solely, a cache is a small, fast, array of memory which is placed between lower level memory and higher one.  It store a special block of information, in order to increase performance of computer systems. It is like a buffer area which has some logic to exploit locality features of programming logic. Today, with increasing of processing ability of computer systems, memory access is bottle neck. 
-
+        
 The "cache" is originally french rooted with meaning "concealed place for storage."\cite{sloss2004arm} We can move this definition basically to the computer science. The cache's design is definitely  isolated from software layer, however; if you know your caches feature and how caches working you could program a lot more efficient codes easily.
 
 
@@ -274,9 +275,9 @@ On recent systems the communication mechanism between nodes are quite more compl
     \label{fig:message_anatomy}
 \end{figure}
 
-There are two main category of computer interconnectors which are host based On-Chip and System/storage area network and remote over LAN and WAN networks inter-connectors. On-Chip networks purpose to mitigate the on-flight latency and chip-crossing wire delay problems related with increased technology scaling and transistor integration. Nevertheless, there is not enough space in a single chip to fill many cores. It is a good design for interconnecting ALU, registers caches, compute tiles, and perhaps several cores and memory. System/storage area networks are the most used interconnection systems between multi-processors, multi-computer, multi-thread systems and memory system interconnection between this cores. Because of physically constrains such as distance and density, it is usual the interconnector between systems and their I/O extensions (e.g DMA chips). LAN and WAN based systems are actually designed to connect enormous number of node together. This kind of networks distributed several locations and interconnecting PCs cluster of computers. Cloud computing is actually one of the good example to show the ability of this species. On of the other advantage of remote interconnectors is that they are generally build on well-known protocols which are tested and acknowledged protocols e.g. Ethernet, GSM, IP, TCP, UDP. All routing issues are tested for many years and solved properly.\cite{hennessy2012computer}.
+There are two main category of computer interconnectors which are host based On-Chip and System/storage area network and remote over LAN and WAN networks inter-connectors. On-Chip networks purpose to mitigate the on-flight latency and chip-crossing wire delay problems related with increased technology scaling and transistor integration. Nevertheless, there is not enough space in a single chip to fill many cores. It is a good design for interconnecting ALU, registers caches, compute tiles, and perhaps several cores and memory. System/Storage area networks are the most used interconnection systems between multi-processors, multi-computer, multi-thread systems and memory system interconnection between this cores. Because of physically constrains such as distance and density, it is usual the interconnector between systems and their I/O extensions (e.g DMA chips). LAN and WAN based systems are actually designed to connect enormous number of node together. This kind of networks distributed several locations and interconnecting PCs cluster of computers. Cloud computing is actually one of the good example to show the ability of this species. On of the other advantage of remote interconnectors is that they are generally build on well-known protocols which are tested and acknowledged protocols e.g. Ethernet, GSM, IP, TCP, UDP. All routing issues are tested for many years and solved properly.\cite{hennessy2012computer}.
 
-Modern interconncetors with advance switching and routing mechanism are using message protocols.  In figure \ref{fig:message_anatomy}, an example of simple interconnector message anatomy is shown. Alternatively, the bus anatomy we mention above, the message based protocols are packetized. However, this packetizing process has some overhead as latency\cite{ComputerArchCoursera}. Message anatomy of interconnectors comprises several layers\cite{0122007514}.
+Modern interconnectors with advance switching and routing mechanism are using message protocols.  In figure \ref{fig:message_anatomy}, an example of simple interconnector message anatomy is shown. Alternatively, the bus anatomy we mention above, the message based protocols are packetized. However, this packetizing process has some overhead as latency\cite{ComputerArchCoursera}. Message anatomy of interconnectors comprises several layers\cite{0122007514}.
 \begin{description}
 \item[Message]The message is the unit of information which must be transmitted with a propose. If it is about cache coherency, It could be whole line of the cache to provide coherency.
 \item[Packet]Packets are the fixed maximum sized  smallest unit of information which include routing information in its header section. It can also include sequence number for flow control protocol. Its size is depending on the arbitration mechanism on the router or switches. It comprises with data flits which actually part of information in message.
@@ -284,7 +285,7 @@ Modern interconncetors with advance switching and routing mechanism are using me
 \item[Phit]It is the unit of the physical layer of the interconnectors design. Its size is depending on the clock cycle. On the primitive bus example, the clock mechanism determine the phit size when it tick. They are around 8 bit to 32 bit.
 \end{description}
  
-
+In order to characterize interconnector device we will use several feature of networks which are switching mechanism, switching mechanism, routing algorithms, topology, and flow control of networks.
 \subsubsection{Switching}
 \begin{description}
 \item[Circuit Switching]
