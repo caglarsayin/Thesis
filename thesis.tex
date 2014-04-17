@@ -29,17 +29,6 @@
 \makefrontpages % make the frontpages
 \thesistitlepage % make the ordinary titlepage
 
-\chapter*{Revision history}
-
-\begin{center}
-\begin{tabular}[H]{|l|p{35em}|}
-\hline
-Version \#  & Description of change (why, what where - a few sentences)\\
-\hline
-      0.1   & First version is made available via Fronter\\
-\hline
-\end{tabular}
-\end{center}
 
 \chapter*{Abstract}
 
@@ -56,6 +45,19 @@ small \LaTeX\ class for GUC's master's theses, and in particular for
 making sure that I will not be responsible for maintaining and
 supporting it\dots
 
+\chapter*{Ethical and legal considerations}
+\begin{quote}
+
+"Virus don't harm, ignorance does."\\
+- VxHeaven
+\end{quote}
+
+The content of this document could be used in order to malicious purpose, but any matter or information could be misused in the life and ignorance is not known well as a defense strategy. In this purpose, this thesis aims to enlighten security specialist and system developers against recent way of the possible attacks. 
+
+However, in order to act ethical responsibility, we tried to eliminate practice of tools and piece of codes which could leads malicious usage. In any case, there is no doubt that it is critical to discover and publish vulnerabilities which could cause deep impact before malicious people discover and abuse them.
+
+
+
 \vspace{\baselineskip}
 \noindent Ivar Farup, \gucmasterthesisdate
  
@@ -64,7 +66,7 @@ supporting it\dots
 \listoftables
 
 \include{introduction}
-\chapter{Related Works}
+\include{relatedworks}
 \chapter{Malware Detection}
 	\section{Taxonomy}
 	\section{Scope of Model}
@@ -79,16 +81,9 @@ supporting it\dots
 	\section{Practical Implication Issues}
 	\section{Summary}
 \chapter{Conclusion and Further Works}
-
-
-
 \bibliographystyle{gucmasterthesis}
 \bibliography{gucmasterthesis}
-
 \appendix
-
-\chapter{Cache Memory Simulation}
+\include{simulation}
 \chapter{Real Systems Cache Coherency Latency Simulation Results}
-
-
 \end{document}
