@@ -1,5 +1,7 @@
+%!TEX root = thesis.tex
 \chapter{Cache Memory Simulation}
-\begin{verbatim}
+\lstset{language=Python} 
+\begin{lstlisting}
 __author__ = 'caglar'
 import random
 
@@ -161,4 +163,4 @@ class CacheLine(object):
         self.lines[i]["valid"] = True
         self.lines[i]["dirty"] = False
         self.lines[i]["data"] = rline["data"]
-\end{verbatim}
+\end{lstlisting}

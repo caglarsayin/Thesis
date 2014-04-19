@@ -1,0 +1,3011 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Evading Malicious Code with Concurrent Programming in Parallel Architectures and Their
+Protection Methods</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- html --> 
+<meta name="src" content="thesis.tex"> 
+<meta name="date" content="2014-04-19 23:41:00"> 
+<link rel="stylesheet" type="text/css" href="thesis.css"> 
+</head><body 
+>
+<!--l. 29--><p class="noindent" >
+                                                                         
+                                                                         
+<div class="center" 
+>
+<!--l. 29--><p class="noindent" >
+<!--l. 29--><p class="noindent" ><span 
+class="bchr8t-x-x-200">Evading Malicious Code with Concurrent</span>
+<span 
+class="bchr8t-x-x-200">Programming in Parallel Architectures and</span>
+<span 
+class="bchr8t-x-x-200">Their Protection Methods</span>
+<div class="tabular"> <table id="TBL-1" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-1-1g"><col 
+id="TBL-1-1"></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-1-1-"><td  style="white-space:nowrap; text-align:center;" id="TBL-1-1-1"  
+class="td11"><span 
+class="bchr8t-x-x-140">Caglar SAYIN</span></td></tr></table>
+</div>
+</div>
+<div class="center" 
+>
+<!--l. 29--><p class="noindent" >
+<!--l. 29--><p class="noindent" ><img 
+src="thesis0x.png" alt="PIC" class="graphics" width="70.0pt" height="69.99802pt" ><!--tex4ht:graphics  
+name="thesis0x.png" src="higlogo.eps"  
+--><br />
+Masteroppgave<br />
+Master i Teknologi - Medieteknikk<br />
+30 ECTS<br />
+Avdeling for informatikk og medieteknikk<br />
+Høgskolen i Gjøvik, 2014</div>
+                                                                         
+                                                                         
+<!--l. 29--><p class="noindent" >
+                                                                         
+                                                                         
+<!--l. 29--><p class="noindent" ><span 
+class="bchr8t-x-x-80">Avdeling for</span><br 
+class="newline" /><span 
+class="bchr8t-x-x-80">informatikk og medieteknikk</span><br 
+class="newline" /><span 
+class="bchr8t-x-x-80">Høgskolen i Gjøvik</span><br 
+class="newline" /><span 
+class="bchr8t-x-x-80">Postboks 191</span><br 
+class="newline" /><span 
+class="bchr8t-x-x-80">2802 Gjøvik</span>
+<!--l. 29--><p class="noindent" ><span 
+class="bchr8t-x-x-80">Department of Computer Science</span><br 
+class="newline" /><span 
+class="bchr8t-x-x-80">and Media Technology</span><br 
+class="newline" /><span 
+class="bchr8t-x-x-80">Gjøvik University College</span><br 
+class="newline" /><span 
+class="bchr8t-x-x-80">Box 191</span><br 
+class="newline" /><span 
+class="bchr8t-x-x-80">N-2802 Gjøvik</span><br 
+class="newline" /><span 
+class="bchr8t-x-x-80">Norway</span>
+   <div class="maketitle">
+                                                                         
+                                                                         
+
+<h2 class="titleHead">Evading Malicious Code with Concurrent
+Programming in Parallel Architectures and Their
+Protection Methods</h2>
+<div class="author" ><span 
+class="bchr8t-x-x-120">Caglar SAYIN</span></div><br />
+<div class="date" ><span 
+class="bchr8t-x-x-120">2014/06/01</span></div>
+                                                                         
+                                                                         
+   </div>
+                                                                         
+                                                                         
+<div class="center" 
+>
+<!--l. 33--><p class="noindent" >
+</div>
+<!--l. 33--><p class="indent" >   <a 
+ id="likesection.1"></a>
+   <h2 class="likechapterHead"><a 
+ id="x1-1000"></a>Abstract</h2>
+<!--l. 35--><p class="noindent" >Have you ever realize how secure and safe environment they claim in security product
+companies&#8217; advertisement? Does Anti-Malware software really provide 100 percent
+security against Malware? As Everybody knows, It is not. Today, it is nothing more than
+cat and dog fight. Malware authors purpose an new architecture, an new approach
+and Anti Virus companies just try to fix vulnerabilities. Due to this fact, Parallel and
+concurrent architectures are elusive field for malware. They are new, trendy, popular,
+complex.
+<!--l. 37--><p class="indent" >   In this thesis, we will try to show vulnerabilities on concurrent and parallel cpu
+schedulers and non-uniform memory architecture. The weaknesses on hardware layer of
+the computer are hard to be observed by software solution. Therefore; It is time
+to pay attention for them, since it is not hard to predict that attackers will focus
+them.
+<!--l. 39--><p class="indent" >   This thesis purpose an offensive security approach, how malware can be evade autonomous
+malware detection systems, and also purpose and experimental method to detect and mitigate
+them.
+                                                                         
+                                                                         
+<!--l. 41--><p class="indent" >
+                                                                         
+                                                                         
+<div class="center" 
+>
+<!--l. 41--><p class="noindent" >
+</div>
+<!--l. 41--><p class="indent" >   <a 
+ id="likesection.2"></a>
+   <h2 class="likechapterHead"><a 
+ id="x1-2000"></a>Preface</h2>
+<!--l. 43--><p class="noindent" >I would like to thank Erik Hjelmås for encouraging me to write this small <span class="LATEX">L<span class="A">A</span><span class="TEX">T<span 
+class="E">E</span>X</span></span>&#x00A0;class for
+GUC&#8217;s master&#8217;s theses, and in particular for making sure that I will not be responsible for
+maintaining and supporting it&#x2026;
+                                                                         
+                                                                         
+<!--l. 48--><p class="indent" >
+                                                                         
+                                                                         
+<div class="center" 
+>
+<!--l. 48--><p class="noindent" >
+</div>
+<!--l. 48--><p class="indent" >   <a 
+ id="likesection.3"></a>
+   <h2 class="likechapterHead"><a 
+ id="x1-3000"></a>Ethical and legal considerations</h2>
+     <div class="quote">
+     <!--l. 51--><p class="noindent" ><span 
+class="bchr8t-x-x-90">~Virus don&#8217;t harm, ignorance does.~</span><br 
+class="newline" /><span 
+class="bchr8t-x-x-90">- VxHeaven</span></div>
+<!--l. 55--><p class="noindent" >The content of this document could be used in order to malicious purpose, but any matter or
+information could be misused in the life and ignorance is not known well as a defense strategy.
+In this purpose, this thesis aims to enlighten security specialist and system developers against
+recent way of the possible attacks.
+<!--l. 57--><p class="indent" >   However, in order to act ethical responsibility, we tried to eliminate practice of tools and
+piece of codes which could leads malicious usage. In any case, there is no doubt that it is
+critical to discover and publish vulnerabilities which could cause deep impact before malicious
+people discover and abuse them.
+<!--l. 62--><p class="noindent" >Ivar Farup, 2014/06/01
+                                                                         
+                                                                         
+<!--l. 64--><p class="indent" >
+                                                                         
+                                                                         
+<div class="center" 
+>
+<!--l. 64--><p class="noindent" >
+</div>
+<!--l. 64--><p class="indent" >   <a 
+ id="likesection.4"></a>
+   <h2 class="likechapterHead"><a 
+ id="x1-4000"></a>Contents</h2> <div class="tableofcontents">
+   <span class="chapterToc" >1 <a 
+href="#x1-70001" id="QQ2-1-7">Introduction</a></span>
+<br />   &#x00A0;&#x00A0;<span class="subsectionToc" >1.0.1 <a 
+href="#x1-80001.0.1" id="QQ2-1-8">Topic covered by the project</a></span>
+<br />   &#x00A0;&#x00A0;<span class="subsectionToc" >1.0.2 <a 
+href="#x1-90001.0.2" id="QQ2-1-9">Keywords</a></span>
+<br />   &#x00A0;&#x00A0;<span class="subsectionToc" >1.0.3 <a 
+href="#x1-100001.0.3" id="QQ2-1-10">Problem description</a></span>
+<br />   &#x00A0;&#x00A0;<span class="subsectionToc" >1.0.4 <a 
+href="#x1-110001.0.4" id="QQ2-1-11">Justification, motivation and benefits</a></span>
+<br />   &#x00A0;&#x00A0;<span class="subsectionToc" >1.0.5 <a 
+href="#x1-120001.0.5" id="QQ2-1-12">Research questions</a></span>
+<br />   &#x00A0;&#x00A0;<span class="subsectionToc" >1.0.6 <a 
+href="#x1-130001.0.6" id="QQ2-1-13">Planned contributions</a></span>
+<br />   &#x00A0;<span class="sectionToc" >1.1 <a 
+href="#x1-140001.1" id="QQ2-1-14">Choice of methods</a></span>
+<br />   <span class="chapterToc" >2 <a 
+href="#x1-150002" id="QQ2-1-15">Related Works</a></span>
+<br />   &#x00A0;<span class="sectionToc" >2.1 <a 
+href="#x1-160002.1" id="QQ2-1-16">Malware Self-Defense</a></span>
+<br />   &#x00A0;<span class="sectionToc" >2.2 <a 
+href="#x1-170002.2" id="QQ2-1-17">Malware analysis methods</a></span>
+<br />   <span class="chapterToc" >3 <a 
+href="#x1-180003" id="QQ2-1-19">Malware Detection</a></span>
+<br />   &#x00A0;<span class="sectionToc" >3.1 <a 
+href="#x1-190003.1" id="QQ2-1-20">Taxonomy</a></span>
+<br />   &#x00A0;<span class="sectionToc" >3.2 <a 
+href="#x1-200003.2" id="QQ2-1-21">Scope of Model</a></span>
+<br />   &#x00A0;<span class="sectionToc" >3.3 <a 
+href="#x1-210003.3" id="QQ2-1-22">Scope of Methods</a></span>
+<br />   &#x00A0;<span class="sectionToc" >3.4 <a 
+href="#x1-220003.4" id="QQ2-1-23">Obfuscation Methods</a></span>
+<br />   <span class="chapterToc" >4 <a 
+href="#x1-230004" id="QQ2-1-24">Background Studies</a></span>
+<br />   &#x00A0;<span class="sectionToc" >4.1 <a 
+href="#x1-240004.1" id="QQ2-1-25">Caches</a></span>
+<br />   &#x00A0;&#x00A0;<span class="subsectionToc" >4.1.1 <a 
+href="#x1-250004.1.1" id="QQ2-1-26">Motivation of Caches and Principle of Locality</a></span>
+<br />   &#x00A0;&#x00A0;<span class="subsectionToc" >4.1.2 <a 
+href="#x1-260004.1.2" id="QQ2-1-29">The basic logic of caches</a></span>
+<br />   &#x00A0;&#x00A0;<span class="subsectionToc" >4.1.3 <a 
+href="#x1-270004.1.3" id="QQ2-1-30">Allocation, Write and Replacement Policies</a></span>
+<br />   &#x00A0;&#x00A0;<span class="subsectionToc" >4.1.4 <a 
+href="#x1-310004.1.4" id="QQ2-1-35">Miss Type and Advance Cache Optimization Methods</a></span>
+<br />   &#x00A0;<span class="sectionToc" >4.2 <a 
+href="#x1-340004.2" id="QQ2-1-38">Cache Coherence and Consistency</a></span>
+<br />   &#x00A0;&#x00A0;<span class="subsectionToc" >4.2.1 <a 
+href="#x1-350004.2.1" id="QQ2-1-41">Snooping Coherence Protocols</a></span>
+<br />   &#x00A0;<span class="sectionToc" >4.3 <a 
+href="#x1-390004.3" id="QQ2-1-51">Inter-connector Design</a></span>
+<br />   &#x00A0;&#x00A0;<span class="subsectionToc" >4.3.1 <a 
+href="#x1-400004.3.1" id="QQ2-1-54">Topology</a></span>
+<br />   &#x00A0;&#x00A0;<span class="subsectionToc" >4.3.2 <a 
+href="#x1-410004.3.2" id="QQ2-1-57">Topologies</a></span>
+<br />   &#x00A0;&#x00A0;<span class="subsectionToc" >4.3.3 <a 
+href="#x1-420004.3.3" id="QQ2-1-58">Switching</a></span>
+<br />   &#x00A0;&#x00A0;<span class="subsectionToc" >4.3.4 <a 
+href="#x1-430004.3.4" id="QQ2-1-59">Routing</a></span>
+<br />   &#x00A0;&#x00A0;<span class="subsectionToc" >4.3.5 <a 
+href="#x1-440004.3.5" id="QQ2-1-60">Flow Control</a></span>
+<br />   <span class="chapterToc" >5 <a 
+href="#x1-450005" id="QQ2-1-61">Obfuscation on inconsistent systems</a></span>
+<br />   <span class="chapterToc" >6 <a 
+href="#x1-460006" id="QQ2-1-62">Delay Attack</a></span>
+<br />   <span class="chapterToc" >7 <a 
+href="#x1-470007" id="QQ2-1-63">Implementation for Hayward Computer Architecture</a></span>
+<br />   <span class="chapterToc" >8 <a 
+href="#x1-480008" id="QQ2-1-64">Implication and Discussion</a></span>
+<br />   &#x00A0;<span class="sectionToc" >8.1 <a 
+href="#x1-490008.1" id="QQ2-1-65">Theoretical Considerations</a></span>
+<br />   &#x00A0;<span class="sectionToc" >8.2 <a 
+href="#x1-500008.2" id="QQ2-1-66">Practical Implication Issues</a></span>
+                                                                         
+                                                                         
+<br />   &#x00A0;<span class="sectionToc" >8.3 <a 
+href="#x1-510008.3" id="QQ2-1-67">Summary</a></span>
+<br />   <span class="chapterToc" >9 <a 
+href="#x1-520009" id="QQ2-1-68">Conclusion and Further Works</a></span>
+<br />   <span class="appendixToc" >A <a 
+href="#x1-54000A" id="QQ2-1-70">Cache Memory Simulation</a></span>
+<br />   <span class="appendixToc" >B <a 
+href="#x1-55000B" id="QQ2-1-71">Real Systems Cache Coherency Latency Simulation Results</a></span>
+   </div>
+                                                                         
+                                                                         
+<div class="center" 
+>
+<!--l. 65--><p class="noindent" >
+</div>
+<!--l. 65--><p class="indent" >   <a 
+ id="likesection.5"></a>
+   <h2 class="likechapterHead"><a 
+ id="x1-5000"></a>List of Figures</h2><div class="tableofcontents"><span class="lofToc" >1&#x00A0;<a 
+href="#x1-17001r1">Detection models [<span 
+class="bchb8t-">?</span>]</a></span><br /><span class="lofToc" >1&#x00A0;<a 
+href="#x1-25001r1">Principle of Locality</a></span><br /><span class="lofToc" >2&#x00A0;<a 
+href="#x1-25002r2">4 KB 4-way set
+associative cache with 256 cache lines </a></span><br /><span class="lofToc" >3&#x00A0;<a 
+href="#x1-27001r3">A. A Write-Through cache with No-Write
+Allocation B. A Write-Back cache with Write Allocation</a></span><br /><span class="lofToc" >4&#x00A0;<a 
+href="#x1-34002r4">Write-back Policy Cache
+Memory Inconsistency</a></span><br /><span class="lofToc" >5&#x00A0;<a 
+href="#x1-34003r5">Write-through Policy Cache Memory Inconsistency</a></span><br /><span class="lofToc" >6&#x00A0;<a 
+href="#x1-36002r6">MSI State
+Diagram for processor P1</a></span><br /><span class="lofToc" >7&#x00A0;<a 
+href="#x1-37001r7">MESI State Diagram for processor P1</a></span><br /><span class="lofToc" >8&#x00A0;<a 
+href="#x1-38001r8">MOESI State Diagram
+for processor P1</a></span><br /><span class="lofToc" >9&#x00A0;<a 
+href="#x1-39001r9">Primitive Multi-Drop Memory Bus </a></span><br /><span class="lofToc" >10&#x00A0;<a 
+href="#x1-39002r10">An example of interconnector
+message anatomy </a></span><br /><span class="lofToc" >11&#x00A0;<a 
+href="#x1-40001r11">A) Bus topology example B) Ring topology example</a></span><br /><span class="lofToc" >12&#x00A0;<a 
+href="#x1-40002r12">A) Mesh
+topology example B) Torus topology example C) 3D mesh topology example[45]</a></span><br />
+   </div>
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+<div class="center" 
+>
+<!--l. 66--><p class="noindent" >
+</div>
+<!--l. 66--><p class="indent" >   <a 
+ id="likesection.6"></a>
+   <h2 class="likechapterHead"><a 
+ id="x1-6000"></a>List of Tables</h2><div class="tableofcontents"><span class="lotToc" >1&#x00A0;<a 
+href="#x1-36001r1">MSI states&#8217; properties</a></span><br /><span class="lotToc" >2&#x00A0;<a 
+href="#x1-37002r2">MESI states&#8217; properties</a></span><br /><span class="lotToc" >3&#x00A0;<a 
+href="#x1-38002r3">MEOSI states&#8217; properties</a></span><br />
+   </div>
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+<!--l. 1--><p class="indent" >   <a 
+ id="likesection.7"></a>
+   <h2 class="chapterHead"><span class="titlemark">Chapter&#x00A0;1</span><br /><a 
+ id="x1-70001"></a>Introduction</h2>
+<!--l. 2--><p class="noindent" >The purpose of introduction chapter is giving the readers blueprint of the subject,
+the problems that we face, the change in the solutions, as well as motivation of its
+importance. In addition, It also purpose to form proper research question which will guide
+thesis.
+   <h4 class="subsectionHead"><span class="titlemark">1.0.1    </span> <a 
+ id="x1-80001.0.1"></a>Topic covered by the project</h4>
+<!--l. 5--><p class="noindent" >The thesis purposes an architecture of the malware which process parallel, access memory
+concurrently, conceal itself systematically, shortly that it is likely to be rocket science. However,
+everything actually started with a simple mathematical theory by John Von Neumann <span class="cite">[<a 
+href="#Xvon1966theory">1</a>]</span> and
+the first example of practical malware is written by Bob Thomas at BBN, and it was called
+Creeper
+<!--l. 7--><p class="indent" >   The malware is abbreviation of malicious software. It could be any piece of code which is
+defined malicious. There is no formal definition of malicious, it could be some software
+advertise without any contest or it could be self-producing code piece which aim to distribute
+itself and steal your private information, and it turned an arm race between power holders
+today.
+<!--l. 9--><p class="indent" >   With development of the first malware, their counter software are created and anti malware
+software have evolved with them so far. In this race, malware authors are always one step
+further, because of security&#8217;s nature. This race between black and white side raised the bar
+above. The motivation of the information amount and severity influence both today, and that
+information can be sometimes vital.
+<!--l. 12--><p class="noindent" >
+   <h4 class="subsectionHead"><span class="titlemark">1.0.2    </span> <a 
+ id="x1-90001.0.2"></a>Keywords</h4>
+<!--l. 13--><p class="noindent" >Security, Concurrent Malware Design, Malware, Multi-processing Architectures, Parallelism and
+Concurrency, Cache Oriented Polymorphism, Cache Coherency Problems
+<!--l. 15--><p class="noindent" >
+   <h4 class="subsectionHead"><span class="titlemark">1.0.3    </span> <a 
+ id="x1-100001.0.3"></a>Problem description</h4>
+<!--l. 16--><p class="noindent" >The one of the main and indecipherable problem in security discipline is formulating general
+threat definition and recognizing malicious activity and all this problems unsurprisingly reflect
+on information and computer security concept. Security is defined by system&#8217;s identification,
+which involve with purpose, crowd, design structures, network model and so on, and today&#8217;s
+information system which is designed with various architectural forms is protected against
+malware by general purpose protection tools. In the market, The anti malware tools
+producers focused on pragmatic solutions to survive, but it leads to that most of
+these tools are utterly reverse engineering process which works on result instead of
+reason.
+<!--l. 18--><p class="indent" >   With usual and pragmatic signature based methods, there are two mainstream techniques to
+detect malicious code which are called static and dynamic analysis.Static analysis
+identifies malware mainly with code flow graph and data flow graph on stored file which
+is not processing. However, On the dynamic side it is a bit more tricky to analyze
+process, because you are working on the running pieces of codes without knowledge of
+                                                                         
+                                                                         
+structures and worse than this, it must concern race condition and memory coherency
+flaws.
+<!--l. 20--><p class="indent" >   The detection methods and techniques have been adequately worked so far because of the
+simplicity of architectures and usage of the massive generic computers, However, with
+increasing of the not standardized, parallel and popular devices like arm&#8217;s SoC, it is not hard
+to estimate their new challenges. It is really likely to evade and obfuscate properly
+your on-the-fly processes with using uncertain characteristic of parallel processing,
+complexity of concurrent programming, and structure of &#8220;Non Uniform Memory
+Architecture~.
+<!--l. 23--><p class="noindent" >
+   <h4 class="subsectionHead"><span class="titlemark">1.0.4    </span> <a 
+ id="x1-110001.0.4"></a>Justification, motivation and benefits</h4>
+<!--l. 24--><p class="noindent" >If malware designing is superficially considered, you could fall in usual fallacy that It is not
+beneficial and exactly opposite. However, if we can design it, there is always more skillful
+author who already abuse this vulnerabilities on the black side of the moon. The work we are
+obligated to actually proof this vulnerabilities and design counter measure against them. In this
+way, our blessed motivation is finding possible vulnerabilities, and mitigate or eliminate
+their risk. Otherwise; if we confront with unknown attack, it could be too late to fix
+and analyze it. For example, some of the most sensational and beneficial papers are
+criticize malware as same as the thesis (<span class="cite">[<a 
+href="#Xmoser2007limits">2</a>]</span>,<span class="cite">[<a 
+href="#Xcavallaro2008limits">3</a>]</span>,<span class="cite">[<a 
+href="#Xegele2012survey">4</a>]</span>), and their values are undoubted
+today.
+<!--l. 26--><p class="noindent" >
+   <h4 class="subsectionHead"><span class="titlemark">1.0.5    </span> <a 
+ id="x1-120001.0.5"></a>Research questions</h4>
+<!--l. 28--><p class="noindent" >
+   <ol  class="enumerate0" >
+   <li 
+  class="enumerate" id="x1-12002x1">Can a malware model be designed with using parallel and concurrent architecture in
+   order to conceal its presence from detection mechanism?
+   </li>
+   <li 
+  class="enumerate" id="x1-12004x2">If we can design the mentioned malware, can we build a detection mechanism against
+   these kind of malware&#8217;s presence?
+   </li>
+   <li 
+  class="enumerate" id="x1-12006x3">If we build the detection mechanism, What is detection complexity of the algorithms?</li></ol>
+<!--l. 35--><p class="noindent" >
+   <h4 class="subsectionHead"><span class="titlemark">1.0.6    </span> <a 
+ id="x1-130001.0.6"></a>Planned contributions</h4>
+<!--l. 36--><p class="noindent" >This Master thesis is looking for better understanding on concurrent malware abilities and their
+counter-measure. Especially, It will try to show how possible to abuse concurrent memory
+accessing and how durable recent detection kits. It is quite unique work which we have to
+consider on the future. Ultimate goal is to eliminate any uncertainties which detection methods
+encounter with concurrent memory accessing.
+                                                                         
+                                                                         
+<!--l. 40--><p class="noindent" >
+   <h3 class="sectionHead"><span class="titlemark">1.1    </span> <a 
+ id="x1-140001.1"></a>Choice of methods</h3>
+<!--l. 41--><p class="noindent" >This thesis will use a technical approach to the problem. It will use quantitative and model
+building approach. The methodology consist 8 circular step which are, asking question,
+building new hypothesis, planning methods, developing software, preparing generic testbed,
+testing, analyzing, reporting results. In addition to this, the large portion of the time
+will be given researching related topics, based architecture, and learning tools and
+technologies. Consequently, the accuracy of the thesis is lies on the proper scientific
+methodology.
+<!--l. 43--><p class="indent" >   <a 
+ id="likesection.8"></a><a 
+ id="x1-14001"></a>
+<!--l. 43--><p class="noindent" >                                     <!--l. 43--><p class="noindent" > circular diagram will be Drawn here
+<!--l. 46--><p class="indent" >   To address the first question, designing proper malware evasion technique with concurrent
+and parallel architecture have not been researched well so for, therefore; it will lies on so much
+experiment and we might have to reflection of other evasion and obfuscation attacks analogy.
+We will chose several known malware, which is on air, to evade them during testing
+part. We will strong probably use kernel modules and android operating systems
+for testing bed, however we could linux OS without android layer to simplify and
+closure test period. In testing step, we will use several anti-virus system such as Avast,
+Comodo, Norton and compare the result before evasion and after evasion. Testing
+period might me include mathematical proof depending on evasion or obfuscation
+method.<a 
+ id="likesection.9"></a><a 
+ id="x1-14002"></a>
+<span class="marginpar">           <br />Consider involvement of
+this line during project.<br />Consider involvement of
+this line during project.
+</span>At the end of the each hypothesis&#8216; result, which is mean the method for concealing malware,
+will be reported properly. Each method will be another hypothesis, so we could be proof
+whether multiple or none successful hypotheses, yet the failed hypothesis could be
+crucial. There could be also many result which are too baroque to proof them or
+explain their result, these cases could be observed on further work. For semantic
+knowledge, we could try to show relationship between evasion methods and hybrid
+approaches.
+<!--l. 48--><p class="indent" >   If we can find successful hypothesis for first question, we observe them in second question.
+Second question is depend on the first question&#8217;s answer. Second questions methodology is
+actually exactly same circular. It start with defense hypothesis against evasion method.
+Dynamic and static detection methods must be both considered. The development of the
+counter algorithms could be proved mathematically, but it can be quite baroque to formulate it.
+In order to prove it, we could design evasion and detection methods&#8216; Turing model, however;
+the main approach of our testing is involved with experimental solution. we will develop
+planned algorithms prototype. Proper test bed could be provided with lots of malware species..
+We will test our algorithms&#8216; prototype with concealed or obfuscated viruses. If it is really
+necessary, we could prepare also control groups to prove trustworthiness of method,
+then we have to record result without any intervention. For semantic knowledge, we
+could try to show relationship between detection methods and hybrid approaches.
+<a 
+ id="likesection.10"></a><a 
+ id="x1-14003"></a>
+                                                                         
+                                                                         
+<span class="marginpar">           <br />depending on the found
+evasion technique,
+methodology could be
+shaped again<br />depending on the found
+evasion technique,
+methodology could be
+shaped again
+</span>
+                                                                         
+                                                                         
+<!--l. 52--><p class="indent" >   The last question is a matter of measuring and analyzing algorithms complexity. It is totally
+mathematical scientific methodology. We have to analyze worst, best and average complexity
+rate. There are also several Quantitative approaches like measuring resource usage. It
+could be efficient some system like network which there are lots of uncertainties
+in.
+<!--l. 54--><p class="indent" >   In this project, there five inevitable risks which we can face during development.
+   <ul class="itemize0">
+   <li class="itemize">The  thesis  is  highly  dependent  on  the  hardware,  and  the  cost  of  the  hardware
+   constitute risk on its own. Any case of hardware defect leads to comprise obstacle.
+   </li>
+   <li class="itemize">Hardware dependency is also leads to logistical and time consuming risk which could
+   result with latency on submit time.
+   </li>
+   <li class="itemize">Firmware codes which we are planning to work on are mostly undocumented. We
+   could discover their usage by proper reverse engineering and fuzzing process when
+   required, however it is obviously manpower.
+   </li>
+   <li class="itemize">Most important and highlighting risk is there isn&#8217;t proper research on this particular
+   area. That means there are strongly possibly hidden risks which could cause other
+   mental and physical result.
+   </li>
+   <li class="itemize">During  testing  and  purification  part,  Anti-malware  tools  could  come  out  with
+   unreliable result. To analyze result properly, we may need to inspect mentioned tools
+   with  reverse  engineering  process  which  could  violate  proper  usage  agreement.  To
+   mitigate that kind of risks, we could request research agreement from companies.</li></ul>
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+<!--l. 3--><p class="indent" >
+                                                                         
+                                                                         
+<!--l. 3--><p class="indent" >   <a 
+ id="likesection.11"></a>
+   <h2 class="chapterHead"><span class="titlemark">Chapter&#x00A0;2</span><br /><a 
+ id="x1-150002"></a>Related Works</h2>
+   <h3 class="sectionHead"><span class="titlemark">2.1    </span> <a 
+ id="x1-160002.1"></a>Malware Self-Defense</h3>
+<!--l. 5--><p class="noindent" >This section will give an overview of researches about Malware&#8216;s self-defense technique, the
+methods to analyze them, and their application on concurrent architecture. This section
+will try to give the literature about malware evasion techniques. This techniques are
+generally antonym solution which are found by malware authors, however, there
+are enough surveys about known technique. We classified all these methods in six
+categories which are code obfuscation, code reuse, anti debugging, anti emulator and
+visualization and covert channel over network traffic. This taxonomy is well defined by
+Jonathan A.P Marpaung, et al <span class="cite">[<a 
+href="#Xmarpaung2012survey">5</a>]</span>, yet malware authors used them to protect their own
+properties.
+<!--l. 9--><p class="indent" >   Code obfuscation was originally found for protecting intellectual property<span class="cite">[<a 
+href="#Xbalakrishnan2005code">6</a>]</span>, but It aims to
+puzzle code&#8216;s binary against merely static analysis and disassembling<span class="cite">[<a 
+href="#Xnachenberg1996understanding">7</a>]</span>. The first
+known obfuscation method used encryption in order to hide its content. It was called
+Cascade which is seen first 1986<span class="cite">[<a 
+href="#Xyou2010malware">8</a>]</span>. This simple architecture of the obfuscation is called
+packing<span class="cite">[<a 
+href="#Xinternotsecurityteam">9</a>]</span>. It involve with two part of binary which are slub part, in order to decipher and
+encipher.<span class="cite">[<a 
+href="#Xmarpaung2012survey">5</a>]</span>. Cascade was using simple XOR encryption and that was increasing
+performance.
+<!--l. 11--><p class="indent" >   Early of the 1990s , oligomorphism and polimorphism started to show up<span class="cite">[<a 
+href="#Xyou2010malware">8</a>]</span>. The main idea
+behind them is basicly transforming their slub part in each attempt of encryption process<span class="cite">[<a 
+href="#Xnachenberg1996understanding">7</a>]</span>.
+Today, there are two type of polymorphic approach to generate different variants of
+slub.<span class="cite">[<a 
+href="#Xli2011mechanisms">10</a>]</span>
+   <ul class="itemize0">
+   <li class="itemize">Rewriting the code each time from pseudo-code so it differs code synthetically which
+   is actually transformation based obfuscation.
+   </li>
+   <li class="itemize">Self-cipher itself different, order of these ciphers and using different keys.</li></ul>
+<!--l. 16--><p class="noindent" >One of the other important milestone of polymorphic malware is Mutation Engine(MtE) is writen
+by a Bulgarian virus Author, called The Dark Avanger. It was automated obfuscation tool which
+actually considered impossible in those times.<span class="cite">[<a 
+href="#Xanonymous1">11</a>]</span>
+<!--l. 18--><p class="indent" >   There are also several methods to prevent unpacking process. These methods are collected
+carefully by Peter Ferrie <span class="cite">[<a 
+href="#Xferrie2008anti">12</a>]</span>. These methods are especially obstacle for automated
+analysis.
+<!--l. 20--><p class="indent" >   Compare with polymorphic methods, metamorphic approach is more complicated. It is
+transformation based method instead of encryption approach.<span class="cite">[<a 
+href="#Xkonstantinou2008metamorphic">13</a>]</span> Fundamentally, it produce
+different codes which doing same blue printed semantic. That just mitigate detection possibility
+because of lack of static code.
+<!--l. 22--><p class="indent" >   Network traffic, which malware produce are generally Achilles heel for malware, because
+they are generally adequately unique traffics to be identified<span class="cite">[<a 
+href="#Xmarpaung2012survey">5</a>]</span>. They usually cover their overt
+malicious traffic with covert channel methods.<span class="cite">[<a 
+href="#Xrutkowska2006rootkits">14</a>]</span>
+<!--l. 24--><p class="indent" >   Code reuse attacks are strong attacks because they do not inject any code in them as
+obfuscation methods did. They aim to use legitimate software to evade themselves. There are
+there well known applied version which are return-into-libc, return oriented programming and
+                                                                         
+                                                                         
+Frankenstein.
+<!--l. 26--><p class="indent" >   Return into libc attacks were demonstrated by solar designer in 1997 as a method of
+bypassing non executable stack to executable libc libraries<span class="cite">[<a 
+href="#Xdesigner1997getting">15</a>]</span>. It&#8217;s object is to change the ~ret~
+infrastructure argument to the known address possibly libc library(stdio, system, etc). However,
+this attack is limited with libc libraries, which we improved with return oriented
+programming.
+<!--l. 28--><p class="indent" >   Return oriented programming is more flex version of retur-into-libc attack, which is
+introduced by Shacham in 2007<span class="cite">[<a 
+href="#Xshacham2007geometry">16</a>]</span>. Return oriented programming purpose a programming
+language with small gadgets(instruction bound) which involve all ability of Turing&#8217;s
+machine<span class="cite">[<a 
+href="#Xroemer2012return">17</a>]</span>. Frankenstein is one of the novel application of return oriented programming by
+Vishwath Mohan and Kevin W. Hamlen<span class="cite">[<a 
+href="#Xmohan2012frankenstein">18</a>]</span>.
+<!--l. 30--><p class="indent" >   Anti debugging and anti emulator methods are really usual for today&#8217;s malware. The survey
+of Chen Xu et al. showed us in 2008, majority of 6900 on-the-air malware could evade their self
+with exhibiting benign behavior in sandboxes, debuggers, and virtual machines.<span class="cite">[<a 
+href="#Xchen2008towards">19</a>]</span>. VM and
+debuggers are most important element of dynamic analysis techniques in autonomous sector,
+because it must run the file just before it touch the working environment. Yet, it is not
+that knotty to determine whether working environment is virtual or not. Fuzzing
+cpu bechmarks and comparing results entropy is a good way to determine virtual
+machines.<span class="cite">[<a 
+href="#Xfranklin2008remote">20</a>]</span>
+<!--l. 32--><p class="indent" >   Rootkits are the piece of malicious code which aims to crack integrity of the system state.
+The idea of the remaining invisible to the system state is traced backed one of the oldest virus
+~Brain~<span class="cite">[<a 
+href="#Xmartin2008">21</a>]</span>. It was changing the boot process and activate virus during booting. ~Tequila~ and
+~1689~ viruses followed ~Brain~ in 1991 and 1993<span class="cite">[<a 
+href="#XDucklin1991">22</a>]</span>. There are NTRootkit and
+HackerDeffender rootkits today. The proper classification of the rootkit are prepared by Adnan
+Abdakka<span class="cite">[<a 
+href="#XAdnan2011">23</a>]</span>.
+<!--l. 36--><p class="noindent" >
+   <h3 class="sectionHead"><span class="titlemark">2.2    </span> <a 
+ id="x1-170002.2"></a>Malware analysis methods</h3>
+<!--l. 38--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                         
+                                                                         
+<a 
+ id="x1-17001r1"></a>
+                                                                         
+                                                                         
+
+<!--l. 40--><p class="noindent" ><img 
+src="img/alisa_1007_pic1_en.jpg" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;1: </span><span  
+class="content">Detection models <span class="cite">[<span 
+class="bchb8t-">?</span>]</span></span></div><!--tex4ht:label?: x1-17001r1 -->
+                                                                         
+                                                                         
+<!--l. 43--><p class="noindent" ></div><hr class="endfigure">
+<!--l. 44--><p class="indent" >   Malware analysis medhods could be considered two dimensional plane which are
+~anomaly, signature based detection technique~ and ~Statistic and dynamic analysis
+method~.
+<!--l. 48--><p class="indent" >   There are also several applied techniques, which combine terminology above.
+     <dl class="description"><dt class="description">
+<span 
+class="bchb8t-">N-gram</span> </dt><dd 
+class="description">It is a anomaly based heuristic detection method algorithm. It is a bit costly
+     process  and  not  practical  for  client  side  analysis.  It  could  be  fit  for  honey  pot
+     analysis <span class="cite">[<a 
+href="#Xreddy2006n">24</a>]</span> <span class="cite">[<a 
+href="#Xabou2004n">25</a>]</span> <span class="cite">[<a 
+href="#Xabou2004detection">26</a>]</span>. They are capable against to zero time malwares and that
+     could makes it futures malware detection system.
+     </dd><dt class="description">
+<span 
+class="bchb8t-">Sequential approach on system and funtion call</span> </dt><dd 
+class="description">This   approach   is   anomaly   based
+     dynamic  analysis  and  observing  and  recording  the  flow  graph  of  systems  and
+     function calls and try to analysis anomaly behaviors.<span class="cite">[<a 
+href="#Xkendall2007practical">27</a>]</span>
+     </dd><dt class="description">
+<span 
+class="bchb8t-">Taint</span> </dt><dd 
+class="description">It is also called data flow analysis or data flow graph. It is basic tracking marked
+     data values during execution.<span class="cite">[<a 
+href="#Xsaxena2008efficient">28</a>]</span><span class="cite">[<a 
+href="#Xsaxena2008efficient">28</a>]</span><span class="cite">[<a 
+href="#Xsmith2007principles">29</a>]</span>
+     </dd><dt class="description">
+<span 
+class="bchb8t-">Control Flow Graph</span> </dt><dd 
+class="description">They   are   one   of   the   most   important   arm   of   commercial
+     autonomous  malware  detection  tools<span class="cite">[<a 
+href="#Xlee2010detecting">30</a>]</span>  <span class="cite">[<a 
+href="#Xchristodorescu2006static">31</a>]</span>  <span class="cite">[<a 
+href="#Xchristodorescu2005semantics">32</a>]</span>.  After  the  invention  of  the
+     polymorphic  and  metamorphic,  syntactic  analysis  could  not  bear  with  them.
+     Then we moved to upper layer of information, semantic layer. Semantic can be
+     representation of code flow, and the routes of the code are adequate to produce
+     signature to identify malware. This methods are a member of static analysis and
+     disassembling and source code analysis job.
+     </dd><dt class="description">
+<span 
+class="bchb8t-">Network Monitoring</span> </dt><dd 
+class="description">Malware intention of the communication over network actually
+     big clue to detect them. They generally use unique hostname, ip adress or specific
+     protocol with particular way <span class="cite">[<a 
+href="#Xmarpaung2012survey">5</a>]</span>.</dd></dl>
+                                                                         
+                                                                         
+<!--l. 70--><p class="noindent" >
+                                                                         
+                                                                         
+<!--l. 70--><p class="indent" >   <a 
+ id="likesection.12"></a>
+   <h2 class="chapterHead"><span class="titlemark">Chapter&#x00A0;3</span><br /><a 
+ id="x1-180003"></a>Malware Detection</h2>
+   <h3 class="sectionHead"><span class="titlemark">3.1    </span> <a 
+ id="x1-190003.1"></a>Taxonomy</h3>
+<!--l. 72--><p class="noindent" >
+   <h3 class="sectionHead"><span class="titlemark">3.2    </span> <a 
+ id="x1-200003.2"></a>Scope of Model</h3>
+<!--l. 73--><p class="noindent" >
+   <h3 class="sectionHead"><span class="titlemark">3.3    </span> <a 
+ id="x1-210003.3"></a>Scope of Methods</h3>
+<!--l. 74--><p class="noindent" >
+   <h3 class="sectionHead"><span class="titlemark">3.4    </span> <a 
+ id="x1-220003.4"></a>Obfuscation Methods</h3>
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+<!--l. 2--><p class="indent" >   <a 
+ id="likesection.13"></a>
+   <h2 class="chapterHead"><span class="titlemark">Chapter&#x00A0;4</span><br /><a 
+ id="x1-230004"></a>Background Studies</h2>
+   <h3 class="sectionHead"><span class="titlemark">4.1    </span> <a 
+ id="x1-240004.1"></a>Caches</h3>
+<!--l. 4--><p class="noindent" >Solely, a cache is a small, fast, array of memory which is placed between lower level memory
+and higher one. It store a special block of information, in order to increase performance of
+computer systems. It is like a buffer area which has some logic to exploit locality features of
+programming logic. Today, with increasing of processing ability of computer systems, memory
+access is bottle neck.
+<!--l. 6--><p class="indent" >   The ~cache~ is originally french rooted with meaning ~concealed place for storage.~<span class="cite">[<a 
+href="#Xsloss2004arm">33</a>]</span> We
+can move this definition basically to the computer science. The cache&#8217;s design is definitely
+isolated from software layer, however; if you know your caches feature and how caches
+working you could program a lot more efficient codes easily.
+<!--l. 10--><p class="noindent" >
+   <h4 class="subsectionHead"><span class="titlemark">4.1.1    </span> <a 
+ id="x1-250004.1.1"></a>Motivation of Caches and Principle of Locality</h4>
+<!--l. 11--><p class="noindent" >The main motivation of caches is indisputably performance. As we mentioned, Performance of
+high-speed computers is usually limited by memory bandwidth and latency. In order to
+increase, and turn around that, we use an small array of memory which is located close to the
+processors. The location of chip is important and there are many design decision (e.g On chip,
+out of chip), but more crucial properties of caches are their designs (e.g. Naive Capacitor ,
+SRAM, DRAM) and their logic complexity<span class="cite">[<a 
+href="#Xhennessy2012computer">34</a>]</span>.Due to physical constrains, the size of the
+memory is limited which we can locate close to memory. On the other hand, these design
+choices are decisive factor about prices of memories. Because of all these reasons, Multi-Layer
+Memory Hierarchy with several caches between processor core and main memory is
+well-known option in order to improve performance. Nevertheless, In multilayer memory
+hierarchy, it is hard to know where the particular data reside in, and whether it is coherent or
+not. It also add many layer between memory and processor and in some cases it
+even decrease system performance,especially because of logical complexity of the
+line.
+<!--l. 13--><p class="indent" >   The idea all the caches logic depending on is Principle of Locality. Principle of locality is
+actually a concern of information theory<span class="cite">[<a 
+href="#Xshannon2001mathematical">35</a>]</span>. It a conjecture of data distribution and processing
+order. The phenomenon assume that the the same data and related document will be accessed
+more frequently than other data<span class="cite">[<a 
+href="#Xdenning2005locality">36</a>]</span>. Today, it is the one of the corner stone of computer
+science. It was first developed with Atlas System with purpose to develop virtual memory
+systems work well<span class="cite">[<a 
+href="#Xkilburn1962one">37</a>]</span>. Then, it spread from search engines optimization to hardware
+caches.
+<!--l. 15--><p class="indent" >   <hr class="figure"><div class="figure" 
+>
+                                                                         
+                                                                         
+<a 
+ id="x1-25001r1"></a>
+                                                                         
+                                                                         
+
+<!--l. 17--><p class="noindent" ><img 
+src="img/localitygraph2.jpg" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;1: </span><span  
+class="content">Principle of Locality</span></div><!--tex4ht:label?: x1-25001r1 -->
+<!--l. 19--><p class="noindent" ><span class="cite">[<a 
+href="#XComputerArchCoursera">38</a>]</span>
+                                                                         
+                                                                         
+<!--l. 21--><p class="indent" >   </div><hr class="endfigure">
+<!--l. 24--><p class="indent" >   There are mainly two type of locality of reference:
+     <dl class="description"><dt class="description">
+<span 
+class="bchb8t-">Spacial Locality</span> </dt><dd 
+class="description">Spacial  locality  propose  if  there  is  a  particular  of  memory  which  is
+     accessed on memory, then it is more likely to accessing memory locations around
+     of it in near feature. Especially arrays and instructions are exploiting this locality.
+     Arrays,  formed  structure  and  instructions  on  memory  are  laid  out  lineally  over
+     memory.  On  figure  <a 
+href="#x1-25001r1">1<!--tex4ht:ref: fig:principleoflocality --></a>,  we  can  see  spacial  locality  simply.  For  example,  during
+     instruction  fetches  part  on  the  figure,  n  loop  iterations  accesses  same  memory
+     locations for many times. There are also subclass of spacial localities like Branch
+     Locality and Equidistant Locality. They are designed locality types of indeterministic
+     feature of program structure. Branch prediction and Special compiler designs aims
+     to exploits this kind of locality more efficiently.
+     </dd><dt class="description">
+<span 
+class="bchb8t-">Temporal Locality</span> </dt><dd 
+class="description">Temporal locality propose if there is a particular of memory location
+     which is accessed recently, it will be accessed again more likely than any other
+     location.  Especially,  variables,  subroutines  of  stacks  or  other  calls  exploits  this
+     feature of locality. On figure <a 
+href="#x1-25001r1">1<!--tex4ht:ref: fig:principleoflocality --></a>, it is obviously seen that the values accessed once is
+     possible to accessed again.</dd></dl>
+<!--l. 31--><p class="indent" >   <hr class="figure"><div class="figure" 
+>
+                                                                         
+                                                                         
+<a 
+ id="x1-25002r2"></a>
+                                                                         
+                                                                         
+
+<!--l. 33--><p class="noindent" ><img 
+src="img/cacheinternals.jpg" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;2: </span><span  
+class="content">4 KB 4-way set associative cache with 256 cache lines </span></div><!--tex4ht:label?: x1-25002r2 -->
+<!--l. 35--><p class="noindent" ><span class="cite">[<a 
+href="#Xsloss2004arm">33</a>]</span>
+                                                                         
+                                                                         
+<!--l. 37--><p class="indent" >   </div><hr class="endfigure">
+   <h4 class="subsectionHead"><span class="titlemark">4.1.2    </span> <a 
+ id="x1-260004.1.2"></a>The basic logic of caches</h4>
+<!--l. 40--><p class="noindent" >As we said in previous section, the basic logic behind caches is moving arranging
+caches with local data. In order to provide this feature as smooth as possible, we use a
+logic circuit called ~Cache Controller~. It does basic logic comparison and wiring the
+request and response into the right path. Thus, it intercept the write and read request
+from processor, replace its memory array with right scheduling method, and evict
+it safely and coherently. It processes with diving address of th request into three
+fields which are Index set field, tag field, and block field. In figure <a 
+href="#x1-25002r2">2<!--tex4ht:ref: fig:cacheinternals --></a>, these fields
+showed.
+<!--l. 42--><p class="indent" >   At the beginning of cache process after it divided address fields, It first request right
+cache line which is shown in figure <a 
+href="#x1-25001r1">1<!--tex4ht:ref: fig:principleoflocality --></a>. So if we have <span 
+class="eurm-10">M </span>byte memory and <span 
+class="eurm-10">N </span>byte
+cache line, we must have <span 
+class="eurm-10">M&#x2215;N </span><span 
+class="eufm-10">= </span><span 
+class="eurm-10">cacheline</span>, then we can represent it with <span 
+class="eurm-10">p </span>when
+<span 
+class="eurm-10">cacheline </span><span 
+class="eufm-10">= </span><span 
+class="eurm-10">2</span><sup><span 
+class="eurm-7">p</span></sup> Thus, cache controller just wire corresponding line with given set
+index.
+<!--l. 44--><p class="indent" >   In traditional cache convention, first field belongs to tag id. Tag id is determined depending
+on other field i.e. the remaining part after index field and block field calculated is tag id length.
+Tag id is using to verify the stored line is actually belongs to right location of memory. The
+cache controller has comparison circuit(XOR) and compare the requested address and the
+address which is in the pointed line by set index field. If they are matched with each other,
+then it check valid byte and hit or miss. There is a simple AND circuit between tag
+comparison.
+<!--l. 46--><p class="indent" >   Final field is called data index or block index field. It will point in the cache line the smallest
+addressable memory location. Therefore, when processor want to read a value, cache fetch the
+whole block, and that makes cache to exploit spacial locality linearly. However, it will limit the
+access speed remarkable, if we increase block size. The optimum block size is about 64 byte for
+many system. As we mention before each cache line includes cache-tag field, valid bit, dirty bit,
+and some coherency bits in some special systems. The length of the data index field is equal to r
+if <span 
+class="eurm-10">wordsize </span><span 
+class="eufm-10">= </span><span 
+class="eurm-10">2</span><sup><span 
+class="eurm-7">r</span></sup>.
+<!--l. 48--><p class="indent" >   When we increase the set index count it increase basically temporal locality, but not always.
+The cache conflict could happened when two memory location which uses same
+cache line could be used concurrently or twisted. Highly trashing can reduce cache
+performance. For this reason, associative caches are developed. Set associative caches are
+represented by their way number e.g 3 way associative caches or full associative caches,
+and there are group of cache arrays corresponding to the same set index. So that
+decrease the set index count but increase the performance during conflict miss in
+some cases. However, because of the complexity of the comparison circuit, it must be
+carefully chosen the number of ways. The associative caches are showed in figure
+<a 
+href="#x1-25002r2">2<!--tex4ht:ref: fig:cacheinternals --></a>.
+<!--l. 50--><p class="indent" >   The computer architecture we uses today actually first formulated by John Von Neumann
+<span class="cite">[<a 
+href="#Xvon1961collected">39</a>]</span>. On the first design of computer it was a single cycle instruction machine without any
+pipeline or superscalar idea. Then Hardward Mark I machine is designed with proposing two
+type of caches which are one for instruction, and one for data. Icache and Dcache are specified
+for their own purpose, because data and instruction on memories have different deterministic
+                                                                         
+                                                                         
+properties. Instruction are more tent to be linearly accessed by memory and they has branch
+locality which can be predict earlier. Icache also could be located more close to decode and
+fetch parts of processors when Dcache are instead closer to memory fetch parts. Yet, the most
+significant benefit of Harward design is concurrently usage both caches during pipelined
+architectures.
+   <h4 class="subsectionHead"><span class="titlemark">4.1.3    </span> <a 
+ id="x1-270004.1.3"></a>Allocation, Write and Replacement Policies</h4>
+<!--l. 52--><p class="noindent" >There are three policy type determine a cache behaviours. They are write policy, read policy
+and reallocate policy. System&#8217;s performance, coherency, and designs are determined depending
+on these rules.
+<!--l. 54--><p class="indent" >   <hr class="figure"><div class="figure" 
+>
+                                                                         
+                                                                         
+<a 
+ id="x1-27001r3"></a>
+                                                                         
+                                                                         
+
+<!--l. 56--><p class="noindent" ><img 
+src="img/policies.jpg" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;3: </span><span  
+class="content">A. A Write-Through cache with No-Write Allocation B. A Write-Back cache
+with Write Allocation</span></div><!--tex4ht:label?: x1-27001r3 -->
+<!--l. 58--><p class="noindent" ><span class="cite">[<a 
+href="#Xwikipolicies">40</a>]</span>
+                                                                         
+                                                                         
+<!--l. 60--><p class="indent" >   </div><hr class="endfigure">
+   <h4 class="likesubsectionHead"><a 
+ id="x1-280004.1.3"></a>Write Policies </h4>
+     <dl class="description"><dt class="description">
+<span 
+class="bchb8t-">Write Through</span> </dt><dd 
+class="description">When  the  cache  controller  designed  based  on  <span 
+class="eurm-10">writethrough </span>policy,
+     it write the values into the memory and caches simultaneously, when the write
+     request is arrived from processors. It does not depend on <span 
+class="eurm-10">writemiss </span>or <span 
+class="eurm-10">writehit</span>.
+     It will reduce write performance, because writing data on memory is a lot slower,
+     but it stay coherent all the times. It is performance could be increased a bit with
+     write buffer memories between memory and cache.
+     </dd><dt class="description">
+<span 
+class="bchb8t-">Write Back</span> </dt><dd 
+class="description">The systems with that policies does not have same values in memory and
+     corresponding  cache  line,  so  the  coherency  between  memory  and  caches  are
+     provided by a trashing algorithm. Cache line always store more recent data, but if
+     there is more than one cache it is hard to decide which one is more valid or whether
+     there is a valid coherent one. However, it effects performance quite remarkable
+     (e.g. in ARM 15 cpu writing cycle to memory is around 200 cycle, but caches is
+     about 4.) . The system with limited register numbers can overflow to the memory to
+     store loop variables and that could increase write memory usage. <span 
+class="eurm-10">WriteBack </span>policy
+     makes this kind of systems really effective. The dirty bit are stand for <span 
+class="eurm-10">WriteBack</span>
+     policy. If you write some value on any cache line, dirty bit must be set for eviction.
+     During trashing process, you must first move dirt block back to memory.</dd></dl>
+<!--l. 67--><p class="noindent" >
+   <h4 class="likesubsectionHead"><a 
+ id="x1-290004.1.3"></a>Replacement Policies </h4>
+     <dl class="description"><dt class="description">
+<span 
+class="bchb8t-">Random</span> </dt><dd 
+class="description">Random policies are designed to evict a random line in the associative caches.
+     It is not really random on implementation, but enough random to work with it. It
+     sounds to weak and primitive approach but actually it could be really effective on
+     highly associative caches.
+     </dd><dt class="description">
+<span 
+class="bchb8t-">Least Recently Used</span>  </dt><dd 
+class="description">Least                  recently                  used                  replacement
+     policies are actually implemented in two types. Fully most recently used and Not
+     most recently used random. It is probably the most efficient algorithm to replace
+     cache index sets, but it is really hard to implement on highly associative caches.
+     You must record history of schedule and update it each attempt of access. It could
+     be most effective and easy method on 2 way associative caches and it just need one
+     bit to record who used last. It actually increase temporal locality, because it offers
+     the most recently used one is more likely to be used again. The most recently used
+     but random is a hybrid solution of least recently used and random policies. It just
+     record who accessed last and replace one random set except most recently one.
+                                                                         
+                                                                         
+     </dd><dt class="description">
+<span 
+class="bchb8t-">First In First Out</span> </dt><dd 
+class="description">It  is  also  known  Round  robin.  It  is  also  mostly  using  with  highly
+     associative caches. In its implementation, it has one one tail pointer of stack and in
+     each attempt of access it evict tail pointers set, and increment the the tail pointer
+     to next set.</dd></dl>
+<!--l. 73--><p class="noindent" >
+   <h4 class="likesubsectionHead"><a 
+ id="x1-300004.1.3"></a>Allocation Policies </h4>
+     <dl class="description"><dt class="description">
+<span 
+class="bchb8t-">Write Allocate</span> </dt><dd 
+class="description"><span 
+class="eurm-10">WriteAllocate </span>policy is also known as <span 
+class="eurm-10">ReadWriteAllocate </span>policy. It
+     refers  that  during  write  miss  process,  cache  controller  allocates  the  cache  line
+     with related address, as like as normal read miss process. It is mostly using with
+     <span 
+class="eurm-10">WriteBack </span>policies, because it assume it is more likely to access same data which
+     you write before.
+     </dd><dt class="description">
+<span 
+class="bchb8t-">No-Write Allocate</span> </dt><dd 
+class="description"><span 
+class="eurm-10">No </span><span 
+class="eufm-10">- </span><span 
+class="eurm-10">WriteAllocate </span>policy is also known <span 
+class="eurm-10">ReadAllocate</span>. It is an
+     exotic  implementation  of  caches.  It  is  generally  seen  with  <span 
+class="eurm-10">WriteThough </span>policy.
+     This systems can be special to read privileged and they do not hope to read or write
+     subsequent write(or even read after write.)</dd></dl>
+<!--l. 79--><p class="noindent" >
+   <h4 class="subsectionHead"><span class="titlemark">4.1.4    </span> <a 
+ id="x1-310004.1.4"></a>Miss Type and Advance Cache Optimization Methods</h4>
+<!--l. 80--><p class="noindent" >
+   <h4 class="likesubsectionHead"><a 
+ id="x1-320004.1.4"></a>Miss Type</h4>
+     <dl class="description"><dt class="description">
+<span 
+class="bchb8t-">Cold Misses</span> </dt><dd 
+class="description">Cold misses are sometimes referred to as compulsory misses . If you never
+     invoke related memory address and if you calling it first time, You will encounter
+     with that misses. It is natural misses, and really hard to mitigate them. Spacial
+     locality is the one of the method to avoid this misses. As we mention before, when
+     we increase the size of block, it will increase spacial locality.Also before initializing
+     memory, pre-fetching algorithms and branch prediction algorithms can be useful to
+     eliminate this kind of misses. In addition to this, usage of large amount of caches
+     will naturally reduce this misses, but it is side effect of it.
+     </dd><dt class="description">
+<span 
+class="bchb8t-">Conflict Misses</span> </dt><dd 
+class="description">Those  misses  are  the  one  we  are  able  to  avoid.  Conflict  happens  in
+     systems set with lower associativity esp. with direct map systems. To reduce this
+     you should increase associativity. In full associative caches, it all conflict misses are
+     avoided. The change of conflict miss is <span 
+class="eurm-10">tagsize&#x2215;memorysize</span>.
+     </dd><dt class="description">
+                                                                         
+                                                                         
+<span 
+class="bchb8t-">Capacity Misses</span> </dt><dd 
+class="description">They are also natural misses related with size of the caches. We can not
+     store every information in memory into cache. Those misses are based by definition
+     of caches. You can&#8217;t solve it even with perfect replacement algorithm, but maybe
+     you could decrease the rate of capacity miss with pre-fetching.</dd></dl>
+<!--l. 86--><p class="noindent" >
+   <h4 class="likesubsectionHead"><a 
+ id="x1-330004.1.4"></a>Advance Cache Optimization Methods</h4>
+     <dl class="description"><dt class="description">
+<span 
+class="bchb8t-">Pipelined Caches</span> </dt><dd 
+class="description">As we did in processors, we could divide cache organization in two
+     separate stage which are decode and data. It will increase the writing efficiency
+     because it will increase the bandwidth during subsequent requests. However the
+     clock mechanism will decrease to hit time.
+     </dd><dt class="description">
+<span 
+class="bchb8t-">Write Buffers</span> </dt><dd 
+class="description">Write buffers are small fully associated buffer memories between caches
+     and memories. They effects cache performance because the time between writing
+     values to memory from cache, cache memories must lock if we do not use cache
+     memories. Thus, Cache memories store values to buffer buffer will responsible with
+     writing it. Buffer size is important, when consecutive write operation requested.
+     When buffers is full, it will makes cache lock to get empty.
+     </dd><dt class="description">
+<span 
+class="bchb8t-">Multilayer Cache</span> </dt><dd 
+class="description">Multilayer caches are game changer optimization decisions, because
+     when we have level 2 caches, then we could have faster level 1 caches, because it
+     could be smaller and simpler. Namely, we are adding systems higher level caches,
+     in  order  to,  decrease  lower  level  caches  miss  time  penalty  and  increase  the  hit
+     response time, but it will decrease lower level caches hit rate. Level 2 or higher
+     caches could be also on-chip (i.e fast as possible) and SRAM, yet lower level caches
+     must always be faster closer and simpler.
+     </dd><dt class="description">
+<span 
+class="bchb8t-">Victim Caches</span> </dt><dd 
+class="description">Victim  caches  are  really  useful  and  simple  idea  for  decreasing  miss
+     penalty time. It is a buffer memory, fully associative and mostly 4 to 16 cache line.
+     It stores recently evicted lines in it. It means it increase the associativity of recently
+     used lines on other small buffer with cheap and flexible design.
+     </dd><dt class="description">
+<span 
+class="bchb8t-">Hardware Prefetching</span> </dt><dd 
+class="description">There are many theoretical pre-fetching method, but there are
+     a few example implemented. The most well known is prefetch the most recently
+     values  incremental  block  line.  That  targets  to  increase  most  recently  used  ones
+     spacial locality. It is really efficient to applying it, because increasing block depth
+     is  expensive  job  for  caches  and  increase  hit  time.  If  you  implement  one  buffer
+     memory, which prefetch next block of block you need, it automatically increase
+     spacial locality. Also compiler based branch prediction methods are good example
+     of instruction prefetching, however, generally, prefethers for instruction caches load
+     all branches to decrease miss rate.
+                                                                         
+                                                                         
+     </dd><dt class="description">
+<span 
+class="bchb8t-">Non-Blocking Caches</span> </dt><dd 
+class="description"></dd></dl>
+<!--l. 95--><p class="noindent" >
+   <h3 class="sectionHead"><span class="titlemark">4.2    </span> <a 
+ id="x1-340004.2"></a>Cache Coherence and Consistency</h3>
+<!--l. 96--><p class="noindent" >Many modern computer systems with parallel processing ability have support of shared
+memory in hardware. Shared memory has lots of advantage over message based
+memory systems. Each processor could access same address space, read and write them
+simultaneously with using their own caches. This features has lots of benefit such as;
+low power consumption, higher performance and lower prices. However, without
+consistency between processors, parallel processing can not use many advantage of parallel
+programming. It could be also insecure to use a system without consistency between
+processors.
+<!--l. 98--><p class="indent" >   To provide better understanding of shared memory correctness, we defined it in two
+separate them in two definition, which are consistency and coherency. Consistency provide a
+definition of memory access rules and how they will act around computer system with store
+and load operations. When we compare it with coherency model, it must be more simple and
+easy to understand it. Therefore, it define a correct behaviours of the memory accesses of
+multiple threads by allowing or disallowing executions. On the other hand Coherency is a way
+of implementing a control protocol between memories and processors to support and provide
+consistency. Correct coherency provide a system which programmer or operator of the
+system can never determine behaviours (misbehaviours or correct behaviours) of
+caches<span class="cite">[<a 
+href="#Xsorin2011primer">41</a>]</span>.
+<!--l. 100--><p class="indent" >   As mentioned, Mention Consistency is try to define to correct shared memory behaviour
+between many processor in term of loads and stores. It does not have to concern specific
+hardware issues, such as hardware level pipelines, write buffers, caches, Out-of-order
+processing schemes etc. However, in the market, there is no hardware provide consistency
+perfectly, because the reordering store and load operations is regular optimization techniques in
+out-of-order processors. In addition to out-of-order processors, the multi layer memory
+architecture makes consistency vague and subtle. Yet, most of the programmers assume
+memories are completely consistent. There are several level between inconsistent and
+sequentially consistent memory.
+<!--l. 102--><p class="indent" >   <a 
+ id="likesection.14"></a><a 
+ id="x1-34001"></a>
+<!--l. 102--><p class="noindent" >                                     <!--l. 102--><p class="noindent" >Mention Consistency Application Summery.
+<!--l. 104--><p class="indent" >   <hr class="figure"><div class="figure" 
+>
+                                                                         
+                                                                         
+<a 
+ id="x1-34002r4"></a>
+                                                                         
+                                                                         
+
+<!--l. 106--><p class="noindent" ><img 
+src="img/cacheinconsistencywriteback.jpg" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;4: </span><span  
+class="content">Write-back Policy Cache Memory Inconsistency</span></div><!--tex4ht:label?: x1-34002r4 -->
+                                                                         
+                                                                         
+<!--l. 109--><p class="indent" >   </div><hr class="endfigure">
+<!--l. 111--><p class="indent" >   Memory Coherency (a.k.a. Cache Coherency) is actually to impose a protocol between
+caches to provide a specific consistency model on shared memory systems. Unlikely consistency,
+it also concern hardware uncertainness and subtle part such as write buffer, pre-fetcher. Typical
+consistency protocol has features which include instruction caches, multiple-level caches,
+virtual-physical address transaction, and coherent direct memory access. However, it is not
+enough to ensure consistency(depending on consistency model) by itself. It tries to makes
+caches synchronization in shared memory systems invisible from software developer. However
+there are timing techniques to analysis cache architecture and coherency model of
+system.
+<!--l. 114--><p class="indent" >   In figure <a 
+href="#x1-34002r4">4<!--tex4ht:ref: fig:cacheinconsistencywriteback --></a> and <a 
+href="#x1-34003r5">5<!--tex4ht:ref: fig:cacheinconsistencywritethrough --></a>, the consistency issues on multi layer memory systems. Assume there
+is two cluster which has ability to process values with given instruction codes. LD
+and ST instruction refer to memory load and store request. In figure <a 
+href="#x1-34002r4">4<!--tex4ht:ref: fig:cacheinconsistencywriteback --></a>, there is a
+system with two caches which belongs each cluster and one shared memory block. x
+and y is represents a particular memory address. Contrast with figure <a 
+href="#x1-34003r5">5<!--tex4ht:ref: fig:cacheinconsistencywritethrough --></a>, figure <a 
+href="#x1-34002r4">4<!--tex4ht:ref: fig:cacheinconsistencywriteback --></a>
+uses write-back policy. In step 1, cluster A loaded x and y to the processor(it could
+be also pre-fetcher who load them to the cache block). In second step, somehow
+clusters stored 1 in memory location x and 10 in memory location y. In this step,
+memory is not consistent with memory but it is not hazard because they are not
+shared with cluster B. In step 3, caches evicted the block which include address x
+and later address x and y were loaded into the cache B. After this moment, they
+will never share the values which other cluster is actually using. Y was 10 at the
+end in the memory but it can&#8217;t be seen by cluster B, even if it try to read it a million
+times.
+<!--l. 117--><p class="indent" >   <hr class="figure"><div class="figure" 
+>
+                                                                         
+                                                                         
+<a 
+ id="x1-34003r5"></a>
+                                                                         
+                                                                         
+
+<!--l. 119--><p class="noindent" ><img 
+src="img/cacheinconsistencywritethrough.jpg" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;5: </span><span  
+class="content">Write-through Policy Cache Memory Inconsistency</span></div><!--tex4ht:label?: x1-34003r5 -->
+                                                                         
+                                                                         
+<!--l. 122--><p class="indent" >   </div><hr class="endfigure">
+<!--l. 124--><p class="indent" >   Write-through cache policy is intuitively perceived as solution of this problem, because it
+just write every values directly to the memory and it will be always synchronized with memory,
+yet it is not. In figure <a 
+href="#x1-34003r5">5<!--tex4ht:ref: fig:cacheinconsistencywritethrough --></a>, write-through cache policy inconsistency showed. The problem with
+write-through policy, clusters use values which in their cache instead of memory, so even if
+memory is consistent with clusters, it is not consistent with each caches. In step 1 of
+figure <a 
+href="#x1-34003r5">5<!--tex4ht:ref: fig:cacheinconsistencywritethrough --></a>, cluster A loaded x and y addresses into the its registers. Then, in step 2,
+cluster B loaded values of x and y addresses. In step 3, system got in inconsistent
+state, because cluster A write values through memory, but Cluster B uses the old
+values, and it will never reach never values, even if it try to load many times. For this
+reason, many of the large systems which has more than 64 core use this type of cache
+coherence.
+<!--l. 126--><p class="indent" >   In order to solve this problems, there are several coherency mechanisms and their protocols.
+Depending on the case and the number of cluster or processor in the system, system could use
+Snooping and Directory based mechanism. These each protocol have their own benefits
+and drawbacks. Snooping protocol is tent to use a lot of bandwidth, however, it is
+faster and more synchronous. Its logic is to broadcast each state to every node on the
+system. However, directory based mechanism work with request and response. There is
+interconnector to forward message to the right address and it makes directory based
+mechanism slower because of the increased latency, lighter because of the decreased
+bandwidth.
+   <h4 class="subsectionHead"><span class="titlemark">4.2.1    </span> <a 
+ id="x1-350004.2.1"></a>Snooping Coherence Protocols</h4>
+<!--l. 129--><p class="noindent" >Snooping coherence (a.k.a. Bus Sniffing) is a technique to have caches to watch other
+processors caches and provide consistency depending on specified protocol. It basically
+implemented with external port to the system bus. Therefore, it implemented over cache
+controller which has feature to watch bus. It makes cache controller bigger and waste more
+power, so lower layer caches could use less complex coherency protocols and vice versa.
+There are many snoopy cache coherency protocol also depending on consistency
+model, but we can categorize them in two class which are Write update and write
+invalidate.
+<!--l. 131--><p class="indent" >   In this both protocol, we try to get rid of stall data which are in different caches, but it is
+provided with different logics. Write-update protocol is a broadcast write protocol that in every
+write attempt, it will write the values into the corresponding cache block but also it broadcast
+the write message to the every caches on the connected bus. Thus, everyone on the bus which
+has the ability of interpreting the message of write-update protocol will update stall values with
+new ones.
+<!--l. 133--><p class="indent" >   Secondly, Write-invalidate is whenever you write, you invalidate other cache copies and
+reduce to possibility usage of stall data. Instead of sending whole data block, it just send
+the tag number and state of the tag. It could effectively be successful, if you have
+limited bandwidth and power source. Most processor with coherency is today using
+write-invalidate protocol. However, it is efficient if there a few writer and many reader
+clusters or processors. Comparing with write-update protocol, if there is many writer, it
+could be less efficient because of invalidation process validate-invalidate-forward
+hops.<span class="cite">[<a 
+href="#XComputerArchCoursera">38</a>]</span>
+                                                                         
+                                                                         
+<!--l. 135--><p class="indent" >   There are many protocols for both write-invalidate and write-update to maintain
+coherence, such as MSI, MESI (aka Illinois), MOSI, MOESI, MESIF, write-once, and
+Synapse, Berkeley, Firefly and Dragon protocol. In this thesis, we will just focus on
+write-invalidate protocols because of their popularity, but basic principles are same as each
+other.
+<!--l. 137--><p class="indent" >   <a 
+ id="likesection.15"></a><a 
+ id="x1-35001"></a>
+<!--l. 137--><p class="noindent" >                                     <!--l. 137--><p class="noindent" >Mention Serialization of buses
+<!--l. 140--><p class="noindent" >
+   <h5 class="subsubsectionHead"><a 
+ id="x1-360004.2.1"></a>MSI - Basic</h5>
+   <div class="table">
+                                                                         
+                                                                         
+<!--l. 142--><p class="indent" >   <a 
+ id="x1-36001r1"></a><hr class="float"><div class="float" 
+>
+                                                                         
+                                                                         
+<div class="tabular"> <table id="TBL-3" class="tabular" 
+cellspacing="0" cellpadding="0" rules="groups" 
+><colgroup id="TBL-3-1g"><col 
+id="TBL-3-1"></colgroup><colgroup id="TBL-3-2g"><col 
+id="TBL-3-2"></colgroup><colgroup id="TBL-3-3g"><col 
+id="TBL-3-3"></colgroup><colgroup id="TBL-3-4g"><col 
+id="TBL-3-4"></colgroup><colgroup id="TBL-3-5g"><col 
+id="TBL-3-5"></colgroup><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-3-1-"><td  style="white-space:nowrap; text-align:center;" id="TBL-3-1-1"  
+class="td11">   <span 
+class="cmsy-10">&#x2219;  </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-3-1-2"  
+class="td11">Clean/Dirtiy</td><td  style="white-space:nowrap; text-align:center;" id="TBL-3-1-3"  
+class="td11">Write?</td><td  style="white-space:nowrap; text-align:center;" id="TBL-3-1-4"  
+class="td11">Unique?</td><td  style="white-space:nowrap; text-align:center;" id="TBL-3-1-5"  
+class="td11">Silent Transition to</td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-3-2-"><td  style="white-space:nowrap; text-align:center;" id="TBL-3-2-1"  
+class="td11"> Invalid  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-3-2-2"  
+class="td11">   Clean     </td><td  style="white-space:nowrap; text-align:center;" id="TBL-3-2-3"  
+class="td11">  No   </td><td  style="white-space:nowrap; text-align:center;" id="TBL-3-2-4"  
+class="td11">  No    </td><td  style="white-space:nowrap; text-align:center;" id="TBL-3-2-5"  
+class="td11">        -              </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-3-3-"><td  style="white-space:nowrap; text-align:center;" id="TBL-3-3-1"  
+class="td11"> Shared </td><td  style="white-space:nowrap; text-align:center;" id="TBL-3-3-2"  
+class="td11">   Clean     </td><td  style="white-space:nowrap; text-align:center;" id="TBL-3-3-3"  
+class="td11">  No   </td><td  style="white-space:nowrap; text-align:center;" id="TBL-3-3-4"  
+class="td11">  No    </td><td  style="white-space:nowrap; text-align:center;" id="TBL-3-3-5"  
+class="td11">   Invalid State     </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-3-4-"><td  style="white-space:nowrap; text-align:center;" id="TBL-3-4-1"  
+class="td11">Modified</td><td  style="white-space:nowrap; text-align:center;" id="TBL-3-4-2"  
+class="td11">   Dirty      </td><td  style="white-space:nowrap; text-align:center;" id="TBL-3-4-3"  
+class="td11"> Yes   </td><td  style="white-space:nowrap; text-align:center;" id="TBL-3-4-4"  
+class="td11">  Yes    </td><td  style="white-space:nowrap; text-align:center;" id="TBL-3-4-5"  
+class="td11">        -              </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-3-5-"><td  style="white-space:nowrap; text-align:center;" id="TBL-3-5-1"  
+class="td11">       </td></tr></table></div>
+<br /> <div class="caption" 
+><span class="id">Table&#x00A0;1: </span><span  
+class="content">MSI states&#8217; properties</span></div><!--tex4ht:label?: x1-36001r1 -->
+                                                                         
+                                                                         
+   </div><hr class="endfloat" />
+   </div>
+<!--l. 160--><p class="indent" >   Basic write-invalidate snoopy cache control protocol is MSI (a.k.a Modified-Shared-Invalid
+protocol). In this model, each cache block has cache tag, and two status bit as same as standard
+caches, but instead of dirt and valid status bit, MSI cache line has state bits to refer in which
+state it is. MSI has three state in state machine and they are ~Modified~, ~Shared~, ~Invalid~. two
+bits can represent four state, so definitely represent three state. The main idea behind this
+protocol is that one writer and many reader states provide always consistent memory sharing.
+Therefore, every cache in the system has different responsibilities when they read or
+write.
+     <dl class="description"><dt class="description">
+<span 
+class="bchb8t-">Invalid</span> </dt><dd 
+class="description">Invalid  state  is  exactly  same  state  with  standard  caches&#8217;  invalid  state.  When
+     cache need to access a invalid block, it must act as cache miss, and be fetched this
+     block again.
+     </dd><dt class="description">
+<span 
+class="bchb8t-">Shared</span> </dt><dd 
+class="description">When there is no writer processor on this line, and if a processor request this
+     line with purpose of read it, it will be in shared state. It is read-only cache block,
+     and processors are not allowed write without transforming state. The processor
+     also can evict it without writing back to the upper layer memory, because that is
+     for sure, it is clean block.
+     </dd><dt class="description">
+<span 
+class="bchb8t-">Modified</span> </dt><dd 
+class="description">It is modified and also modifiable cache block. In a memory coherent system
+     there can be at most one modified cache and all other cache must be invalidated.
+     It is responsible with writing back cache to the upper layer memory.</dd></dl>
+<!--l. 169--><p class="indent" >   <hr class="figure"><div class="figure" 
+>
+                                                                         
+                                                                         
+<a 
+ id="x1-36002r6"></a>
+                                                                         
+                                                                         
+
+<!--l. 171--><p class="noindent" ><img 
+src="img/MSIstatediagram.jpg" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;6: </span><span  
+class="content">MSI State Diagram for processor P1</span></div><!--tex4ht:label?: x1-36002r6 -->
+                                                                         
+                                                                         
+<!--l. 174--><p class="indent" >   </div><hr class="endfigure">
+<!--l. 176--><p class="indent" >   In figure <a 
+href="#x1-36002r6">6<!--tex4ht:ref: fig:MSIstatediagram --></a>, MSI protocol&#8217;s state diagram is showed. Cache memory launch with invalid
+cache block, and when a read miss is comprised, cache controller will request memory block
+from memory. Then, the snooping control bus will broadcast the request of read. If there is a
+modified copy on the bus, it will abort request of memory block from memory. It will evict its
+line to memory, and change its state to shared state. Then, memory responds source of the
+request. After the fetching cache block to the source cache it, it sets the state as shared state.
+If there is a shared stated copies in the system, It does not matter who responds
+the request. In any case, It will fetch the memory block, and sets the state bits to
+shared.
+<!--l. 178--><p class="indent" >   When write miss is compromised in invalid state or shared, It will fetch the data as same as
+read miss cases, but the difference is it will invalidate other case&#8217;s corresponding block which
+are shared or modified. Modified stated block must evict blocks properly. At the end, source
+cache block fetches the block.
+<!--l. 180--><p class="indent" >   Write hit can be compromise in modified state, and read hit can be compromise in shared
+state.
+   <h5 class="subsubsectionHead"><a 
+ id="x1-370004.2.1"></a>MESI - Exclusive</h5>
+<!--l. 183--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                         
+                                                                         
+<a 
+ id="x1-37001r7"></a>
+                                                                         
+                                                                         
+
+<!--l. 185--><p class="noindent" ><img 
+src="img/MESIstatediagram.jpg" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;7: </span><span  
+class="content">MESI State Diagram for processor P1</span></div><!--tex4ht:label?: x1-37001r7 -->
+                                                                         
+                                                                         
+<!--l. 188--><p class="noindent" ></div><hr class="endfigure">
+<!--l. 191--><p class="indent" >   The MESI protocol (a.k.a Illinois protocol due to its development at the University of Illinois
+at Urbana-Champaign) is a widely used cache coherency protocol<span class="cite">[<a 
+href="#Xpapamarcos1984low">42</a>]</span>. The idea behind the
+MESI is to use forth state we can use with 2 bits. In order to increase efficiency <span 
+class="eurm-10">exclusive </span>state
+is developed by JH. Patel et. al. in 1984<span class="cite">[<a 
+href="#Xpapamarcos1984low">42</a>]</span>. As showed in MSI protocol, there is modified,
+shared and invalid states but also we have exclusive state. This exclusive states also known
+unmodified exclusive state, if we refer modified state as modified exclusive. This is very
+similar to the shared state in MSI, and in fact, Shared state is split in two different
+states. That is because of reducing the communication on the bus and increasing
+efficiency. In this case, there is exclusive cache blocks which are in read mode and
+they are unique i.e there is no other cache controller on the system has this cache
+block.
+     <dl class="description"><dt class="description">
+<span 
+class="bchb8t-">Exclusive</span> </dt><dd 
+class="description">The  cache  line  is  only  present  in  current  cache  memory,  and  it  has  not
+     modified yet. It is not a state to provide coherency, but it is state for increasing
+     efficiency of bus bandwidth usage. When a cache line in exclusive state the cache
+     controller can decide the transaction of the line without communicating with other
+     caches. When a cache is requested with load operation, it is loaded in exclusive
+     state, if there is no other cache controller has the cache block.</dd></dl>
+   <div class="table">
+                                                                         
+                                                                         
+<!--l. 198--><p class="indent" >   <a 
+ id="x1-37002r2"></a><hr class="float"><div class="float" 
+>
+                                                                         
+                                                                         
+<div class="tabular"> <table id="TBL-4" class="tabular" 
+cellspacing="0" cellpadding="0" rules="groups" 
+><colgroup id="TBL-4-1g"><col 
+id="TBL-4-1"></colgroup><colgroup id="TBL-4-2g"><col 
+id="TBL-4-2"></colgroup><colgroup id="TBL-4-3g"><col 
+id="TBL-4-3"></colgroup><colgroup id="TBL-4-4g"><col 
+id="TBL-4-4"></colgroup><colgroup id="TBL-4-5g"><col 
+id="TBL-4-5"></colgroup><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-1-"><td  style="white-space:nowrap; text-align:center;" id="TBL-4-1-1"  
+class="td11">   <span 
+class="cmsy-10">&#x2219;  </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-1-2"  
+class="td11">Clean/Dirtiy</td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-1-3"  
+class="td11">Write?</td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-1-4"  
+class="td11">Unique?</td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-1-5"  
+class="td11">      Silent Transition to           </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-2-"><td  style="white-space:nowrap; text-align:center;" id="TBL-4-2-1"  
+class="td11"> Invalid  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-2-2"  
+class="td11">   Clean     </td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-2-3"  
+class="td11">  No   </td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-2-4"  
+class="td11">  No    </td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-2-5"  
+class="td11">             -                         </td></tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-3-"><td  style="white-space:nowrap; text-align:center;" id="TBL-4-3-1"  
+class="td
+11"> Shared  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-3-2"  
+class="td11">   Clean     </td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-3-3"  
+class="td11">  No   </td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-3-4"  
+class="td11">  No    </td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-3-5"  
+class="td11">        Invalid State                </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-4-"><td  style="white-space:nowrap; text-align:center;" id="TBL-4-4-1"  
+class="td11">Excursive</td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-4-2"  
+class="td11">   Clean     </td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-4-3"  
+class="td11">  No   </td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-4-4"  
+class="td11">  Yes    </td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-4-5"  
+class="td11">Shared Modified Exclusive States</td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-5-"><td  style="white-space:nowrap; text-align:center;" id="TBL-4-5-1"  
+class="td11">Modified</td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-5-2"  
+class="td11">   Dirty      </td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-5-3"  
+class="td11"> Yes   </td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-5-4"  
+class="td11">  Yes    </td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-5-5"  
+class="td11">             -                         </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-6-"><td  style="white-space:nowrap; text-align:center;" id="TBL-4-6-1"  
+class="td11">        </td></tr></table></div>
+<br /> <div class="caption" 
+><span class="id">Table&#x00A0;2: </span><span  
+class="content">MESI states&#8217; properties</span></div><!--tex4ht:label?: x1-37002r2 -->
+                                                                         
+                                                                         
+   </div><hr class="endfloat" />
+   </div>
+<!--l. 217--><p class="indent" >   In figure <a 
+href="#x1-37001r7">7<!--tex4ht:ref: fig:MESIstatediagram --></a>, state transactions are showed. Bus usage is bottle neck, low performance
+behavior in cache coherency. Silent state transactions are transactions in cache controller
+without communicating with other caches. For example, there is no need to broadcast and
+occupy bus for invalidating shared state in MSI protocol. If a cache controller is in shared
+state, the other cache controller can be shared or invalidate in MSI, so there is no
+dependency in the system transaction from shared to invalidate. Exclusive state is
+to exploit the salient transactions. When a load request arrive to cache controller
+from a processor, it request the line from upper level memory controller and other
+child caches controller. If any child controller send a shared state broadcast message,
+it load it in shared state. If there is a exclusive cache controller on the bus, it will
+degrade its state to shared and broadcast it. If there is no other shared state on the
+bus. It load the cache line in excluded state. Then, in case of store operation from
+processor, it will transact its state from exclusive to modified. It does not need to
+broadcast it, because we know it is unique in system. Contrast with modified state, due to
+be cleanness of the line, it does not need to evict line to upper memory, it can just
+invalidate it silently. The weakness of this protocol comparing with MSI, if there is
+many processor with the corresponding cache line, when it count the copies to test
+uniqueness, it occupy shared bus more in some cases. If there is n cache controller with
+corresponding cache line, it will send n broadcast message with this message, however,
+instead of sending whole line to upper memory it is mostly efficient to send this
+message.
+   <h5 class="subsubsectionHead"><a 
+ id="x1-380004.2.1"></a>MOESI - Owned Exclusive</h5>
+<!--l. 220--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                         
+                                                                         
+<a 
+ id="x1-38001r8"></a>
+                                                                         
+                                                                         
+
+<!--l. 222--><p class="noindent" ><img 
+src="img/MOESIstatediagram.jpg" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;8: </span><span  
+class="content">MOESI State Diagram for processor P1</span></div><!--tex4ht:label?: x1-38001r8 -->
+                                                                         
+                                                                         
+<!--l. 225--><p class="noindent" ></div><hr class="endfigure">
+   <div class="table">
+                                                                         
+                                                                         
+<!--l. 227--><p class="indent" >   <a 
+ id="x1-38002r3"></a><hr class="float"><div class="float" 
+>
+                                                                         
+                                                                         
+<div class="tabular"> <table id="TBL-5" class="tabular" 
+cellspacing="0" cellpadding="0" rules="groups" 
+><colgroup id="TBL-5-1g"><col 
+id="TBL-5-1"></colgroup><colgroup id="TBL-5-2g"><col 
+id="TBL-5-2"></colgroup><colgroup id="TBL-5-3g"><col 
+id="TBL-5-3"></colgroup><colgroup id="TBL-5-4g"><col 
+id="TBL-5-4"></colgroup><colgroup id="TBL-5-5g"><col 
+id="TBL-5-5"></colgroup><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-1-"><td  style="white-space:nowrap; text-align:center;" id="TBL-5-1-1"  
+class="td11">   <span 
+class="cmsy-10">&#x2219;  </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-1-2"  
+class="td11">Clean/Dirtiy</td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-1-3"  
+class="td11">Write?</td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-1-4"  
+class="td11">Unique?</td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-1-5"  
+class="td11">      Silent Transition to           </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-2-"><td  style="white-space:nowrap; text-align:center;" id="TBL-5-2-1"  
+class="td11"> Invalid  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-2-2"  
+class="td11">   Clean     </td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-2-3"  
+class="td11">  No   </td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-2-4"  
+class="td11">  No    </td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-2-5"  
+class="td11">             -                         </td></tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-3-"><td  style="white-space:nowrap; text-align:center;" id="TBL-5-3-1"  
+class="td
+11"> Shared  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-3-2"  
+class="td11">   Either     </td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-3-3"  
+class="td11">  No   </td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-3-4"  
+class="td11">  No    </td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-3-5"  
+class="td11">        Invalid State                </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-4-"><td  style="white-space:nowrap; text-align:center;" id="TBL-5-4-1"  
+class="td11">Excursive</td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-4-2"  
+class="td11">   Clean     </td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-4-3"  
+class="td11">  No   </td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-4-4"  
+class="td11">  Yes    </td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-4-5"  
+class="td11">Shared Modified Exclusive States</td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-5-"><td  style="white-space:nowrap; text-align:center;" id="TBL-5-5-1"  
+class="td11"> Owned  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-5-2"  
+class="td11">   Dirty      </td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-5-3"  
+class="td11">  No   </td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-5-4"  
+class="td11">  Yes    </td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-5-5"  
+class="td11">             -                         </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-6-"><td  style="white-space:nowrap; text-align:center;" id="TBL-5-6-1"  
+class="td11">Modified</td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-6-2"  
+class="td11">   Dirty      </td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-6-3"  
+class="td11"> Yes   </td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-6-4"  
+class="td11">  Yes    </td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-6-5"  
+class="td11">           Owned                    </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-7-"><td  style="white-space:nowrap; text-align:center;" id="TBL-5-7-1"  
+class="td11">        </td></tr></table></div>
+<br /> <div class="caption" 
+><span class="id">Table&#x00A0;3: </span><span  
+class="content">MEOSI states&#8217; properties</span></div><!--tex4ht:label?: x1-38002r3 -->
+                                                                         
+                                                                         
+   </div><hr class="endfloat" />
+   </div>
+<!--l. 248--><p class="indent" >   Such processor producers AMD Opteron and Arm Cortex A are using MOESI protocol for
+cache sharing. In addition to the four states in MESI, a fifth state ~Owned~ appears here
+representing data that is both modified and shared. Using MOESI, instead of writing modified
+data back to main memory, it directly forward the dirty value from cache to cache before being
+shared, which could save bandwidth and gain much faster access to users to the
+cache.
+     <dl class="description"><dt class="description">
+<span 
+class="bchb8t-">Owned</span> </dt><dd 
+class="description">Owned  state  is  a  state  if  and  only  if  a  cache  line  can  transact  in  it,  when  a
+     read request message snooped from another processors when the cache line is in
+     modified state. It allows dirty line sharing between caches, and reduce the latency
+     which is arisen due to the communication between memories and processors. The
+     line is read only by all processors, when it is owned state.</dd></dl>
+<!--l. 254--><p class="indent" >   In figure <a 
+href="#x1-38001r8">8<!--tex4ht:ref: fig:MOESIstatediagram --></a>, state transactions of MOESI protocol are showed. The relationships of states are
+almost same with MESI, but there is a state which supplants upper level memory with its own
+cache line. Hence, it is responsible with evicting lines and cleaning state. The cache line may be
+changed to the Modified state after invalidating all shared copies, or changed to the
+Shared state by writing the modifications back to main memory. If could increase
+efficiency sharply, if the line between upper memory and itself is long and bandwidth
+is limited. Mostly the L1 and L2 caches are located on-the-chip, and memory are
+located somewhere outside, the buses&#8217; bandwidth between in side and outside of chips
+are game changer. It can be efficient to use a chip as a forwarder in many system.
+However, in the MOESI protocol, it is not possible to forward the cache line which is
+not dirty but present on the chip. If there is a shared cache line in a cache, and if
+any other cache controller request to load the same cache line, it fetches it from
+memory.
+   <h3 class="sectionHead"><span class="titlemark">4.3    </span> <a 
+ id="x1-390004.3"></a>Inter-connector Design</h3>
+<!--l. 258--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                         
+                                                                         
+<a 
+ id="x1-39001r9"></a>
+                                                                         
+                                                                         
+
+<!--l. 260--><p class="noindent" ><img 
+src="img/bus_primatives.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;9: </span><span  
+class="content">Primitive Multi-Drop Memory Bus </span></div><!--tex4ht:label?: x1-39001r9 -->
+<!--l. 262--><p class="noindent" ><span class="cite">[<a 
+href="#XComputerArchCoursera">38</a>]</span>
+                                                                         
+                                                                         
+<!--l. 264--><p class="noindent" ></div><hr class="endfigure">
+<!--l. 265--><p class="indent" >   Computer Bus which is the primitive version of the inter-connection network was designed
+to transfers data between components inside a computer, or between computers. They are
+defined to include all computer hardware components and software, included with
+communication protocols, in order to communicate devices. Devices is generally called as node
+or end node in taxonomy. However, this definition is quite broad and it covers from today&#8217;s
+Internet network to cloud computing network and evolved in many aspect to different
+direction.
+<!--l. 267--><p class="indent" >   In figure <a 
+href="#x1-39001r9">9<!--tex4ht:ref: fig:bus_primative --></a>, There is an early multi-drop bus example. Multi-drop bus term is used for a bus
+line with many element on a line (not a ring), and there is an arbitration mechanism, so it is
+normal computer buses which is used in interconnection taxonomy. The multi-drop buses
+includes 5 separated wires which is distinguished by their purpose. Arbitration line decide
+actually how has right to speak, request. There is a logic devices to determine the arbitration
+and it is one of the most crucial research area in computer architecture and especially
+interconnector design<span class="cite">[<a 
+href="#Xhennessy2012computer">34</a>]</span>. Control wire is actually determine the purpose of the node.
+Generally, they are <span 
+class="eurm-10">store </span>and <span 
+class="eurm-10">load </span>operations. The address wire determine the requested
+address from corresponding place, in this case there is no cache controller so directly memory.
+Data wire carries the data which is stored or load, so the communication is synchronous, with
+consecutively request and reply. Lastly, clock wire provides a fixed, constant frequency to carry
+values.<span class="cite">[<a 
+href="#Xhennessy2012computer">34</a>]</span>
+<!--l. 269--><p class="indent" >   On recent systems the communication mechanism between nodes are quite more
+complicated comparing with given primitive example. The pace in the development on parallel
+systems makes correlation and communication between notes chaotic. Systems comprise with
+many nodes and requires high bandwidths to overcome and increase their bottleneck.
+Intercommunication is still the slowest part of mainframe and personal computers. On the
+other hand, with multi layer memory aspect, communication between nodes and parallel
+computing gets more and more complicated. It makes every cache controllers a member of
+interconnector and perhaps more. Today, there are some coherent interconnector which are
+also responsible with traffic management (i.e. QoS), barriers between devices and memories,
+and coherency<span class="cite">[<a 
+href="#Xarmcoherentinterconnector">43</a>]</span>.
+<!--l. 271--><p class="indent" >   <hr class="figure"><div class="figure" 
+>
+                                                                         
+                                                                         
+<a 
+ id="x1-39002r10"></a>
+                                                                         
+                                                                         
+
+<!--l. 273--><p class="noindent" ><img 
+src="img/Message_Anatomy.jpg" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;10: </span><span  
+class="content">An example of interconnector message anatomy </span></div><!--tex4ht:label?: x1-39002r10 -->
+                                                                         
+                                                                         
+<!--l. 276--><p class="indent" >   </div><hr class="endfigure">
+<!--l. 278--><p class="indent" >   There are two main category of computer interconnectors which are host based On-Chip
+and System/Storage area network and remote over LAN and WAN networks inter-connectors.
+On-Chip networks purpose to mitigate the on-flight latency and chip-crossing wire delay
+problems related with increased technology scaling and transistor integration. Nevertheless,
+there is not enough space in a single chip to fill many cores. It is a good design for
+interconnecting ALU, registers caches, compute tiles, and perhaps several cores and memory.
+System/Storage area networks are the most used interconnection systems between
+multi-processors, multi-computer, multi-thread systems and memory system interconnection
+between this cores. Because of physically constrains such as distance and density, it is usual the
+interconnector between systems and their I/O extensions (e.g DMA chips). LAN and WAN
+based systems are actually designed to connect enormous number of node together. This
+kind of networks distributed several locations and interconnecting PCs cluster of
+computers. Cloud computing is actually one of the good example to show the ability of this
+species. On of the other advantage of remote interconnectors is that they are generally
+build on well-known protocols which are tested and acknowledged protocols e.g.
+Ethernet, GSM, IP, TCP, UDP. All routing issues are tested for many years and solved
+properly.<span class="cite">[<a 
+href="#Xhennessy2012computer">34</a>]</span>.
+<!--l. 280--><p class="indent" >   Modern interconnections with advance switching and routing mechanism are using message
+protocols. In figure <a 
+href="#x1-39002r10">10<!--tex4ht:ref: fig:message_anatomy --></a>, an example of simple interconnector message anatomy is shown.
+Alternatively, the bus anatomy we mention above, the message based protocols are packetized.
+However, this packetizing process has some overhead as latency<span class="cite">[<a 
+href="#XComputerArchCoursera">38</a>]</span>. Message anatomy of
+interconnectors comprises several layers<span class="cite">[<a 
+href="#X0122007514">44</a>]</span>.
+     <dl class="description"><dt class="description">
+<span 
+class="bchb8t-">Message</span> </dt><dd 
+class="description">The  message  is  the  unit  of  information  which  must  be  transmitted  with  a
+     propose. If it is about cache coherency, It could be whole line of the cache to provide
+     coherency.
+     </dd><dt class="description">
+<span 
+class="bchb8t-">Packet</span> </dt><dd 
+class="description">Packets are the fixed maximum sized smallest unit of information which include
+     routing information in its header section. It can also include sequence number for
+     flow control protocol. Its size is depending on the arbitration mechanism on the
+     router or switches. It comprises with data flits which actually part of information
+     in message.
+     </dd><dt class="description">
+<span 
+class="bchb8t-">Flit</span> </dt><dd 
+class="description">The small unit of link layer is called flit. Flits size are depending on the switching
+     algorithms. In circuit switching flit size are whole packed. They are typically 4 byte
+     to 16 byte.
+     </dd><dt class="description">
+<span 
+class="bchb8t-">Phit</span> </dt><dd 
+class="description">It is the unit of the physical layer in the interconnectors design. Its size is depending
+     on the clock cycle of the interconnector. On the primitive bus example, the clock
+     mechanism determine the phit size when it tick. They are around 8 bit to 32 bit.</dd></dl>
+<!--l. 287--><p class="noindent" >In order to characterize interconnector device we will use several feature of networks which are
+switching mechanism, switching mechanism, routing algorithms, topology, and flow control of
+networks. These feature are determine depending on application domain and defuse all
+                                                                         
+                                                                         
+character of network. Across the designs, performance with latency and bandwidth parameters
+and queuing theory is the valuable analysis tools to define network and its classification<span class="cite">[<a 
+href="#Xhennessy2012computer">34</a>]</span>.
+<a 
+ id="likesection.16"></a><a 
+ id="x1-39003"></a>
+<!--l. 288--><p class="noindent" >                                     <!--l. 288--><p class="noindent" >put the quotes of interconnection networks appendix E questions here.
+   <h4 class="subsectionHead"><span class="titlemark">4.3.1    </span> <a 
+ id="x1-400004.3.1"></a>Topology</h4>
+<!--l. 290--><p class="noindent" >Topology is a mathematical study of shapes and the points and their relationships in the
+environment. Network topology is actually determining the path and shape of the network. The
+shapes which topology concerns depending on the dimension they are build on. Electronic
+circuit are generally build on two or tree dimensional space. The wire and nodes are the basic
+element of interconnector topologies, but also router is the switch element which can decide
+the path. The node could be grouped to regulate communication and bandwidth e.g. there
+could be two group as memories and processors. Also, there are two main type of
+network topologies, that are In-directly connected distributed and directly connected
+centralized. The root of ~central~ word in telecommunication comes from this switches, but
+they are too vast topics to discuss in this thesis. The basic idea of the centralizing
+topology is to use a central switching fabric between nodes. The switching fabrics is
+actually external subsystem or combination of systems, e.g omega and crossbar network
+topologies<span class="cite">[<a 
+href="#X0122007514">44</a>]</span>.
+<!--l. 292--><p class="indent" >   <hr class="figure"><div class="figure" 
+>
+                                                                         
+                                                                         
+<a 
+ id="x1-40001r11"></a>
+                                                                         
+                                                                         
+
+<!--l. 294--><p class="noindent" ><img 
+src="img/busandring.jpg" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;11: </span><span  
+class="content">A) Bus topology example B) Ring topology example</span></div><!--tex4ht:label?: x1-40001r11 -->
+                                                                         
+                                                                         
+<!--l. 297--><p class="indent" >   </div><hr class="endfigure">
+<!--l. 298--><p class="indent" >   The general assumption of topologies is wire are faster then logical routers and
+transactions.-Today, there is in chip transaction devices which are faster then wires<span class="cite">[<a 
+href="#Xhennessy2012computer">34</a>]</span>.- In
+order to design efficient topology, optimum cost and measure its quality, we have several
+parameters, which are diameter of tomography, routing distance, minimum bisection
+bandwidth and degree of a node.
+     <dl class="description"><dt class="description">
+<span 
+class="bchb8t-">Routing Distance</span> </dt><dd 
+class="description">It is any given two points distance by mean of number of links or hops
+     </dd><dt class="description">
+<span 
+class="bchb8t-">Diameter</span> </dt><dd 
+class="description">It is maximum routing distance between any two point of the network. In
+     figure <a 
+href="#x1-40001r11">11<!--tex4ht:ref: fig:busring --></a> and example A, it is from the first node of the bus to last node, so it is 5.
+     It could be sometimes not that obvious, but it is the most far two nodes&#8217; distances.
+     </dd><dt class="description">
+<span 
+class="bchb8t-">Average Distance</span> </dt><dd 
+class="description">Average Distance is <span 
+class="eurm-10">TotalDistance&#x2215;NumberofNodes</span>. It is one of
+     the value which using in average latency calculation. Generally performance values
+     are compared with each other by average latency.
+     </dd><dt class="description">
+<span 
+class="bchb8t-">Minimum Bisection Bandwidth</span> </dt><dd 
+class="description">If network is segmented in two equal part, and if the
+     bandwidth of these two segments is as minimum as possible, it is called minimum
+     bisection bandwidth. Typically, this bisection will be the most occupied lines, and
+     the  bandwidth  of  bisection  will  effect  total  performance  sharply.  To  embody  it
+     better,  it  is  like  a  bridge  between  two  island.  Most  of  the  traffic  caused  by  the
+     occupation on the bridge in ordinary traffic networks. The inner island bandwidth
+     is futile to effect overall traffic.
+     </dd><dt class="description">
+<span 
+class="bchb8t-">Degree of a Node</span> </dt><dd 
+class="description">It is the properties of each node to imply how many nodes it is directly
+     connected to. The node with the highest degree is applied as degree of the network.</dd></dl>
+<!--l. 306--><p class="noindent" ><hr class="figure"><div class="figure" 
+><a 
+ id="x1-40002r12"></a><img 
+src="img/multidimensional.jpg" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;12: </span><span  
+class="content">A) Mesh topology example B) Torus topology example C) 3D mesh topology
+example<span class="cite">[<a 
+href="#XHPCfigure">45</a>]</span></span></div><!--tex4ht:label?: x1-40002r12 -->
+<!--l. 311--><p class="indent" >   </div><hr class="endfigure">
+<!--l. 312--><p class="indent" >   The number of topologies designed in literature can be too many to count, but the idea
+behind them has always same logic. Topology directly effect performance, but also greatly
+impact the cost of systems. Physical constrains such as chips&#8217; pin-out, light speed, dimension
+count on the board and etc. determine topologies properties. Generally chips are reducing their
+inner bandwidth, when they are communicating with out side of chip, due to the restriction of
+building pins<span class="cite">[<a 
+href="#Xhennessy2012computer">34</a>]</span>.
+   <h4 class="subsectionHead"><span class="titlemark">4.3.2    </span> <a 
+ id="x1-410004.3.2"></a>Topologies</h4>
+     <dl class="description"><dt class="description">
+<span 
+class="bchb8t-">Buses and Rings</span> </dt><dd 
+class="description">Buses and rings are the first dimensional primitive and basic type of
+                                                                         
+                                                                         
+     interconnector topologies. They are both directly connected nodes in in sequence
+     as shown in figure <a 
+href="#x1-40001r11">11<!--tex4ht:ref: fig:busring --></a>, but rings are end around buses. Namely, ring topology aims
+     to reduce the longest link which is actually diameter of the network. If <span 
+class="eurm-10">N </span>is the
+     total number of node, node <span 
+class="eurm-10">i </span>is directly connected to node <span 
+class="eurm-10">i </span><span 
+class="eufm-10">+ </span><span 
+class="eurm-10">1</span>, and node <span 
+class="eurm-10">i </span><span 
+class="eufm-10">- </span><span 
+class="eurm-10">1</span>
+     except element <span 
+class="eurm-10">0 </span>and element <span 
+class="eurm-10">N </span><span 
+class="eufm-10">- </span><span 
+class="eurm-10">1 </span>in buses, and in rings, every node <span 
+class="eurm-10">i </span>is directly
+     connected to every node <span 
+class="eurm-10">i</span><span 
+class="eufm-10">+</span><span 
+class="eurm-10">1 </span>and <span 
+class="eurm-10">i</span><span 
+class="eufm-10">-</span><span 
+class="eurm-10">1 </span>in mod <span 
+class="eurm-10">N</span>. In bus topology, diameter is <span 
+class="eurm-10">N</span><span 
+class="eufm-10">-</span><span 
+class="eurm-10">1</span>,
+     in ring topology, diameter is <span 
+class="eufm-10">(</span><span 
+class="eurm-10">N</span><span 
+class="eufm-10">-</span><span 
+class="eurm-10">1</span><span 
+class="eufm-10">)</span><span 
+class="eurm-10">&#x2215;2</span>. In segmented and pipelined networks, rings
+     are also increasing bandwidth, because when 2 closer nodes communicate with
+     each other, other nodes can connect over all around the line. For example, When 4
+     and 5 is communicating, in buses, there is no way from 1, to 6 but in rings there is
+     another links goes around the network to connect 6 and 1, so bisection bandwidth
+     is 2 in rings and 1 in buses Rings looks more efficient and logical to use it, however,
+     in practice it could be hard to implement because of the physical constraints, but
+     they are vast topics to discuss in this section.
+     </dd><dt class="description">
+<span 
+class="bchb8t-">Two Dimensional Networks: Meshes, Tori</span> </dt><dd 
+class="description">Meshes and Tori are the idealized structure
+     of  two  dimensional  interconnectors,  because  every  best  two  dimensional  forms
+     to connect <span 
+class="eurm-10">m</span><sup><span 
+class="eurm-7">2</span></sup>  nodes. while mesh topology is derivative of bus topology, tori are
+     derivative of rings-as showed in figure <a 
+href="#x1-40002r12">12<!--tex4ht:ref: fig:meshestorus --></a>, so terminologies uses meshes end around
+     term instead of torus. The bisection bandwidths are <span 
+class="eurm-10">2</span><img 
+src="thesis1x.png" alt="&#x221A; --
+  N"  class="sqrt" > for meshes and <span 
+class="eurm-10">4</span><img 
+src="thesis2x.png" alt="&#x221A; --
+  N"  class="sqrt" > for
+     tori. The diameters are <span 
+class="eurm-10">2</span><img 
+src="thesis3x.png" alt="&#x221A; --
+  N"  class="sqrt" > <span 
+class="eufm-10">- </span><span 
+class="eurm-10">2 </span>for meshes and <img 
+src="thesis4x.png" alt="&#x221A;--
+ N"  class="sqrt" > <span 
+class="eufm-10">- </span><span 
+class="eurm-10">1</span>. Degree of the network is
+     4(5 in some terminologies), and every nodes degree is same in the torus network
+     which can be seen in figure <a 
+href="#x1-40002r12">12<!--tex4ht:ref: fig:meshestorus --></a>.<span class="cite">[<a 
+href="#XComputerArchCoursera">38</a>]</span>
+     </dd><dt class="description">
+<span 
+class="bchb8t-">Multiple Dimensional Networks</span> </dt><dd 
+class="description">They  are  excessive  versions  of  the  mesh  and  torus
+     networks   which   are   influenced   by   the   chips   packaging   technology.   Multi
+     dimensional system over 2D space is still good to obtain higher bandwidth and
+     balance the traffic but more complicated example are seen with Storage/System,
+     local and wide area networks. Because they are instead of chips real 3D systems
+     and surely, 3D networks works better in 3D systems. On an <span 
+class="eurm-10">N </span>dimensional system,
+     if you want to build more dimensional systems such as <span 
+class="eurm-10">N</span><span 
+class="eufm-10">+</span><span 
+class="eurm-10">1 </span>or <span 
+class="eurm-10">N</span><span 
+class="eufm-10">+</span><span 
+class="eurm-10">i</span>, it increase the
+     wire length exponentiation when you increase <span 
+class="eurm-10">i</span>. Wire length is related with flight
+     time of the data, and it effects directly bandwidth. One of the idealized for of the
+     multi dimensional networks are cubes. Cubes are the three dimensional topologies
+     which every nodes are 3Th degree and all nodes are equally close to each other. In
+     figure <a 
+href="#x1-40002r12">12<!--tex4ht:ref: fig:meshestorus --></a>, there is an example of three dimension mesh. CM1 and Thinking machine
+     is the examples of their practice today in market. They actually connects thousands
+     of computers in hyper cube topologies. They connects the mesh dimensions, which
+     are two dimensional with each others. <a 
+ id="likesection.17"></a><a 
+ id="x1-41001"></a>
+     <!--l. 318--><p class="noindent" >                                                                <!--l. 318--><p class="noindent" >formalize the diameters, bisection bandwidth
+     </dd><dt class="description">
+<span 
+class="bchb8t-">Fully Connected Star</span> </dt><dd 
+class="description">Fully connected stars are directly connected star topologies which
+                                                                         
+                                                                         
+     actually  known  in  some  terminologies  as  mesh  networks.  This  topology  is  the
+     best possible topology which have been designed so far, because every nodes are
+     directly connected with each other within <span 
+class="eurm-10">1 </span>routing distance. If there is <span 
+class="eurm-10">N </span>number
+     of node that means the bisection bandwidth is exactly <span 
+class="eurm-10">1024</span>, because each node
+     has  for  every  other  nodes  another  links  with  an  other  bandwidth,  it  makes  it
+     bottleneck-less topology.
+     </dd><dt class="description">
+<span 
+class="bchb8t-">Omega and Fat Tree</span> </dt><dd 
+class="description">Omega  and  fat  tree  topologies  are  examples  of  centralized
+     systems.  They  are  improvements  of  crossbar  switches.  Crossbar  switches  are
+     expensive designs because its complexity increase quadratically with the number of
+     ports. Instead of the increasing the design complexity, it increase the stages&#x00A0;thus,
+     permutation<span class="cite">[<a 
+href="#Xhennessy2012computer">34</a>]</span>. With <span 
+class="eurm-10">N </span>number of node and with <span 
+class="eurm-10">kxk </span>switches, <span 
+class="eurm-10">log</span><sub><span 
+class="eurm-7">k</span></sub><span 
+class="eurm-10">N </span>stages
+     each of which contains <span 
+class="eurm-10">N&#x2215;k </span>is required in omega network. However, the reduction
+     of the implementation cost has some negative sides, which are lower bandwidth,
+     dropped packet, more latency. <a 
+ id="likesection.18"></a><a 
+ id="x1-41002"></a>
+     <!--l. 321--><p class="noindent" >                                                                <!--l. 321--><p class="noindent" >formalize the diameters, bisection bandwidth and a bit more about fat tree
+     </dd></dl>
+<!--l. 323--><p class="noindent" >
+   <h4 class="subsectionHead"><span class="titlemark">4.3.3    </span> <a 
+ id="x1-420004.3.3"></a>Switching</h4>
+<!--l. 324--><p class="noindent" ><a 
+ id="likesection.19"></a><a 
+ id="x1-42001"></a>
+<!--l. 324--><p class="noindent" >                                     <!--l. 324--><p class="noindent" >I could add figures about switching later also latency calculation formula could be
+attacked here or latency part.
+<!--l. 325--><p class="indent" >   Switching name root originally comes from circuits. It is complex combination of many
+circuits switch which actually connects conductors together. It determines in interconnection
+networks how data is allocated for data transmission, i.e. how and when the input channel will
+be connected to the output channel. Buffer states, channel flow, and surely routing
+algorithms effects the switching designs as we know so far from computer network
+design. To sum up, it is actually model how to connect different locations and nodes
+together<span class="cite">[<a 
+href="#XComputerArchCoursera">38</a>]</span>.
+     <dl class="description"><dt class="description">
+<span 
+class="bchb8t-">Circuit Switching</span> </dt><dd 
+class="description">Circuit switching is the oldest type of communication model. Most
+     of  the  telecommunication  networks  still  using  its  advantages.  Circuit  switching
+     reserve whole line and its whole its bandwidth during communication. It could
+     be advantage, if message is infrequent and long, e.g. analogue sound transfer. In
+     addition to this, message could be whole part instead of fixed sized packets, phits,
+     and flits. On its implementation, there are two state which are circuit establishment
+     phase and message transmission phase<span class="cite">[<a 
+href="#X0122007514">44</a>]</span>. The physical path between point <span 
+class="eurm-10">A</span>
+     and point <span 
+class="eurm-10">B </span>is reserved before it started to transfer message. The line is reserved
+     through <span 
+class="eurm-10">routingprobe </span>message. It is generally one phit and one fhit long message.
+                                                                         
+                                                                         
+     It discover the route which is provided by router algorithms and invoke routers
+     to  preserve  corresponding  line  to  the  packet  destination.  When  <span 
+class="eurm-10">routingprobe</span>
+     reached to the destination note, it means all intermediate router(switches) reserved
+     for connection, then point <span 
+class="eurm-10">B </span>will sent back acknowledgment message and finish
+     the establishment. This establishment is tricky point in circuit switching, because
+     it requires setup delay which actually comprises with logical calculation time and
+     time  of  flight.  This  time  is  called  as  RTD(Round  trip  delay)  or  RTT(Round  trip
+     time), and it is one time delay. There is no routing decision and switching delay.
+     That is good for long message, but disadvantage for short message. At the end of
+     the communication, it must be ended with <span 
+class="eurm-10">resetprobe</span>.
+     </dd><dt class="description">
+<span 
+class="bchb8t-">Packet Store and Forward Switching</span> </dt><dd 
+class="description">This  Switching  method  is  packetizing  type  of
+     communication model. It divides each message into the fixed length packets and
+     phits and flits. Each channel(output and input) in every switches has its reserved
+     buffer  memory  as  large  as  packet  size.  It  stores  fits  and  plits  in  this  buffers
+     until they are totally loaded, and switch them to the right output channel. The
+     most important think of packet switching is every packets are switched(routed)
+     individually from the source to the destination. In addition to this, every packets
+     could  be  routed  through  different  switches  and  routers  depending  on  routing
+     algorithms.  If  there  are  parallel  routers  between  source  and  destination  nodes,
+     it could makes calculation of the chaotic, so they are not preferred by real-time
+     systems&#8217;  network.  Also,  implementation  of  buffers  and  switching  each  packets
+     again  and  again  continuously  makes  it  slower  and  expensive.  However,  on  the
+     other side, it has many advantages. When we need to communicate with short and
+     frequently packets, we can not reserve whole line for two nodes. It makes the same
+     line provide many nodes with sending small packets and also dynamic routing is
+     what makes our Internet works today. Theoretically, It does not have establishment
+     state, but piratically it is so usual to implement it upon link layer.
+     </dd><dt class="description">
+<span 
+class="bchb8t-">Packet Cut Through</span> </dt><dd 
+class="description">It is also called as wormhole networks. It is a hybrid combination
+     of circuit and packet store switching. It allows simple, small, cheap, and relatively
+     fast switches. In theory, it does not need any buffer and instead of waiting the tail
+     of the message, it just start routing the packet from the head. In implementation
+     input channels could use buffer memories, because of busy output channels, and
+     it whole message could get stalled if there is no buffer to store it, then it need to
+     demand this message again, or worse, it could perhaps lose whole packets forever.
+     In implementation, it divides packets flits and phits and intercept header of packets
+     and then continuously switch or route all phits or flits.</dd></dl>
+<!--l. 331--><p class="noindent" >
+   <h4 class="subsectionHead"><span class="titlemark">4.3.4    </span> <a 
+ id="x1-430004.3.4"></a>Routing</h4>
+<!--l. 332--><p class="noindent" >Routing of the networks is actually provided by predetermined set of rules which draw the path
+of the packets they will follow on the network. Namely, routing algorithms determine the path
+over network topology with using switching mechanisms. If we look at the smaller picture, each
+intermediate router on the network determines which input ports are to connect to which
+                                                                         
+                                                                         
+output port. Some of the routing algorithms can complexly adapt their algorithms depending
+on the network condition i.e. they can monitor bandwidth and latency differences,
+compare them with demands and route depending on latest traffic, and some of the can
+simply choose random available path. However, there are two significant criteria
+of ideal routing: They should be deadlock-free, and they should give the shortest
+path.
+<!--l. 334--><p class="indent" >   Deadlock is more difficult to handle, and there are two common strategies are used in
+practice: avoidance and recovery<span class="cite">[<a 
+href="#Xhennessy2012computer">34</a>]</span>. Avoidance strategy determine deadlock stages and keep
+packets out of the path which include those stages or vice versa i.e. determining the clean
+states and routing over them. Instead of avoidance strategies, recovery strategies
+accept existence of the dead lock stages and have mechanism to detect likely existence
+of deadlock situation. In many cases avoidance and recovery strategies are using
+together.
+<!--l. 336--><p class="indent" >   We can simply categorize routing algorithms in two title: obvious and adaptive routing
+algorithms. Obvious routing algorithms are responding obvious rules repeated, yet adaptive
+one could change their decisions depending on the network condition. Obvious algorithms
+generally simple, and consequently, they are generally desirably quick and safe. On the other
+side, adaptive algorithms can check up the network overall and route packets depending on the
+current situation. Adaptive algorithms are preferable in huge networks like Internet<span class="cite">[<a 
+href="#X0122007514">44</a>]</span>,
+because adapting the path in response to non-uniform network traffics spread and normalize
+network bandwidth, but it is to much processing latency and power consumption for on-chip
+networks. Nevertheless, adaptive algorithms are what the market focused today esp. for wide
+area networks.
+<!--l. 338--><p class="indent" >   If an obvious algorithms are always giving the same path for each source-destination couple,
+it is called deterministic routing. Deterministic routing algorithms are simple way to avoid
+deadlock patters, but they consumes bandwidth without using many possible routes to
+aggregate traffic and reduce the contention. There are also non-deterministic algorithms to
+propagate network bandwidth all around the network, they just always use random way to
+route packets from source to destination. Also, there are algorithms to flood packets all
+around the networks to find fastest path to reach destination. It is called flooding
+routing.
+   <h4 class="subsectionHead"><span class="titlemark">4.3.5    </span> <a 
+ id="x1-440004.3.5"></a>Flow Control</h4>
+<!--l. 340--><p class="noindent" >Flow control internals define protocol for synchronization of sender and receiver
+nodes&#8217; communication. with other words, it tries to prevent packet loss. It generally
+works on packet level, but there are some exotic examples of flit level flow control
+mechanisms. There are several situation can lead packet loss which are full buffers, busy
+output links, bandwidth issues, and faults, deadlocks, issues on link isolation, etc.
+The proper protocol must avoid packet loss and also recover lost packets on line.
+There are mainly two methods to synchronize flows in on-chip networks and each of
+them has advantages and disadvantages. They are On/Off with stall signal and credit
+based flow control mechanisms. Signalling mechanism could be useless because when
+receiver send a stall signal to sender, it could be too late to stop the flow for further
+transmissions, because when the receiver send stall message for implying that buffer is
+full, the further packets would be already sent. To solve this problem extra nodes
+                                                                         
+                                                                         
+and buffer could be used but there is no guaranty. On the other side, Credit-base
+systems needs more preconfigured knowledge between pairs. They should know
+their buffer space before start communication to use proper credit. If they use lower
+credit then proper, It will reduce bandwidth, if they use higher, it will increase packet
+loss. If there are more then one sender for receiver, credit base systems turns chaotic
+systems to implement. The pairs also compromise on the rate of packets in a period of
+time to reduce lost rate. For example, it could be problematic issue in heterogeneous
+systems which have many different processors with different processing abilities and
+frequencies.
+<!--l. 343--><p class="indent" >   <a 
+ id="likesection.20"></a><a 
+ id="x1-44001"></a>
+<!--l. 343--><p class="noindent" >                                     <!--l. 343--><p class="noindent" >Prepare latency section here and compare the performance and formulate latency
+and compare prices.
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+<!--l. 76--><p class="indent" >
+                                                                         
+                                                                         
+<!--l. 76--><p class="indent" >   <a 
+ id="likesection.21"></a>
+   <h2 class="chapterHead"><span class="titlemark">Chapter&#x00A0;5</span><br /><a 
+ id="x1-450005"></a>Obfuscation on inconsistent systems</h2>
+                                                                         
+                                                                         
+<!--l. 77--><p class="indent" >
+                                                                         
+                                                                         
+<!--l. 77--><p class="indent" >   <a 
+ id="likesection.22"></a>
+   <h2 class="chapterHead"><span class="titlemark">Chapter&#x00A0;6</span><br /><a 
+ id="x1-460006"></a>Delay Attack</h2>
+                                                                         
+                                                                         
+<!--l. 78--><p class="indent" >
+                                                                         
+                                                                         
+<!--l. 78--><p class="indent" >   <a 
+ id="likesection.23"></a>
+   <h2 class="chapterHead"><span class="titlemark">Chapter&#x00A0;7</span><br /><a 
+ id="x1-470007"></a>Implementation for Hayward Computer Architecture</h2>
+                                                                         
+                                                                         
+<!--l. 79--><p class="indent" >
+                                                                         
+                                                                         
+<!--l. 79--><p class="indent" >   <a 
+ id="likesection.24"></a>
+   <h2 class="chapterHead"><span class="titlemark">Chapter&#x00A0;8</span><br /><a 
+ id="x1-480008"></a>Implication and Discussion</h2>
+   <h3 class="sectionHead"><span class="titlemark">8.1    </span> <a 
+ id="x1-490008.1"></a>Theoretical Considerations</h3>
+<!--l. 81--><p class="noindent" >
+   <h3 class="sectionHead"><span class="titlemark">8.2    </span> <a 
+ id="x1-500008.2"></a>Practical Implication Issues</h3>
+<!--l. 82--><p class="noindent" >
+   <h3 class="sectionHead"><span class="titlemark">8.3    </span> <a 
+ id="x1-510008.3"></a>Summary</h3>
+                                                                         
+                                                                         
+<!--l. 83--><p class="indent" >
+                                                                         
+                                                                         
+<!--l. 83--><p class="indent" >   <a 
+ id="likesection.25"></a>
+   <h2 class="chapterHead"><span class="titlemark">Chapter&#x00A0;9</span><br /><a 
+ id="x1-520009"></a>Conclusion and Further Works</h2>
+                                                                         
+                                                                         
+<!--l. 1--><p class="indent" >
+                                                                         
+                                                                         
+<div class="thebibliography">
+<p class="bibitem" ><span class="biblabel">
+<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span>
+</p>
+</div>
+<!--l. 1--><p class="indent" >   <a 
+ id="likesection.26"></a>
+   <h2 class="likechapterHead"><a 
+ id="x1-530009"></a>Bibliography</h2>
+  [1]<a 
+ id="Xvon1966theory"></a>Von&#x00A0;Neumann, J., Burks, A.&#x00A0;W., et&#x00A0;al. 1966. Theory of self-reproducing automata.
+  [2]<a 
+ id="Xmoser2007limits"></a>Moser, A., Kruegel, C., &amp; Kirda, E.   2007.   Limits of static analysis for malware
+     detection.    In  <span 
+class="bchri8t-">Computer  Security  Applications  Conference,  2007.  ACSAC  2007.</span>
+     <span 
+class="bchri8t-">Twenty-Third Annual</span>, 421&#8211;430. IEEE.
+  [3]<a 
+ id="Xcavallaro2008limits"></a>Cavallaro,  L.,  Saxena,  P.,  &amp;  Sekar,  R.   2008.   On  the  limits  of  information  flow
+     techniques for malware analysis and containment.  In <span 
+class="bchri8t-">Detection of Intrusions and</span>
+     <span 
+class="bchri8t-">Malware, and Vulnerability Assessment</span>, 143&#8211;163. Springer.
+  [4]<a 
+ id="Xegele2012survey"></a>Egele,  M.,  Scholte,  T.,  Kirda,  E.,  &amp;  Kruegel,  C.   2012.   A  survey  on  automated
+     dynamic malware-analysis techniques and tools.  <span 
+class="bchri8t-">ACM Computing Surveys (CSUR)</span>,
+     44(2), 6.
+  [5]<a 
+ id="Xmarpaung2012survey"></a>Marpaung,  J.&#x00A0;A.,  Sain,  M.,  &amp;  Lee,  H.-J.    2012.    Survey  on  malware  evasion
+     techniques: state of the art and challenges. In <span 
+class="bchri8t-">Advanced Communication Technology</span>
+     <span 
+class="bchri8t-">(ICACT), 2012 14th International Conference on</span>, 744&#8211;749. IEEE.
+  [6]<a 
+ id="Xbalakrishnan2005code"></a>Balakrishnan, A. &amp; Schulze, C.  2005.  Code obfuscation literature survey.  <span 
+class="bchri8t-">CS701</span>
+     <span 
+class="bchri8t-">Construction of Compilers</span>, 19.
+  [7]<a 
+ id="Xnachenberg1996understanding"></a>Nachenberg, C.   1996.   Understanding and managing polymorphic viruses.   <span 
+class="bchri8t-">The</span>
+     <span 
+class="bchri8t-">Symantec Enterprise Papers</span>, 30, 16.
+  [8]<a 
+ id="Xyou2010malware"></a>You,  I.  &amp;  Yim,  K.   2010.   Malware  obfuscation  techniques:  A  brief  survey.   In
+     <span 
+class="bchri8t-">Broadband, Wireless Computing, Communication and Applications (BWCCA), 2010</span>
+     <span 
+class="bchri8t-">International Conference on</span>, 297&#8211;300. IEEE.
+  [9]<a 
+ id="Xinternotsecurityteam"></a>Team, I.&#x00A0;S. Bypassing anti-virus scanners. <span 
+class="bchri8t-">Packet Storm Security</span>.
+                                                                         
+                                                                         
+ [10]<a 
+ id="Xli2011mechanisms"></a>Li, X., Loh, P.&#x00A0;K., &amp; Tan, F.  2011.  Mechanisms of polymorphic and metamorphic
+     viruses. In <span 
+class="bchri8t-">Intelligence and Security Informatics Conference (EISIC), 2011 European</span>,
+     149&#8211;154. IEEE.
+ [11]<a 
+ id="Xanonymous1"></a>anonymous. Polymorphic generators. In <span 
+class="bchri8t-">VxHeaven</span>.
+ [12]<a 
+ id="Xferrie2008anti"></a>Ferrie, P. 2008. Anti-unpacker tricks. In <span 
+class="bchri8t-">Amsterdam: CARO Workshop</span>.
+ [13]<a 
+ id="Xkonstantinou2008metamorphic"></a>Konstantinou, E. &amp; Wolthusen, S. 2008. Metamorphic virus: Analysis and detection.
+     <span 
+class="bchri8t-">Retrieved on February</span>, 22, 2011.
+ [14]<a 
+ id="Xrutkowska2006rootkits"></a>Rutkowska, J. 2006. Rootkits vs. stealth by design malware. <span 
+class="bchri8t-">Black Hat, Europe</span>.
+ [15]<a 
+ id="Xdesigner1997getting"></a>Designer, S. 1997. Getting around non-executable stack (and fix).
+ [16]<a 
+ id="Xshacham2007geometry"></a>Shacham, H.  2007.  The geometry of innocent flesh on the bone: Return-into-libc
+     without function calls (on the x86).  In <span 
+class="bchri8t-">Proceedings of the 14th ACM conference on</span>
+     <span 
+class="bchri8t-">Computer and communications security</span>, 552&#8211;561. ACM.
+ [17]<a 
+ id="Xroemer2012return"></a>Roemer,  R.,  Buchanan,  E.,  Shacham,  H.,  &amp;  Savage,  S.   2012.   Return-oriented
+     programming:  Systems,  languages,  and  applications.      <span 
+class="bchri8t-">ACM  Transactions  on</span>
+     <span 
+class="bchri8t-">Information and System Security (TISSEC)</span>, 15(1), 2.
+ [18]<a 
+ id="Xmohan2012frankenstein"></a>Mohan, V. &amp; Hamlen, K.&#x00A0;W.  2012.  Frankenstein: Stitching malware from benign
+     binaries. In <span 
+class="bchri8t-">WOOT</span>, 77&#8211;84.
+ [19]<a 
+ id="Xchen2008towards"></a>Chen,  X.,  Andersen,  J.,  Mao,  Z.&#x00A0;M.,  Bailey,  M.,  &amp;  Nazario,  J.   2008.   Towards
+     an  understanding  of  anti-virtualization  and  anti-debugging  behavior  in  modern
+     malware.   In <span 
+class="bchri8t-">Dependable Systems and Networks With FTCS and DCC, 2008. DSN</span>
+     <span 
+class="bchri8t-">2008. IEEE International Conference on</span>, 177&#8211;186. IEEE.
+ [20]<a 
+ id="Xfranklin2008remote"></a>Franklin,  J.,  Luk,  M.,  McCune,  J.&#x00A0;M.,  Seshadri,  A.,  Perrig,  A.,  &amp;  Van&#x00A0;Doorn,  L.
+     2008.   Remote detection of virtual machine monitors with fuzzy benchmarking.
+     <span 
+class="bchri8t-">ACM SIGOPS Operating Systems Review</span>, 42(3), 83&#8211;92.
+ [21]<a 
+ id="Xmartin2008"></a>Chris, M. 2008. What is rootkit and how to detect and protect from rootkits.
+ [22]<a 
+ id="XDucklin1991"></a>Ducklin, P. 1991. Tequila.
+                                                                         
+                                                                         
+ [23]<a 
+ id="XAdnan2011"></a>Abdalla, A. 2011. Rootkits classification and their countermeasures.
+ [24]<a 
+ id="Xreddy2006n"></a>Reddy, D. K.&#x00A0;S. &amp; Pujari, A.&#x00A0;K. 2006. N-gram analysis for computer virus detection.
+     <span 
+class="bchri8t-">Journal in Computer Virology</span>, 2(3), 231&#8211;239.
+ [25]<a 
+ id="Xabou2004n"></a>Abou-Assaleh,  T.,  Cercone,  N.,  Keselj,  V.,  &amp;  Sweidan,  R.   2004.   N-gram-based
+     detection of new malicious code. In <span 
+class="bchri8t-">Computer Software and Applications Conference,</span>
+     <span 
+class="bchri8t-">2004.  COMPSAC  2004.  Proceedings  of  the  28th  Annual  International</span>,  volume&#x00A0;2,
+     41&#8211;42. IEEE.
+ [26]<a 
+ id="Xabou2004detection"></a>Abou-Assaleh, T., Cercone, N., Keselj, V., &amp; Sweidan, R.  2004.  Detection of new
+     malicious code using n-grams signatures. In <span 
+class="bchri8t-">PST</span>, 193&#8211;196.
+ [27]<a 
+ id="Xkendall2007practical"></a>Kendall,  K.  &amp;  McMillan,  C.    2007.    Practical  malware  analysis.    In  <span 
+class="bchri8t-">Black  Hat</span>
+     <span 
+class="bchri8t-">Conference, USA</span>.
+ [28]<a 
+ id="Xsaxena2008efficient"></a>Saxena,  P.,  Sekar,  R.,  &amp;  Puranik,  V.      2008.      Efficient  fine-grained  binary
+     instrumentationwith applications to taint-tracking. In <span 
+class="bchri8t-">Proceedings of the 6th annual</span>
+     <span 
+class="bchri8t-">IEEE/ACM  international  symposium  on  Code  generation  and  optimization</span>,  74&#8211;83.
+     ACM.
+ [29]<a 
+ id="Xsmith2007principles"></a>Smith,  G.    2007.    Principles  of  secure  information  flow  analysis.    In  <span 
+class="bchri8t-">Malware</span>
+     <span 
+class="bchri8t-">Detection</span>, 291&#8211;307. Springer.
+ [30]<a 
+ id="Xlee2010detecting"></a>Lee,  J.,  Jeong,  K.,  &amp;  Lee,  H.    2010.    Detecting  metamorphic  malwares  using
+     code  graphs.   In  <span 
+class="bchri8t-">Proceedings  of  the  2010  ACM  symposium  on  applied  computing</span>,
+     1970&#8211;1977. ACM.
+ [31]<a 
+ id="Xchristodorescu2006static"></a>Christodorescu,  M.  &amp;  Jha,  S.   Static  analysis  of  executables  to  detect  malicious
+     patterns. Technical report, DTIC Document, 2006.
+ [32]<a 
+ id="Xchristodorescu2005semantics"></a>Christodorescu,  M.,  Jha,  S.,  Seshia,  S.&#x00A0;A.,  Song,  D.,  &amp;  Bryant,  R.&#x00A0;E.    2005.
+     Semantics-aware malware detection. In <span 
+class="bchri8t-">Security and Privacy, 2005 IEEE Symposium</span>
+     <span 
+class="bchri8t-">on</span>, 32&#8211;46. IEEE.
+ [33]<a 
+ id="Xsloss2004arm"></a>Sloss, A., Symes, D., &amp; Wright, C.  2004.  <span 
+class="bchri8t-">ARM system developer&#8217;s guide: designing</span>
+     <span 
+class="bchri8t-">and optimizing system software</span>. Morgan Kaufmann.
+ [34]<a 
+ id="Xhennessy2012computer"></a>Hennessy,  J.&#x00A0;L.  &amp;  Patterson,  D.&#x00A0;A.   2012.   <span 
+class="bchri8t-">Computer  architecture:  a  quantitative</span>
+     <span 
+class="bchri8t-">approach</span>. Elsevier.
+                                                                         
+                                                                         
+ [35]<a 
+ id="Xshannon2001mathematical"></a>Shannon, C.&#x00A0;E. 2001. A mathematical theory of communication. <span 
+class="bchri8t-">ACM SIGMOBILE</span>
+     <span 
+class="bchri8t-">Mobile Computing and Communications Review</span>, 5(1), 3&#8211;55.
+ [36]<a 
+ id="Xdenning2005locality"></a>Denning, P.&#x00A0;J.  2005.  The locality principle.  <span 
+class="bchri8t-">Communications of the ACM</span>, 48(7),
+     19&#8211;24.
+ [37]<a 
+ id="Xkilburn1962one"></a>Kilburn, T., Edwards, D.&#x00A0;B., Lanigan, M., &amp; Sumner, F.&#x00A0;H. 1962. One-level storage
+     system. <span 
+class="bchri8t-">Electronic Computers, IRE Transactions on</span>, (2), 223&#8211;235.
+ [38]<a 
+ id="XComputerArchCoursera"></a>Wentzlaff, D. 2013. Computer architecture.
+ [39]<a 
+ id="Xvon1961collected"></a>Von&#x00A0;Neumann, J. 1961. Collected works. <span 
+class="bchri8t-">Oxford: Pergamon, 1961, edited by Taub,</span>
+     <span 
+class="bchri8t-">AH</span>, 1.
+ [40]<a 
+ id="Xwikipolicies"></a>wikipedia. 2014. Cache(computing).
+ [41]<a 
+ id="Xsorin2011primer"></a>Sorin, D.&#x00A0;J., Hill, M.&#x00A0;D., &amp; Wood, D.&#x00A0;A.  2011.  A primer on memory consistency
+     and cache coherence. <span 
+class="bchri8t-">Synthesis Lectures on Computer Architecture</span>, 6(3), 1&#8211;212.
+ [42]<a 
+ id="Xpapamarcos1984low"></a>Papamarcos, M.&#x00A0;S. &amp; Patel, J.&#x00A0;H.  1984.  A low-overhead coherence solution for
+     multiprocessors with private cache memories. 12(3), 348&#8211;354.
+ [43]<a 
+ id="Xarmcoherentinterconnector"></a>Development,  A.  &amp;  Department,  R.    2013.    Corelink  cci-400  cache  coherent
+     interconnect.
+ [44]<a 
+ id="X0122007514"></a>Dally,  W.&#x00A0;J.  &amp;  Towles,  B.&#x00A0;P.    2004.    <span 
+class="bchri8t-">Principles  and  Practices  of  Interconnection</span>
+     <span 
+class="bchri8t-">Networks  (The  Morgan  Kaufmann  Series  in  Computer  Architecture  and  Design)</span>.
+     Morgan Kaufmann.
+ [45]<a 
+ id="XHPCfigure"></a>HPC. 2013. High performance computing valued opinion.
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+<!--l. 2--><p class="indent" >
+                                                                         
+                                                                         
+<a 
+ id="x1-53046r68"></a>
+<!--l. 2--><p class="indent" >   <a 
+ id="likesection.27"></a>
+   <h2 class="appendixHead"><span class="titlemark">Appendix&#x00A0;A</span><br /><a 
+ id="x1-54000A"></a>Cache Memory Simulation</h2>  <!--l. 4-->
+   <div class="lstlisting" id="listing-1"><span class="label"><a 
+ id="x1-54001r1"></a></span>__author__&#x00A0;=&#x00A0;&#8217;caglar&#8217;&#x00A0;<br /><span class="label"><a 
+ id="x1-54002r2"></a></span><span 
+class="bchb8t-">import</span>&#x00A0;random&#x00A0;<br /><span class="label"><a 
+ id="x1-54003r3"></a></span>&#x00A0;<br /><span class="label"><a 
+ id="x1-54004r4"></a></span>&#x00A0;<br /><span class="label"><a 
+ id="x1-54005r5"></a></span><span 
+class="bchb8t-">class</span>&#x00A0;Memory(<span 
+class="bchb8t-">object</span>):&#x00A0;<br /><span class="label"><a 
+ id="x1-54006r6"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">def</span>&#x00A0;__init__(self):&#x00A0;<br /><span class="label"><a 
+ id="x1-54007r7"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;self.memory&#x00A0;=&#x00A0;{}&#x00A0;<br /><span class="label"><a 
+ id="x1-54008r8"></a></span>&#x00A0;<br /><span class="label"><a 
+ id="x1-54009r9"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">def</span>&#x00A0;__getitem__(self,&#x00A0;item):&#x00A0;<br /><span class="label"><a 
+ id="x1-54010r10"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">try</span>:&#x00A0;<br /><span class="label"><a 
+ id="x1-54011r11"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">return</span>&#x00A0;self.memory[item]&#x00A0;<br /><span class="label"><a 
+ id="x1-54012r12"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">except</span>&#x00A0;KeyError:&#x00A0;<br /><span class="label"><a 
+ id="x1-54013r13"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">return</span>&#x00A0;0&#x00A0;<br /><span class="label"><a 
+ id="x1-54014r14"></a></span>&#x00A0;<br /><span class="label"><a 
+ id="x1-54015r15"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">def</span>&#x00A0;__setitem__(self,&#x00A0;key,&#x00A0;value):&#x00A0;<br /><span class="label"><a 
+ id="x1-54016r16"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;self.memory[key]&#x00A0;=&#x00A0;value&#x00A0;<br /><span class="label"><a 
+ id="x1-54017r17"></a></span>&#x00A0;<br /><span class="label"><a 
+ id="x1-54018r18"></a></span>&#x00A0;<br /><span class="label"><a 
+ id="x1-54019r19"></a></span><span 
+class="bchb8t-">class</span>&#x00A0;Cache(<span 
+class="bchb8t-">object</span>):&#x00A0;<br /><span class="label"><a 
+ id="x1-54020r20"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">def</span>&#x00A0;__init__(self,&#x00A0;size=32768,&#x00A0;block_size=64,&#x00A0;sets=2):&#x00A0;<br /><span class="label"><a 
+ id="x1-54021r21"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;self.size&#x00A0;=&#x00A0;size&#x00A0;<br /><span class="label"><a 
+ id="x1-54022r22"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;self.block_size&#x00A0;=&#x00A0;block_size&#x00A0;<br /><span class="label"><a 
+ id="x1-54023r23"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;self.sets&#x00A0;=&#x00A0;sets&#x00A0;<br /><span class="label"><a 
+ id="x1-54024r24"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;self.addr_size&#x00A0;=&#x00A0;32&#x00A0;<br /><span class="label"><a 
+ id="x1-54025r25"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;self.cache&#x00A0;=&#x00A0;<span 
+class="bchb8t-">list</span>()&#x00A0;<br /><span class="label"><a 
+ id="x1-54026r26"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;self.line&#x00A0;=&#x00A0;size&#x00A0;/&#x00A0;(sets&#x00A0;<span 
+class="cmsy-10">*</span>&#x00A0;block_size)&#x00A0;<br /><span class="label"><a 
+ id="x1-54027r27"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;self.block_addr_len&#x00A0;=&#x00A0;self.__calculate_addr_len(self.block_size)&#x00A0;<br /><span class="label"><a 
+ id="x1-54028r28"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;self.line_addr_len&#x00A0;=&#x00A0;self.__calculate_addr_len(self.line)&#x00A0;<br /><span class="label"><a 
+ id="x1-54029r29"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;self.tag_addr_len&#x00A0;=&#x00A0;self.addr_size&#x00A0;<span 
+class="eufm-10">-</span>&#x00A0;self.block_addr_len&#x00A0;<span 
+class="eufm-10">-</span>&#x00A0;self.line_addr_len&#x00A0;<br /><span class="label"><a 
+ id="x1-54030r30"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;self.<span 
+class="bchb8t-">super</span>&#x00A0;=&#x00A0;None&#x00A0;<br /><span class="label"><a 
+ id="x1-54031r31"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;self.__build()&#x00A0;<br /><span class="label"><a 
+ id="x1-54032r32"></a></span>&#x00A0;<br /><span class="label"><a 
+ id="x1-54033r33"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">def</span>&#x00A0;__repr__(self):&#x00A0;<br /><span class="label"><a 
+ id="x1-54034r34"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">return</span>&#x00A0;<span 
+class="bchb8t-">str</span>(self.cache.__len__())&#x00A0;<br /><span class="label"><a 
+ id="x1-54035r35"></a></span>&#x00A0;<br /><span class="label"><a 
+ id="x1-54036r36"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">def</span>&#x00A0;__getitem__(self,&#x00A0;address):&#x00A0;<br /><span class="label"><a 
+ id="x1-54037r37"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;query&#x00A0;=&#x00A0;self.toquery(address)&#x00A0;<br /><span class="label"><a 
+ id="x1-54038r38"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">return</span>&#x00A0;self.read_request(query)&#x00A0;<br /><span class="label"><a 
+ id="x1-54039r39"></a></span>&#x00A0;<br /><span class="label"><a 
+ id="x1-54040r40"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">def</span>&#x00A0;__setitem__(self,&#x00A0;address,&#x00A0;value):&#x00A0;<br /><span class="label"><a 
+ id="x1-54041r41"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;self.write_request(address,&#x00A0;value)&#x00A0;<br /><span class="label"><a 
+ id="x1-54042r42"></a></span>&#x00A0;<br /><span class="label"><a 
+ id="x1-54043r43"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">def</span>&#x00A0;setsuper(self,<span 
+class="bchb8t-">super</span>):&#x00A0;<br /><span class="label"><a 
+ id="x1-54044r44"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;self.<span 
+class="bchb8t-">super</span>&#x00A0;=&#x00A0;<span 
+class="bchb8t-">super</span>&#x00A0;<br /><span class="label"><a 
+ id="x1-54045r45"></a></span>&#x00A0;<br /><span class="label"><a 
+ id="x1-54046r46"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">def</span>&#x00A0;__build(self):&#x00A0;<br /><span class="label"><a 
+ id="x1-54047r47"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">for</span>&#x00A0;i&#x00A0;<span 
+class="bchb8t-">in</span>&#x00A0;<span 
+class="bchb8t-">range</span>(self.line):&#x00A0;<br /><span class="label"><a 
+ id="x1-54048r48"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;self.cache.append(CacheLine(i,&#x00A0;self.block_size,&#x00A0;self.sets))&#x00A0;<br /><span class="label"><a 
+ id="x1-54049r49"></a></span>&#x00A0;<br /><span class="label"><a 
+ id="x1-54050r50"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">def</span>&#x00A0;__calculate_addr_len(self,&#x00A0;size):&#x00A0;<br /><span class="label"><a 
+ id="x1-54051r51"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;i&#x00A0;=&#x00A0;0&#x00A0;<br /><span class="label"><a 
+ id="x1-54052r52"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;result&#x00A0;=&#x00A0;1&#x00A0;<br /><span class="label"><a 
+ id="x1-54053r53"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">while</span>&#x00A0;size&#x00A0;&#x003E;&#x00A0;result:&#x00A0;<br /><span class="label"><a 
+ id="x1-54054r54"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;result&#x00A0;&#x003C;&#x003C;=&#x00A0;1&#x00A0;<br /><span class="label"><a 
+ id="x1-54055r55"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;i&#x00A0;+=&#x00A0;1&#x00A0;<br /><span class="label"><a 
+ id="x1-54056r56"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">return</span>&#x00A0;i&#x00A0;<br /><span class="label"><a 
+ id="x1-54057r57"></a></span>&#x00A0;<br /><span class="label"><a 
+ id="x1-54058r58"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">def</span>&#x00A0;toquery(self,&#x00A0;address):&#x00A0;<br /><span class="label"><a 
+ id="x1-54059r59"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;mask&#x00A0;=&#x00A0;(1&#x00A0;&#x003C;&#x003C;&#x00A0;32)&#x00A0;<span 
+class="eufm-10">-</span>&#x00A0;1&#x00A0;<br /><span class="label"><a 
+ id="x1-54060r60"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;query&#x00A0;=&#x00A0;{~address~:&#x00A0;address,&#x00A0;<br /><span class="label"><a 
+ id="x1-54061r61"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;~tag~:&#x00A0;address&#x00A0;&#x003E;&#x003E;&#x00A0;(self.addr_size&#x00A0;<span 
+class="eufm-10">-</span>&#x00A0;self.tag_addr_len),&#x00A0;<br /><span class="label"><a 
+ id="x1-54062r62"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;~index~:&#x00A0;(address&#x00A0;&#x003E;&#x003E;&#x00A0;(self.block_addr_len))&#x00A0;&#x003C;&#x003C;&#x00A0;((self.addr_size&#x00A0;<span 
+class="eufm-10">-</span>&#x00A0;self.line_addr_len)&#x00A0;&amp;&#x00A0;mask)&#x00A0;&#x003E;&#x003E;&#x00A0;(&#x00A0;<br /><span class="label"><a 
+ id="x1-54063r63"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;self.addr_size&#x00A0;<span 
+class="eufm-10">-</span>&#x00A0;self.line_addr_len),&#x00A0;<br /><span class="label"><a 
+ id="x1-54064r64"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;~block~:&#x00A0;((address&#x00A0;&#x003C;&#x003C;&#x00A0;(self.addr_size&#x00A0;<span 
+class="eufm-10">-</span>&#x00A0;self.block_addr_len))&#x00A0;&amp;&#x00A0;mask)&#x00A0;&#x003E;&#x003E;&#x00A0;(&#x00A0;<br /><span class="label"><a 
+ id="x1-54065r65"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;self.addr_size&#x00A0;<span 
+class="eufm-10">-</span>&#x00A0;self.block_addr_len)}&#x00A0;<br /><span class="label"><a 
+ id="x1-54066r66"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">return</span>&#x00A0;query&#x00A0;<br /><span class="label"><a 
+ id="x1-54067r67"></a></span>&#x00A0;<br /><span class="label"><a 
+ id="x1-54068r68"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">def</span>&#x00A0;isvalid(self,&#x00A0;query):&#x00A0;<br /><span class="label"><a 
+ id="x1-54069r69"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">for</span>&#x00A0;i&#x00A0;<span 
+class="bchb8t-">in</span>&#x00A0;<span 
+class="bchb8t-">range</span>(self.cache[query[~index~]].sets):&#x00A0;<br /><span class="label"><a 
+ id="x1-54070r70"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">if</span>&#x00A0;(self.cache[query[~index~]].lines[i][~tag~]&#x00A0;<span 
+class="bchb8t-">is</span>&#x00A0;query[~tag~])&#x00A0;<span 
+class="bchb8t-">and</span>&#x00A0;(self.cache[query[~index~]].lines[i][&#8217;valid&#8217;]&#x00A0;<span 
+class="bchb8t-">is</span>&#x00A0;True):&#x00A0;<br /><span class="label"><a 
+ id="x1-54071r71"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;self.cache[query[~index~]].used&#x00A0;=&#x00A0;i&#x00A0;<br /><span class="label"><a 
+ id="x1-54072r72"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">return</span>&#x00A0;self.cache[query[~index~]].lines[i]&#x00A0;<br /><span class="label"><a 
+ id="x1-54073r73"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">return</span>&#x00A0;False&#x00A0;<br /><span class="label"><a 
+ id="x1-54074r74"></a></span>&#x00A0;<br /><span class="label"><a 
+ id="x1-54075r75"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">def</span>&#x00A0;read_request(self,&#x00A0;query):&#x00A0;<br /><span class="label"><a 
+ id="x1-54076r76"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;line&#x00A0;=&#x00A0;self.isvalid(query)&#x00A0;<br /><span class="label"><a 
+ id="x1-54077r77"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">if</span>&#x00A0;line:&#x00A0;<br /><span class="label"><a 
+ id="x1-54078r78"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">return</span>&#x00A0;self.__read_hit(line,&#x00A0;query)&#x00A0;<br /><span class="label"><a 
+ id="x1-54079r79"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">else</span>:&#x00A0;<br /><span class="label"><a 
+ id="x1-54080r80"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">return</span>&#x00A0;self.__read_miss(query)&#x00A0;<br /><span class="label"><a 
+ id="x1-54081r81"></a></span>&#x00A0;<br /><span class="label"><a 
+ id="x1-54082r82"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">def</span>&#x00A0;__read_hit(self,&#x00A0;line,&#x00A0;query):&#x00A0;<br /><span class="label"><a 
+ id="x1-54083r83"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">return</span>&#x00A0;line[~data~][query[~block~]]&#x00A0;<br /><span class="label"><a 
+ id="x1-54084r84"></a></span>&#x00A0;<br /><span class="label"><a 
+ id="x1-54085r85"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">def</span>&#x00A0;__read_miss(self,&#x00A0;query):&#x00A0;<br /><span class="label"><a 
+ id="x1-54086r86"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;self.request_line(query)&#x00A0;<span 
+class="bchri8t-">#</span><span 
+class="bchri8t-">proof</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">it</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">later</span><span 
+class="bchri8t-">.</span>&#x00A0;<br /><span class="label"><a 
+ id="x1-54087r87"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">return</span>&#x00A0;self.read_request(query)&#x00A0;<br /><span class="label"><a 
+ id="x1-54088r88"></a></span>&#x00A0;<br /><span class="label"><a 
+ id="x1-54089r89"></a></span>&#x00A0;<br /><span class="label"><a 
+ id="x1-54090r90"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">def</span>&#x00A0;write_request(self,&#x00A0;address,&#x00A0;value):&#x00A0;<br /><span class="label"><a 
+ id="x1-54091r91"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;query&#x00A0;=&#x00A0;self.toquery(address)&#x00A0;<br /><span class="label"><a 
+ id="x1-54092r92"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;line&#x00A0;=&#x00A0;self.isvalid(query)&#x00A0;<br /><span class="label"><a 
+ id="x1-54093r93"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">if</span>&#x00A0;line&#x00A0;<span 
+class="bchb8t-">is</span>&#x00A0;<span 
+class="bchb8t-">not</span>&#x00A0;<span 
+class="eufm-10">-</span>1:&#x00A0;<br /><span class="label"><a 
+ id="x1-54094r94"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">return</span>&#x00A0;self.__write_hit(line,&#x00A0;query,&#x00A0;value)&#x00A0;<br /><span class="label"><a 
+ id="x1-54095r95"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">else</span>:&#x00A0;<br /><span class="label"><a 
+ id="x1-54096r96"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">return</span>&#x00A0;self.__write_miss(query)&#x00A0;<br /><span class="label"><a 
+ id="x1-54097r97"></a></span>&#x00A0;<br /><span class="label"><a 
+ id="x1-54098r98"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">def</span>&#x00A0;__write_hit(self,&#x00A0;line,&#x00A0;query,&#x00A0;value):&#x00A0;<br /><span class="label"><a 
+ id="x1-54099r99"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;line[~data~][query[~block~]]&#x00A0;=&#x00A0;value&#x00A0;<br /><span class="label"><a 
+ id="x1-54100r100"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;line[~dirty~]&#x00A0;=&#x00A0;True&#x00A0;<br /><span class="label"><a 
+ id="x1-54101r101"></a></span>&#x00A0;<br /><span class="label"><a 
+ id="x1-54102r102"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">def</span>&#x00A0;__write_miss(self,&#x00A0;query):&#x00A0;<br /><span class="label"><a 
+ id="x1-54103r103"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">pass</span>&#x00A0;<br /><span class="label"><a 
+ id="x1-54104r104"></a></span>&#x00A0;<br /><span class="label"><a 
+ id="x1-54105r105"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">def</span>&#x00A0;request_line(self,&#x00A0;query):&#x00A0;<br /><span class="label"><a 
+ id="x1-54106r106"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;line&#x00A0;=&#x00A0;query[~address~]&#x00A0;<span 
+class="eufm-10">-</span>&#x00A0;query[~block~]&#x00A0;<br /><span class="label"><a 
+ id="x1-54107r107"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;rline&#x00A0;=&#x00A0;{~tag~:&#x00A0;query[~tag~],&#x00A0;~data~:&#x00A0;<span 
+class="bchb8t-">bytearray</span>(self.block_size)}&#x00A0;<br /><span class="label"><a 
+ id="x1-54108r108"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">for</span>&#x00A0;i&#x00A0;<span 
+class="bchb8t-">in</span>&#x00A0;<span 
+class="bchb8t-">range</span>(self.block_size):&#x00A0;<br /><span class="label"><a 
+ id="x1-54109r109"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;rline[~data~][i]&#x00A0;=&#x00A0;self.<span 
+class="bchb8t-">super</span>[line+i]&#x00A0;<br /><span class="label"><a 
+ id="x1-54110r110"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;self.cache[query[~index~]].fill_line(rline)&#x00A0;<br /><span class="label"><a 
+ id="x1-54111r111"></a></span>&#x00A0;<br /><span class="label"><a 
+ id="x1-54112r112"></a></span>&#x00A0;<br /><span class="label"><a 
+ id="x1-54113r113"></a></span><span 
+class="bchb8t-">class</span>&#x00A0;CacheLine(<span 
+class="bchb8t-">object</span>):&#x00A0;<br /><span class="label"><a 
+ id="x1-54114r114"></a></span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">#</span><span 
+class="bchri8t-">CacheLine</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">is</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">a</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">Class</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">for</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">defining</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">each</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">cache</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">blocks</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">in</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">cache</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">hierarchy</span>&#x00A0;<br /><span class="label"><a 
+ id="x1-54115r115"></a></span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">#</span><span 
+class="bchri8t-">During</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">initialization</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">it</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">build</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">a</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">static</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">block</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">of</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">given</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">sets</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">sized</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">array</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">with</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">given</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">block</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">size</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">as</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">byte</span>&#x00A0;<br /><span class="label"><a 
+ id="x1-54116r116"></a></span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">#</span><span 
+class="bchri8t-">It</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">has</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">only</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">one</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">method</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">to</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">fill</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">remote</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">block</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">in</span><span 
+class="bchri8t-">.</span>&#x00A0;<br /><span class="label"><a 
+ id="x1-54117r117"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">def</span>&#x00A0;__init__(self,&#x00A0;index,&#x00A0;size,&#x00A0;sets):&#x00A0;<br /><span class="label"><a 
+ id="x1-54118r118"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;self.size&#x00A0;=&#x00A0;size&#x00A0;<br /><span class="label"><a 
+ id="x1-54119r119"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;self.sets&#x00A0;=&#x00A0;sets&#x00A0;<br /><span class="label"><a 
+ id="x1-54120r120"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;self.index&#x00A0;=&#x00A0;index&#x00A0;<br /><span class="label"><a 
+ id="x1-54121r121"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;self.lines&#x00A0;=&#x00A0;<span 
+class="bchb8t-">list</span>()&#x00A0;<br /><span class="label"><a 
+ id="x1-54122r122"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;self.__build()&#x00A0;<br /><span class="label"><a 
+ id="x1-54123r123"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;self.used&#x00A0;=&#x00A0;0&#x00A0;<br /><span class="label"><a 
+ id="x1-54124r124"></a></span>&#x00A0;<br /><span class="label"><a 
+ id="x1-54125r125"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">def</span>&#x00A0;__repr__(self):&#x00A0;<br /><span class="label"><a 
+ id="x1-54126r126"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">return</span>&#x00A0;<span 
+class="bchb8t-">repr</span>(self.lines)&#x00A0;<br /><span class="label"><a 
+ id="x1-54127r127"></a></span>&#x00A0;<br /><span class="label"><a 
+ id="x1-54128r128"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">def</span>&#x00A0;__build(self):&#x00A0;<br /><span class="label"><a 
+ id="x1-54129r129"></a></span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">#</span><span 
+class="bchri8t-">Initialize</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">the</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">first</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">view</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">of</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">the</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">cache</span><span 
+class="bchri8t-">.</span>&#x00A0;<br /><span class="label"><a 
+ id="x1-54130r130"></a></span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">#</span><span 
+class="bchri8t-">It</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">will</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">invoke</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">build_line</span><span 
+class="bchri8t-">()</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">for</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">each</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">line</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">of</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">the</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">cache</span><span 
+class="bchri8t-">.</span>&#x00A0;<br /><span class="label"><a 
+ id="x1-54131r131"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">for</span>&#x00A0;i&#x00A0;<span 
+class="bchb8t-">in</span>&#x00A0;<span 
+class="bchb8t-">range</span>(self.sets):&#x00A0;<br /><span class="label"><a 
+ id="x1-54132r132"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;self.lines.append(self.__build_line())&#x00A0;<br /><span class="label"><a 
+ id="x1-54133r133"></a></span>&#x00A0;<br /><span class="label"><a 
+ id="x1-54134r134"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">def</span>&#x00A0;__build_line(self):&#x00A0;<br /><span class="label"><a 
+ id="x1-54135r135"></a></span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">#</span><span 
+class="bchri8t-">Build</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">a</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">line</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">with</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">default</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">variables</span><span 
+class="bchri8t-">.</span>&#x00A0;<br /><span class="label"><a 
+ id="x1-54136r136"></a></span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">#</span><span 
+class="bchri8t-">data</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">is</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">a</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">byte</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">array</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">which</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">is</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">given</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">length</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">with</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">size</span>&#x00A0;<br /><span class="label"><a 
+ id="x1-54137r137"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;data&#x00A0;=&#x00A0;<span 
+class="bchb8t-">bytearray</span>(self.size)&#x00A0;<br /><span class="label"><a 
+ id="x1-54138r138"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">return</span>&#x00A0;{~tag~:&#x00A0;0,&#x00A0;~valid~:&#x00A0;False,&#x00A0;~dirty~:&#x00A0;False,&#x00A0;~used~:&#x00A0;False,&#x00A0;~data~:&#x00A0;data}&#x00A0;<br /><span class="label"><a 
+ id="x1-54139r139"></a></span>&#x00A0;<br /><span class="label"><a 
+ id="x1-54140r140"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">def</span>&#x00A0;mark_used(self,&#x00A0;line):&#x00A0;<br /><span class="label"><a 
+ id="x1-54141r141"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;self.used&#x00A0;=&#x00A0;line&#x00A0;<br /><span class="label"><a 
+ id="x1-54142r142"></a></span>&#x00A0;<br /><span class="label"><a 
+ id="x1-54143r143"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">def</span>&#x00A0;give_replaceable(self):&#x00A0;<br /><span class="label"><a 
+ id="x1-54144r144"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">if</span>&#x00A0;self.sets&#x00A0;==&#x00A0;1:&#x00A0;<br /><span class="label"><a 
+ id="x1-54145r145"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">return</span>&#x00A0;0&#x00A0;<br /><span class="label"><a 
+ id="x1-54146r146"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">else</span>:&#x00A0;<br /><span class="label"><a 
+ id="x1-54147r147"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;line&#x00A0;=&#x00A0;random.randint(0,&#x00A0;self.sets&#x00A0;<span 
+class="eufm-10">-</span>&#x00A0;1)&#x00A0;<br /><span class="label"><a 
+ id="x1-54148r148"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">if</span>&#x00A0;self.used&#x00A0;!=&#x00A0;line:&#x00A0;<br /><span class="label"><a 
+ id="x1-54149r149"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">return</span>&#x00A0;line&#x00A0;<br /><span class="label"><a 
+ id="x1-54150r150"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">else</span>:&#x00A0;<br /><span class="label"><a 
+ id="x1-54151r151"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">return</span>&#x00A0;(line&#x00A0;+&#x00A0;1)&#x00A0;%&#x00A0;self.sets&#x00A0;<br /><span class="label"><a 
+ id="x1-54152r152"></a></span>&#x00A0;<br /><span class="label"><a 
+ id="x1-54153r153"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="bchb8t-">def</span>&#x00A0;fill_line(self,&#x00A0;rline):&#x00A0;<br /><span class="label"><a 
+ id="x1-54154r154"></a></span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">#</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">It</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">fills</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">the</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">corresponding</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">block</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">from</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">the</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">upper</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">layer</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">into</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">the</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">line</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">.</span>&#x00A0;<br /><span class="label"><a 
+ id="x1-54155r155"></a></span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">#</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">Input</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">~</span><span 
+class="bchri8t-">rline</span><span 
+class="bchri8t-">~</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">is</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">abbreviation</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">of</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">remote</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">line</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">formed</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">as</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">{</span><span 
+class="bchri8t-">tag</span><span 
+class="bchri8t-">,</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">data</span><span 
+class="bchri8t-">}</span>&#x00A0;<br /><span class="label"><a 
+ id="x1-54156r156"></a></span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">#</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">As</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">default</span><span 
+class="bchri8t-">,</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">it</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">uses</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">Not</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">recently</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">used</span><span 
+class="bchri8t-">,</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">random</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">replacement</span><span 
+class="bchri8t-">&#x00A0;</span><span 
+class="bchri8t-">Policy</span>&#x00A0;<br /><span class="label"><a 
+ id="x1-54157r157"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;i&#x00A0;=&#x00A0;self.give_replaceable()&#x00A0;<br /><span class="label"><a 
+ id="x1-54158r158"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;self.lines[i][~tag~]&#x00A0;=&#x00A0;rline[~tag~]&#x00A0;<br /><span class="label"><a 
+ id="x1-54159r159"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;self.lines[i][~valid~]&#x00A0;=&#x00A0;True&#x00A0;<br /><span class="label"><a 
+ id="x1-54160r160"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;self.lines[i][~dirty~]&#x00A0;=&#x00A0;False&#x00A0;<br /><span class="label"><a 
+ id="x1-54161r161"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;self.lines[i][~data~]&#x00A0;=&#x00A0;rline[~data~]
+   
+   </div>
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+<a 
+ id="x1-54162r68"></a>
+<!--l. 88--><p class="indent" >   <a 
+ id="likesection.28"></a>
+   <h2 class="appendixHead"><span class="titlemark">Appendix&#x00A0;B</span><br /><a 
+ id="x1-55000B"></a>Real Systems Cache Coherency Latency Simulation Results</h2>  
+</body></html> 
+
+                                                                         
+
+
