@@ -3,18 +3,18 @@
 \documentclass[medieteknikk]{gucmasterthesis}
 \usepackage{ifpdf}
 \ifpdf
-	\usepackage[pdftex]{graphicx}
-    \usepackage{epstopdf}
+\usepackage[pdftex]{graphicx}
+\usepackage{epstopdf}
 \else
-    \usepackage[dvips]{graphicx}
+\usepackage[dvips]{graphicx}
 	\usepackage[dvips]{hyperref}    % For cross references in pdf
-\fi
-\usepackage{mdwlist}
-\usepackage{url}
-\usepackage{float}
-\usepackage{todonotes}
-\usepackage{hyperref}
-\usepackage{listings}
+	\fi
+	\usepackage{mdwlist}
+	\usepackage{url}
+	\usepackage{float}
+	\usepackage{todonotes}
+	\usepackage{hyperref}
+	\usepackage{listings}
 \usepackage[utf8]{inputenc}     % For utf8 encoded .tex files
 \usepackage[british]{babel}     % For chapter headings etc.
 
@@ -22,10 +22,10 @@
 
 \begin{document}
 
-\thesistitle{Evading Malicious Code with Concurrent Programming in Parallel Architectures and Their Protection Methods}
-\thesisauthor{Caglar SAYIN}
-\thesisdate{\gucmasterthesisdate}
-\useyear{2014}
+	\thesistitle{Evading Malicious Code with Concurrent Programming in Parallel Architectures and Their Protection Methods}
+	\thesisauthor{Caglar SAYIN}
+	\thesisdate{\gucmasterthesisdate}
+	\useyear{2014}
 \makefrontpages % make the frontpages
 \thesistitlepage % make the ordinary titlepage
 
@@ -48,8 +48,8 @@ supporting it\dots
 \chapter*{Ethical and legal considerations}
 \begin{quote}
 
-"Virus don't harm, ignorance does."\\
-- VxHeaven
+	"Virus don't harm, ignorance does."\\
+	- VxHeaven
 \end{quote}
 
 The content of this document could be used in order to malicious purpose, but any matter or information could be misused in the life and ignorance is not known well as a defense strategy. In this purpose, this thesis aims to enlighten security specialist and system developers against recent way of the possible attacks. 
@@ -60,27 +60,30 @@ However, in order to act ethical responsibility, we tried to eliminate practice 
 
 \vspace{\baselineskip}
 \noindent Ivar Farup, \gucmasterthesisdate
- 
+
 \tableofcontents
 \listoffigures
 \listoftables
 
 \include{introduction}
 \include{relatedworks}
-\chapter{Malware Detection}
-	\section{Taxonomy}
-	\section{Scope of Model}
-	\section{Scope of Methods}
-	\section{Obfuscation Methods}
+% \chapter{Malware Detection}
+% 	\section{Taxonomy}
+% 	\section{Scope of Model}
+% 	\section{Scope of Methods}
+% 	\section{Obfuscation Methods}
 \include{background}
-\chapter{Obfuscation on inconsistent systems}
-\chapter{Delay Attack}
-\chapter{Implementation for Hayward Computer Architecture}
-\chapter{Implication and Discussion}
-	\section{Theoretical Considerations}
-	\section{Practical Implication Issues}
-	\section{Summary}
+\include{body1}
+\chapter{Timing Attack against to Coherent Systems}
+\chapter{Implementation on Harvard Computer Architecture}
+% \chapter{Implication and Discussion}
+%	\section{Theoretical Considerations}
+%	\section{Practical Implication Issues}
+%	\section{Summary}
 \chapter{Conclusion and Further Works}
+
+-
+
 \bibliographystyle{gucmasterthesis}
 \bibliography{gucmasterthesis}
 \appendix

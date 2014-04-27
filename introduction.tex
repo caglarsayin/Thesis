@@ -26,9 +26,9 @@ If malware designing is superficially considered, you could fall in usual fallac
 \subsection{Research questions}\label{research:questions}
 
 \begin{enumerate}
-\item Can a malware model be designed with using parallel and concurrent architecture in order to conceal its presence from detection mechanism?
-\item If we can design the mentioned malware, can we build a detection mechanism against these kind of malware's presence?
-\item If we build the detection mechanism, What is detection complexity of the algorithms?
+	\item Can a malware model be designed with using parallel and concurrent architecture in order to conceal its presence from detection mechanism?
+	\item If we can design the mentioned malware, can we build a detection mechanism against these kind of malware's presence?
+	\item If we build the detection mechanism, What is detection complexity of the algorithms?
 \end{enumerate}
 
 
@@ -38,26 +38,26 @@ This Master thesis is looking for better understanding on concurrent malware abi
 
 
 \section{Choice of methods}
-This thesis will use a technical approach to the problem. It will use quantitative and model building approach. The methodology consist 8 circular step which are, asking question, building new hypothesis, planning methods, developing software, preparing generic testbed, testing, analyzing, reporting results. In addition to this, the large portion of the time will be given researching related topics, based architecture, and learning tools and technologies. Consequently, the accuracy of the thesis is lies on the proper scientific methodology.
+	This thesis will use a technical approach to the problem. It will use quantitative and model building approach. The methodology consist 8 circular step which are, asking question, building new hypothesis, planning methods, developing software, preparing generic testbed, testing, analyzing, reporting results. In addition to this, the large portion of the time will be given researching related topics, based architecture, and learning tools and technologies. Consequently, the accuracy of the thesis is lies on the proper scientific methodology.
 
-\todo[inline]{ circular diagram will be Drawn here}
+	\todo[inline]{ circular diagram will be Drawn here}
 
 
-To address the first question, designing proper malware evasion technique with concurrent and parallel architecture have not been researched well so for, therefore; it will lies on so much experiment and we might have to reflection of other evasion and obfuscation attacks analogy.  We will chose several known malware, which is on air, to  evade them during testing part. We will strong probably use kernel modules and android operating systems for testing bed, however we could linux OS without android layer to simplify and closure test period. In testing step, we will use several anti-virus system such as Avast, Comodo, Norton and compare the result before evasion and after evasion. Testing period might me include mathematical proof depending on evasion or obfuscation method.\todo{Consider involvement of this line during project.} At the end of the each hypothesis` result, which is mean the method for concealing malware, will be reported properly. Each method will be another hypothesis, so we could be proof whether multiple or none successful hypotheses, yet the failed hypothesis could be crucial. There could be also many result which are too baroque to proof them or explain their result, these cases could be observed on further work. For semantic knowledge, we could try to show relationship between evasion methods and hybrid approaches.
+	To address the first question, designing proper malware evasion technique with concurrent and parallel architecture have not been researched well so for, therefore; it will lies on so much experiment and we might have to reflection of other evasion and obfuscation attacks analogy.  We will chose several known malware, which is on air, to  evade them during testing part. We will strong probably use kernel modules and android operating systems for testing bed, however we could linux OS without android layer to simplify and closure test period. In testing step, we will use several anti-virus system such as Avast, Comodo, Norton and compare the result before evasion and after evasion. Testing period might me include mathematical proof depending on evasion or obfuscation method.\todo{Consider involvement of this line during project.} At the end of the each hypothesis` result, which is mean the method for concealing malware, will be reported properly. Each method will be another hypothesis, so we could be proof whether multiple or none successful hypotheses, yet the failed hypothesis could be crucial. There could be also many result which are too baroque to proof them or explain their result, these cases could be observed on further work. For semantic knowledge, we could try to show relationship between evasion methods and hybrid approaches.
 
-If we can find successful hypothesis for first question, we observe them in second question. Second question is depend on the first question's answer. Second questions methodology is actually exactly same circular. It start with defense hypothesis against evasion method. Dynamic and static detection methods must be both considered. The development of the counter algorithms could be proved mathematically, but it can be quite baroque to formulate it. In order to prove it, we could design evasion and detection methods` Turing model, however; the main approach of our testing is involved with experimental solution. we will develop planned algorithms prototype. Proper test bed could be provided with lots of malware species.. We will test our algorithms` prototype with concealed or obfuscated viruses. If it is really necessary, we could prepare also control groups to prove trustworthiness of method, then we have to record result without any intervention. For semantic knowledge, we could try to show relationship between detection methods and hybrid approaches.
-\todo{depending on the found evasion technique, methodology could be shaped again}
-\newpage
+	If we can find successful hypothesis for first question, we observe them in second question. Second question is depend on the first question's answer. Second questions methodology is actually exactly same circular. It start with defense hypothesis against evasion method. Dynamic and static detection methods must be both considered. The development of the counter algorithms could be proved mathematically, but it can be quite baroque to formulate it. In order to prove it, we could design evasion and detection methods` Turing model, however; the main approach of our testing is involved with experimental solution. we will develop planned algorithms prototype. Proper test bed could be provided with lots of malware species.. We will test our algorithms` prototype with concealed or obfuscated viruses. If it is really necessary, we could prepare also control groups to prove trustworthiness of method, then we have to record result without any intervention. For semantic knowledge, we could try to show relationship between detection methods and hybrid approaches.
+	\todo{depending on the found evasion technique, methodology could be shaped again}
+	\newpage
 
-The last question is a matter of measuring and analyzing algorithms complexity. It is totally mathematical scientific methodology. We have to analyze worst, best and average complexity rate. There are also several Quantitative approaches like measuring resource usage. It could be efficient some system like network which there are lots of uncertainties in.
+	The last question is a matter of measuring and analyzing algorithms complexity. It is totally mathematical scientific methodology. We have to analyze worst, best and average complexity rate. There are also several Quantitative approaches like measuring resource usage. It could be efficient some system like network which there are lots of uncertainties in.
 
-In this project, there five inevitable risks which we can face during development.
+	In this project, there five inevitable risks which we can face during development.
 
-\begin{itemize}
-\item The thesis is highly dependent on the hardware, and the cost of the hardware constitute risk on its own. Any case of hardware defect leads to comprise obstacle.
-\item Hardware dependency is also leads to logistical and time consuming risk which could result with latency on submit time.
-\item Firmware codes which we are planning to work on are mostly undocumented. We could discover their usage by proper reverse engineering and fuzzing process when required, however it is obviously manpower.
-\item Most important and highlighting risk is there isn't proper research on this particular area. That means there are strongly possibly hidden risks which could cause other mental and physical result.
-\item During testing and purification part, Anti-malware tools could come out with unreliable result. To analyze result properly, we may need to inspect mentioned tools with reverse engineering process which could violate proper usage agreement. To mitigate that kind of risks, we could request research agreement from companies.  
-\end{itemize}
+	\begin{itemize}
+		\item The thesis is highly dependent on the hardware, and the cost of the hardware constitute risk on its own. Any case of hardware defect leads to comprise obstacle.
+		\item Hardware dependency is also leads to logistical and time consuming risk which could result with latency on submit time.
+		\item Firmware codes which we are planning to work on are mostly undocumented. We could discover their usage by proper reverse engineering and fuzzing process when required, however it is obviously manpower.
+		\item Most important and highlighting risk is there isn't proper research on this particular area. That means there are strongly possibly hidden risks which could cause other mental and physical result.
+		\item During testing and purification part, Anti-malware tools could come out with unreliable result. To analyze result properly, we may need to inspect mentioned tools with reverse engineering process which could violate proper usage agreement. To mitigate that kind of risks, we could request research agreement from companies.  
+	\end{itemize}
 
