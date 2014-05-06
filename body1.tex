@@ -38,24 +38,95 @@ The required systems for our technique in this chapter is tightly coupled multi-
 	        \label{fig:gadgetsections}
 	    \end{figure}
 
- 	    \subsection{Setting system up and Loading Cache Memory}
-\begin{lstlisting}
-	mov r2, 0x012345 #address
-	mov r3, 0x013456 #end of gadget
-	mov r4, 0 #counter
-fetch: 	addi r2, r4 # add size of word to address
-	mov r1, [r2] #Load address from memory
-	cmp r2,r3 # compare r2 and r3
+ 	    \subsection{Setting System up and Loading Cache Memory} 
+ 	    	The second step of our attack is to settle on target system. It was the first step on target machine. In order to load all gadgets into the memory, we should use a kind of middle-ware to carry them. In conventional computer architecture and operating system internal, there is not many way to do this. Since volatility of main memory, code must be keep under a kind of I/O devices. This devices are generally connected to DMA devices which provide direct access of I/O devices to main memory. It is a short cut to avoid flooding CPU for each request\cite{mmap2011}. Reading this devices from scratch is not simple task, because CPU instruction and memory maps allow you to read sectors or blocks on the disk, and this could be meaningless without proper structure e.g. FAT, LDM, Raid. Instead, we recommend to use OS or boot-loader features to read files. In listing \ref{code:bootloader}, we showed an example for loading a gadget from disk 0 to memory and set instruction pointer to first memory block of gadget on U-BOOT\footnote{U-Boot is the one of the most common ARM boot-loader by Denx Engineering}. It is a method as if a rootkit could use, because it load itself just before OS is loaded. In this case, Keep in mind that you should initialize OS kernel on the other processor later. On the other hand, On OS implementation, you gadget should be covered with executable structures such as ELF or PE. The most important point here is when you define your structures you should define your gadget part as executable, writeable and readable; therefore, you can deobfuscate executable code.
+
+ 	    	\begin{lstlisting}[caption=The code example for loading a gadget from disk to memory and run it on U-Boot, label=code:bootloader]
+mmc dev 0; 	#Device Number
+fatload mmc 0:1 ${addr_r} gadget_file;
+go ${addr_r};
+ 	    	\end{lstlisting}
+
+ 	    	One of the other attentive point is choosing appropriate address for loading first byte of gadget. It is really crucial, for all gadgets are designed to size of cache as we mention in previous section. If you start to fetch a gadget to the wrong block in memory, then the gadget overflows cache size, although gadget size is right. As we mention in background studies chapter, cache memories have some internal organization. Therefore, before gadgets are fetching from disk to memory, the first address of each gadgets must be predetermined as fit for the first block of any cache line. In other words, the first bit of the gadget must be loaded in a memory address which is first block of any cache line. If it starts in the middle and passes $x$ block, it overflow x block at the end and when it is requested by CPU, it will evict a set in first cache line depending on replacement policy. To calculate first block addresses, we can use formula below.
+
+ 	    	\begin{equation}
+ 	    		S = \{address | 0\equiv address \bmod{cache line size}\} \quad
+ 	    		\forall x \in S := first cache block
+ 	    	\end{equation} 
+
+			\begin{lstlisting}[caption=The code example for loading a section of memory to cache, label=code:memtocache]
+	mov R2, 0x012345 #address
+	mov R3, 0x013456 #end of gadget
+fetch: 	
+	mov R1, [R2] #Load address from memory
+	addi R2, 4 # add size of word to address
+	cmp R2,R3 # compare R2 and R3
 	jl fetch
-\end{lstlisting}
-	    \subsection{Obfuscating Running and Deobfuscating gadget}
-	
+			\end{lstlisting}
+
+			The code which is showed above in figure \ref{code:memtocache} shows the primitive method for fetching memory section into cache memory. Beside of this, you can enhance this code with adding steps between memory location it fetched, because you do not need to fetch each word as showed above. Instead, you can skip $cachelinesize - wordsize$ byte. The cache controller autonomously fetch the following blocks to exploit spacial locality as we mention in previous chapter. Although every further attempt to fetch word will be loaded from cache memory and it is faster then memory access, stepping approach is always better. On this X86 similar assembly code example, on the first two line, it move the first and last address of the gadget into R2 register. Then, it starts loop and fetches incrementally location in the memory, and when it reach to the ending address it jumps out of loop. 
+	    \subsection{Obfuscating, Running and Deobfuscating Gadget}
+			After we load the gadget into the cache, it is time to deobfuscate it to run it. There are many buzz term for obfuscation methods and techniques such as polymorphism, metamorphism, omnimorphism and homomorphism\cite{nachenberg1996understanding}\cite{li2011mechanisms}\cite{marpaung2012survey}\cite{balakrishnan2005code}. However, in this paper, we don't mention the details of these techniques, but instead we will emphases highlights. The most obvious key is that it is not disk to memory obfuscation, it has quite little place to use in cache, so we can not use complicated obfuscation algorithms. 
+
+			Most known methods we have known so far are $XOR$ and $NOT$ operations. $NOT$ operation does not require key to deobfuscate it, though $XOR$ need. Key could be useful against advance malware detection methods because it is quite common that anti malware software are checking signatures and also their $NOT$ state. Even though $XOR$ needs key and can change it after every obfuscation deobfuscation operation, there are techniques to deobfuscate $XOR$ patters simply since key is stored plainly somewhere in stub part, and it is also reason why we call it obfuscation instead of encryption. Sequential $XOR$ keys are also well known attack against generic $XOR$ decryption which is influenced by enigma and solved like enigma i.e. entropy analysis of assembly instruction. Custom obfuscation algorithms are also another method to obfuscate, but the vital point to design obfuscation algorithms, well known and commonly used algorithms should be preferred because the deobfuscation algorithm and key are in stub part. It is pretty easy to detect, identify and signature unique algorithms, so with manual analysis, signature could be obtain and used to detect our stub part. To solve this, well known encryption algorithms such as DES or a specific part of them can be used.
+	    \begin{lstlisting}[caption=The code example of obfuscation and deobfuscation routine, label=code:obfuscation, numbers=left, numberstyle=\tiny]
+	mov R2, 0x012344 	#start address of body
+	mov R3, 0x013456 	#end of gadget
+	mov R4,0
+obfuscate: 
+	mov R1, [R2] 		#Load address from cache
+	xor R1, 12345 		#key
+	mov [R2], R1
+	addi R2, 4 		#add size of word to address
+	cmp R2,R3 		#compare R2 and R3
+	jne obfuscate
+	cmp R4,0
+	jne R4 			#jump next gadget
+start_addr_body:
+	...
+	...
+	...
+	...
+tail_addr:
+	mov R4, 0x234568 	#next gadget
+	mov R2, 0x012344
+	jmp obfuscate
+end_addr:
+		\end{lstlisting}
+
+			On the figure \ref{fig:gadgetsections}, a typical gadget compartments are showed. It has stub and body parts. Stub part consists deobfuscation algorithm and key(s). It must be usual code which is using frequently, so it can not be identical. Body part consist two subsection which are called gadget body and tail. Gadget body is actual code which is a part of malware. Tail part is a part for maintaining obfuscation process as like as stub part. In tail part, it can regenerate stub part in order to obtain uniqueness on every attempt, but it is baroque job to fit in cache size. Instead, we can change key for each attempt. After we regenerate stub part, then we should obfuscate body part. 
+
+			On the listing \ref{code:obfuscation}, a primitive code sample showed for obfuscation and deobfuscation routine. The compartments of the gadget can be seen roughly on the code example. From beginning of the chapter to $start_addr_body$, it is $stub$ part, and rest of it is body. Tail of the body part start from $tail_addr$ to end of code. As you can see in this example, tail code is not obfuscated state. The area with ellipsis belongs to gadget body which is actual malware. The first three line is to initiate loop. As we fetched the gadget to the cache on previous section, we started to work on cache in this section. from line 5 to 8, it is actual obfuscation and deobfuscation part. We used here static key but it is easy to use dynamic key with a register. First jump instruction on line 10 is checking for loop variables, and second jump on line 12 is checking for whether it is obfuscation or deobfuscation state. In this example, we used common code to obfuscate and deobfuscate. It is quite efficient with symmetric obfuscation techniques. After it complete deobfuscation of whole body part, it naturally goes in body part, then at the end, it jumps to obfuscation section after it sets $R4$ register with start address of next gadget's $stub$. At the end of the gadget, it runs instruction on line 12 which jumps new gadget, therefore; it evicts cachelines and fetches its own gadget and do all these routines. We consider that all these gadgets works as a loop of gadgets, so it does not need to have exception or interrupt between gadgets transactions.
+
+
+		    \begin{figure}[h!]
+	        \centering
+	        \includegraphics[width=1\textwidth]{img/control_flow.jpg}
+	        \caption{Control Flow Illustration A) Stepped Control Flow B) All at Once Control Flow}
+	        \label{fig:controlflow}
+	    \end{figure}
+	        We will also propose two type of control flow method for obfuscation, running and deobfuscation routine. In figure \ref{fig:controlflow}, these two approach are illustrated which are on the upside "Stepped Control Flow" and on the downside "All at Once Control Flow". Stepped control flow is running instruction one by one in contrast to all at once. Thus even if it leaks some information in the cache memory, it is just an instruction. However, it is barque to implement this control flow due to many reason. It must be perfectly designed before it run, because there must be register convention between stub and gadget and they should not use same registers in the same time. In addition to this should put a nop or junk instruction in a loop and should change the memory of the concerned instruction with new one. In listing \ref{code:control_flow}, the code try to express what it means. The instruction on the memory location 120 is actually junk instruction which is there to be replaced with deobfuscated code, and the instruction on the memory location 116 is to move plain instruction to the junk's place. However, it is not that easy as showed on code, because of the fact that branches. We should consider branches and fetch them in the loop before they are called and it could be made with an interpreter similar code. It is not utopia, but still hard to implement. It is beneficial to emphases one more time that the register in used by obfuscation algorithm must not be used with gadget or stored in a conventional places in case of stepped algorithm usage. This kind of routines are also really common in stack based assembly programming. Instead of stepped control flow approach, all at once approach is easier, faster but less obfuscated. The code in listing \ref{code:obfuscation} is one of example of all at once method. 
+	    \begin{lstlisting}[caption=The code example of stepped control flow approach, label=code:control_flow]
+100		mov R2, 0x012344 	#start address of body
+104		mov R3, 0x013456 	#end of gadget
+	loop: 
+108		mov R1, [R2] 		#Load address from cache
+112		xor R1, 12345 		#key
+116		mov [120], R1 		#move ins to junk line
+120		nop			#junk line
+124		addi R2, 4 		#add size of word to address
+128		cmp R2,R3 		#compare R2 and R3
+132		jne obfuscate
+		\end{lstlisting}
 
 
 	\section{Pitfalls and Fallacies}
-		It is a bit tricky because it constrains functional programming, because you can not use gadgets as functions and it is really usual for functions to be independent from rest of the part, it makes them good candidate to be gadgets. Therefore, we must implements a function again and again for each use to convert them the obfuscated gadgets. However, designing malware with almost every feature it can have does not book even several megabytes.
-		Write Through caches
-		Coherency Mechanism
-		Harvard Arch
-		Caches are not memory
-		Context switching
+		The things we mention so far was explained for actually a simple test systems which does not have many feature of real systems. That makes it simpler and applicable. However, It is not that simple, when implementing on real systems. The systems today we uses even in our daily PC are chaotic. They have many units to make them feasible for our daily usage. In this chapter, we ignored some issues with memory management unit and memory protection units, cache coherency interconnectors, Harvard Architecture, write through cache policy, out of order processors, multi-threading and context switching, and designed our attack for primitive and theoretical computer system, and it could be quite difficult and knotty to implement it on a real system. 
+
+		One of the most important issue which we ignore is definitely interconnectors which provide cache coherency. With increasing of multi processor system usage, it is getting common to implement an interconnector between processors to provide cache coherency. It converts caches to devices which can communicate with each other. All cache memories are assumed coherent, so if an malware work on a CPU and its cache can't conceal its content from another CPU. However, in next chapters we will propose an attack to exploit coherency latency. In any case, it certainly constrains our attack abilities.
+
+		Secondly, on Harvard architecture, There are two different caches which are separate for instruction and data. It breaks our approach throughout. we can work on upper layer cache e.g L2, L3, but then they generally share the cache with several CPU. we will also propose a novel method to bypass this issue as well.
+
+		Write through caches aren't also perfectly suitable for our attack, but the stepped approach could solve this issue. As it does not need to deobfuscate all code at once, It could reduce the possibility of obtaining signature with leaking a word of memory per time. One word which is about 32 bit size is mostly not adequate to identify a malware. On stepped method, one of the most important obstacle we can encounter is out-of-order and pipelined processors. In stepped approach, all the instruction are nested, and before it write new instruction to the junk instruction place, it might start to decode it or worse might have been already run. Memory barriers and junk delay instructions could be used against this.
+
+		It is a bit tricky to design gadgets, and it constrains functional programming because it is really usual for functions to be independent from rest of the part, it makes them good candidate to be gadgets. In contrast with functions, gadgets can not be called again and again. Therefore, we must write another gadget for each use. However, if we convert them to functions with inputs and outputs, it could be efficient way of designing feasible programs. In addition to functional input and output, they should get the address of gadget which they will stitch with. In order to protect eviction on cache memory, we can use some architectures cache lock. Cache locks can prevent a cache line to evict, in case of fetching its identical pair from memory. If a CPU fetch a memory location, and its corresponding cache line is locked, then the CPU fetches it directly from the memory.
