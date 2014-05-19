@@ -1,0 +1,28 @@
+%!TEX root = thesis.tex
+\chapter{Probabilistic Timing Attack against to Snoopy Cache Coherency Protocol}
+In this chapter of the thesis, we proposed a probabilistic attack to increase evasion probability of malware against to snoopy cache coherence protocol on tightly coupled systems. We briefly explained the issue we can encounter during implementation of the cache oriented obfuscation method. The snoopy cache coherency protocol's internals have already been mentioned in background studies chapter; however, we assumed through whole section that all coherence operations are atomic, and contention between processes are not subject. Yet, They are not close to be atomic; and moreover, the latency is sometimes enough long to process and to complete whole gadget or whole malware. In order to exploit this contention, we methodized a probabilistic race condition attack. 
+
+After we proposed the attack as a solution, we formulated the latency calculation of coherency protocols, compared their variants and enumerated factors which affect latency, and we supported our theories with an acknowledged simulation tool which is written by a team in Stanford University. As it is contention between latency and process overhead, we formulated the calculation of process overhead ins time interval. As a result, both of these values gives the rate of success, we explained it in the evasion rate section. At the end of the chapter, we discussed the attack's feasibility in pitfalls and fallacies section.
+
+As a brief and in other words, instead of giving an absolute obfuscation, we proposed a method which probably obfuscates corresponded malware, and this probability depends on the systems design and gadgets' processing overhead. 
+
+\section{The Issue}
+1 Whole System Figure
+
+\section{Solution}
+1 Time Flow chart
+\subsection{Latency Calculation}
+2 Latency Calculation Formulas
+Interconnector latency relationship
+Protocol Latency relationship
+1 Table of Systems Latency Comparisons
+DOS noise 
+\subsubsection{Simulation Result}
+\subsection{Process Overhead Calculation}
+1 PipeLine Diagram
+Out of order case
+\subsection{Evasion Rate}
+
+\section{Pitfalls and Fallacies}
+Deadlock Live Lock
+
