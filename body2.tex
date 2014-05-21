@@ -1,11 +1,6 @@
 %!TEX root = thesis.tex
-<<<<<<< HEAD
 \chapter{Probabilistic Timing Attack against to Snoopy Cache Coherency}
 In this chapter of the thesis, we proposed a probabilistic attack to increase evasion probability of malware against to snoopy cache coherence protocol on tightly coupled systems. We briefly explained the issue we can encounter during implementation of the cache oriented obfuscation method. The snoopy cache coherency protocol's internals have already been mentioned in background studies chapter; however, we assumed through whole section that all coherence operations are atomic, and contention between processes are not subject. Yet, They are not close to be atomic; and moreover, the latency is sometimes enough long to process and to complete whole gadget or whole malware. In order to exploit this contention, we methodized a probabilistic race condition attack. 
-=======
-\chapter{Probabilistic Timing Attack against to Snoopy Cache Coherency Protocol}
-In this chapter of the thesis, we proposed a probabilistic attack to increase evasion probability of malware against to snoopy cache coherence protocol on tightly coupled systems. We briefly explained the issue we can encounter during implementation of the cache oriented obfuscation method. The snoopy cache coherency protocol's internals have already been mentioned in background studies chapter; however, assumed through whole section that all coherence operations are atomic, and contention between processes are not subject. Yet, They are not close to be atomic; and moreover, the latency is sometimes enough long to process and to complete whole gadget or whole malware. In order to exploit this contention, we methodized a probabilistic race condition attack. 
->>>>>>> FETCH_HEAD
 
 After we proposed the attack as a solution, we formulated the latency calculation of coherency protocols, compared their variants and enumerated factors which affect latency, and we supported our theories with an acknowledged simulation tool which is written by a team in Stanford University. As it is contention between latency and process overhead, we formulated the calculation of process overhead in it's time interval. As a result, both of these values gives the rate of overall obfuscation , we explained it in the obfuscation rate section. At the end of the chapter, we discussed the attack's feasibility in pitfalls and fallacies section.
 
@@ -35,7 +30,7 @@ $thread$ value in the cache is step number between the vertical blocks. In order
 \begin{equation}
 	\forall\: m\bmod thread = 1\ :\  I()\ is\ bijective\ function
 \end{equation}
-Yet, Why do we iterate institution sequence  vertically? Indeed, we assumed that anti-malware scans horizontally from $CPU1$ above, because it is faster. For example, our code starts from $c$ and our second instruction in $c+m$, with purpose of scanning from $CPU1$ in this order, it should  fetch first the line of $c$ into $Cache2$, and then, it should fetches the line of $c+m$, and so forth. In the perfect world, with atomic instruction to fetches whole cachle line and without latency, it could be race condition free approach, but in real systems, it is not. We will combine this attack with latency problem in next sections.
+Yet, Why do we iterate institution sequence  vertically? Indeed, we assumed that anti-malware scans horizontally from $CPU1$ above, because it is faster. For example, our code starts from $c$ and our second instruction in $c+m$, with purpose of scanning from $CPU1$ in this order, it should  fetch first the line of $c$ into $Cache2$, and then, it should fetches the line of $c+m$, and so forth. In the perfect world, with atomic instruction to fetches whole cache line and without latency, it could be race condition free approach, but in real systems, it is not. We will combine this attack with latency problem in the next sections.
 \subsection{Synchronization Latency of Snoopy Caches}
 \subsubsection{Latency Calculation}
 2 Latency Calculation Formulas
