@@ -9,6 +9,7 @@
 \usepackage[dvips]{graphicx}
 	\usepackage[dvips]{hyperref}    % For cross references in pdf
 	\fi
+	\usepackage[final]{pdfpages}
 	\usepackage{mdwlist}
 	\usepackage{url}
 	\usepackage{float}
@@ -88,5 +89,7 @@ However, in order to act ethical responsibility, we tried to eliminate practice 
 \appendix
 \include{simulation}
 \chapter{Real Systems Cache Coherency Latency Simulation Results}
+
+\includepdf[pages={-}]{apendix_3.pdf}
 \end{document}
 

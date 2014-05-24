@@ -2,8 +2,6 @@
 \chapter{Probabilistic Timing Attack against to Snoopy Cache Coherency}
 In this chapter of the thesis, we proposed a probabilistic attack to increase evasion probability of malware against to snoopy cache coherence protocol on tightly coupled systems. We briefly explained the issue we can encounter during implementation of the cache oriented obfuscation method. The snoopy cache coherency protocol's internals have already been mentioned in background studies chapter; however, we assumed through whole section that all coherence operations are atomic, and contention between processes are not subject. Yet, They are not close to be atomic; and moreover, the latency is sometimes enough long to process and to complete whole gadget or whole malware. In order to exploit this contention, we methodized a probabilistic race condition attack. 
 
-After we proposed the attack as a solution, we formulated the latency calculation of coherency protocols, compared their variants and enumerated factors which affect latency, and we supported our theories with an acknowledged simulation tool which is written by a team in Stanford University. As it is contention between latency and process overhead, we formulated the calculation of process overhead in it's time interval. As a result, both of these values gives the rate of overall obfuscation , we explained it in the obfuscation rate section. At the end of the chapter, we discussed the attack's feasibility in pitfalls and fallacies section.
-
 As a brief and in other words, instead of giving an absolute obfuscation, we proposed a method which probably obfuscates malware, and this probability depends on the systems design and gadgets' processing overhead. On the other hand, this value gives us a quantitative rate, but if our concern is signature based detection methods, signatures value can be measured with qualitative approaches rather than quantitative ones e.g. some signature like port number or ip address are treasury.  Yet, the quantity of signature is certainly another value to measure efficiency, when especially, we relate binary codes and signature detection.
 
 \section{The Issue}
@@ -32,18 +30,34 @@ $thread$ value in the cache is step number between the vertical blocks. In order
 \end{equation}
 Yet, Why do we iterate institution sequence  vertically? Indeed, we assumed that anti-malware scans horizontally from $CPU1$ above, because it is faster. For example, our code starts from $c$ and our second instruction in $c+m$, with purpose of scanning from $CPU1$ in this order, it should  fetch first the line of $c$ into $Cache2$, and then, it should fetches the line of $c+m$, and so forth. In the perfect world, with atomic instruction to fetches whole cache line and without latency, it could be race condition free approach, but in real systems, it is not. We will combine this attack with latency problem in the next sections.
 \subsection{Synchronization Latency of Snoopy Caches}
+One of the famous myth on the computer science and design is that tightly coupled parallel architectures are mostly considered as symmetric systems, but if we look more closer, the caches usage and moreover cache usage with coherency protocols and network makes them quite asymmetric and preforce them to be heterogeneous. Processors could have same properties and be arranged in symmetrical, but if they can't give same throughput in an time interval, we can't call them homogeneous\footnote{In order to prevent this, there are systems which avoid to use caches, when they are sharing data. Because of the symmetry of cache processor relationship, they keeps their symmetric design themselves.}. 
+
+
 \subsubsection{Latency Calculation}
-2 Latency Calculation Formulas
-Interconnector latency relationship
-Protocol Latency relationship
-1 Table of Systems Latency Comparisons
-DOS noise 
+	\begin{figure}[h!]
+	    \centering
+	    \includegraphics[width=1.1\textwidth]{img/timing_diagram.jpg}
+	    \caption{The Time Line of the Fetching Cache Line which is Used by Another Cache}
+	    \label{fig:timeline}
+	\end{figure}
+In figure \ref{fig:timeline}, we showed a representational illustration of cache line requesting process which is used in another cache, and labelled latency types with $x$ for inner network latency, $y$ for cache processing latency, $z$ for overall interconnection latency. As seen in figure \ref{fig:timeline}, the throughout latency for synchronization process with another cache is showed in equation 5.3. However, the latency of direct reaching to the cache is showed in equation 5.4 which is obviously shorter\footnote{This formulas are valid for the simple systems showed in figure \ref{fig:tightlycoupled}}. 
+\begin{equation}
+L_{s}=x_{1} + y_{1} + z_{1} + y_{3} + z_{2} + y_{2} + x_{2}
+\end{equation}
+
+\begin{equation}
+L_{d}=x_{1} + y_{d} + x_{2}
+\end{equation}
+All this latency variables is depending on many different factors which we can calculate them in theory, but which is difficult to estimate in practice. $x$ variables are the latencies between CPU and cache. It is tent to be really short, because $L1$ cache and CPU should be designed so close. Mostly $x_{1} = x_{2}$, yet it is not certain. The reason is write buffer and pipelined CPU makes it case depended. Generally, most of the latency comes from the queue of cache which also related to writers block and pipelined architecture as we mentioned in background studies. $y$ variables are cache's logical response latencies. As we mentioned, It depends on cache size, associativity, line size and logical operations complexity. In this example, we have one layer cache, but most systems use multi layer caches. For each layer, it adds more overhead. In brief, caches are as fast as how simple they are.\footnote{Their design affect performance a lot, but they are mostly SDRAM instead of DRAM or switch based registers} However, there is no doubt that most important and game changer latency is $z$ namely, interconnection network latency.
+	\begin{figure}[h!]
+	    \centering
+	    \includegraphics[width=1.1\textwidth]{img/latency_graph.jpg}
+	    \caption{Interconnector Latency Versus Offered Traffic \cite{0122007514}}
+	    \label{fig:veriticaldirection}
+	\end{figure}
+
 \subsubsection*{Simulation Result}
-\subsubsection{Process Overhead Calculation}
-1 PipeLine Diagram
-Out of Order Case
 \subsection{The Big Picture}
 \subsubsection{Overall Obfuscation Rate Calculation}
 \section{Pitfalls and Fallacies}
-Deadlock Live Lock
-Latecy 
+
