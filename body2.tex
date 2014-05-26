@@ -1,13 +1,6 @@
 %!TEX root = thesis.tex
-<<<<<<< HEAD
 \chapter{Probabilistic Timing Attack against to Snoopy Cache Coherency}
 In this chapter of the thesis, we proposed a probabilistic attack to increase evasion probability of malware against to snoopy cache coherence protocol on tightly coupled systems. We briefly explained the issue we can encounter during implementation of the cache oriented obfuscation method. The snoopy cache coherency protocol's internals have already been mentioned in background studies chapter; however, we assumed through whole section that all coherence operations are atomic, and contention between processes are not subject. Yet, They are not close to be atomic; and moreover, the latency is sometimes enough long to process and to complete whole gadget or whole malware. In order to exploit this contention, we methodized a probabilistic race condition attack. 
-=======
-\chapter{Probabilistic Timing Attack against to Snoopy Cache Coherency Protocol}
-In this chapter of the thesis, we proposed a probabilistic attack to increase evasion probability of malware against to snoopy cache coherence protocol on tightly coupled systems. We briefly explained the issue we can encounter during implementation of the cache oriented obfuscation method. The snoopy cache coherency protocol's internals have already been mentioned in background studies chapter; however, assumed through whole section that all coherence operations are atomic, and contention between processes are not subject. Yet, They are not close to be atomic; and moreover, the latency is sometimes enough long to process and to complete whole gadget or whole malware. In order to exploit this contention, we methodized a probabilistic race condition attack. 
->>>>>>> FETCH_HEAD
-
-After we proposed the attack as a solution, we formulated the latency calculation of coherency protocols, compared their variants and enumerated factors which affect latency, and we supported our theories with an acknowledged simulation tool which is written by a team in Stanford University. As it is contention between latency and process overhead, we formulated the calculation of process overhead in it's time interval. As a result, both of these values gives the rate of overall obfuscation , we explained it in the obfuscation rate section. At the end of the chapter, we discussed the attack's feasibility in pitfalls and fallacies section.
 
 As a brief and in other words, instead of giving an absolute obfuscation, we proposed a method which probably obfuscates malware, and this probability depends on the systems design and gadgets' processing overhead. On the other hand, this value gives us a quantitative rate, but if our concern is signature based detection methods, signatures value can be measured with qualitative approaches rather than quantitative ones e.g. some signature like port number or ip address are treasury.  Yet, the quantity of signature is certainly another value to measure efficiency, when especially, we relate binary codes and signature detection.
 
@@ -35,20 +28,75 @@ $thread$ value in the cache is step number between the vertical blocks. In order
 \begin{equation}
 	\forall\: m\bmod thread = 1\ :\  I()\ is\ bijective\ function
 \end{equation}
-Yet, Why do we iterate institution sequence  vertically? Indeed, we assumed that anti-malware scans horizontally from $CPU1$ above, because it is faster. For example, our code starts from $c$ and our second instruction in $c+m$, with purpose of scanning from $CPU1$ in this order, it should  fetch first the line of $c$ into $Cache2$, and then, it should fetches the line of $c+m$, and so forth. In the perfect world, with atomic instruction to fetches whole cachle line and without latency, it could be race condition free approach, but in real systems, it is not. We will combine this attack with latency problem in next sections.
+Yet, Why do we iterate institution sequence  vertically? Indeed, we assumed that anti-malware scans horizontally from $CPU1$ above, because it is faster. For example, our code starts from $c$ and our second instruction in $c+m$, with purpose of scanning from $CPU1$ in this order, it should  fetch first the line of $c$ into $Cache2$, and then, it should fetches the line of $c+m$, and so forth. In the perfect world, with atomic instruction to fetches whole cache line and without latency, it could be race condition free approach, but in real systems, it is not. We will combine this attack with latency problem in the next sections.
 \subsection{Synchronization Latency of Snoopy Caches}
+One of the famous myth on the computer science and design is that tightly coupled parallel architectures are mostly considered as symmetric systems, but if we look more closer, the caches usage and moreover cache usage with coherency protocols and network makes them quite asymmetric and preforce them to be heterogeneous. Processors could have same properties and be arranged in symmetrical, but if they can't give same throughput in an time interval, we can't call them homogeneous\footnote{In order to prevent this, there are systems which avoid to use caches, when they are sharing data. Because of the symmetry of cache processor relationship, they keeps their symmetric design themselves.}. 
+
+
 \subsubsection{Latency Calculation}
-2 Latency Calculation Formulas
-Interconnector latency relationship
-Protocol Latency relationship
-1 Table of Systems Latency Comparisons
-DOS noise 
+	\begin{figure}[h!]
+	    \centering
+	    \includegraphics[width=1.1\textwidth]{img/timing_diagram.jpg}
+	    \caption{The Time Line of the Fetching Cache Line which is Used by Another Cache}
+	    \label{fig:timeline}
+	\end{figure}
+In figure \ref{fig:timeline}, we showed a representational illustration of cache line requesting process which is used in another cache, and labelled latency types with $x$ for inner network latency, $y$ for cache processing latency, $z$ for overall interconnection latency. As seen in figure \ref{fig:timeline}, the throughout latency for synchronization process with another cache is showed in equation 5.3. However, the latency of direct reaching to the cache is showed in equation 5.4 which is obviously shorter\footnote{This formulas are valid for the simple systems showed in figure \ref{fig:tightlycoupled}}. 
+\begin{equation}
+L_{s}=x_{1} + y_{1} + z_{1} + y_{3} + z_{2} + y_{2} + x_{2}
+\end{equation}
+
+\begin{equation}
+L_{d}=x_{1} + y_{d} + x_{2}
+\end{equation}
+All this latency variables is depending on many different factors which we can calculate them in theory, but which is difficult to estimate in practice. $x$ variables are the latencies between CPU and cache. It is tent to be really short, because $L1$ cache and CPU should be designed so close. Mostly $x_{1} = x_{2}$, yet it is not certain. The reason is write buffer and pipelined CPU makes it case depended. Generally, most of the latency comes from the queue of cache which also related to writers block and pipelined architecture as we mentioned in background studies. $y$ variables are cache's logical response latencies. As we mentioned, It depends on cache size, associativity, line size and logical operations complexity. In this example, we have one layer cache, but most systems use multi layer caches. For each layer, it adds more overhead. In brief, caches are as fast as how simple they are.\footnote{Their design affect performance a lot, but they are mostly SDRAM instead of DRAM or switch based registers} However, there is no doubt that most important and game changer latency is $z$ namely, interconnection network latency. 
+	\begin{figure}[h!]
+	    \centering
+	    \includegraphics[width=1.1\textwidth]{img/latency_graph.jpg}
+	    \caption{Interconnector Latency Versus Offered Traffic \cite{0122007514}}
+	    \label{fig:latencyvsofferedtraffic}
+	\end{figure}
+ Mostly, lack of bandwidth is considered as the only reason of network latency, whereas there are many other factor and problems. Nevertheless, it is one of the most important source of latency. Bandwidth is the rate of the data can transmitted from point $a$ to point $b$ in a given time, but originally, it was the number of wire in width of buses. This definition ignores the clock speed contrast with current definition because the speed of wire is related with speed of light and resistance of the wire, but instead, the things which limit it is the performance of source and receiver. The bandwidth could be formulated as $ b = n * f$ where n is width of the channel and f is clock speed. Surprisingly, if our message is smaller than channel width, bandwidth can not effect latency because if we have 100 bit bandwidth, then it carries 20 and 100 bit in the same time. Notable the interconnection networks' costs are routing, serialization/deserialization, link traversal latencies\cite{0122007514}. We already have mentioned about their details; still, it is good to shortly recall that serialization and deserialization are processes to converting messages to given channel bandwidth and could be shown as $ sd = L / b $ where $L$ is length of message and $b$ is bandwidth. Therefore, overall latency can be measured with formula 5.5.
+\begin{equation}
+T_{0}=\sum_{k=1}^{minr}tr_{k}+\sum_{k}^{minc}D_{k}/v_{k}+L/b
+\end{equation}
+In this equation, $minr$ and $minc$ denote the minimum number of router and channel between point $a$ and $b$. $tr$ denotes time consumed during routing process, while $D/v$ denotes distance divided by velocity. The easy way to calculate $T_{0}$ for each flit is $T_{0} = T_{head} + L/b$ because $\sum_{k=1}^{minr}tr_{k}+\sum_{k}^{minc}D_{k}/v_{k}$ is calculated one and only one time in pipelined networks as have been mentioned. If it is not pipelined, the latency could be measured by formula 5.6 or if it was store and forward flow control instead of cut-through as shown in equation 5.5, the latency could be measured by formula 5.6 (see more details \cite{0122007514}). 
+\begin{equation}
+T_{0}=(\sum_{k=1}^{minr}tr_{k}+\sum_{k}^{minc}D_{k}/v_{k})*L/b
+\end{equation}
+\begin{equation}
+T_{0}=(\sum_{k=1}^{minr}tr_{k}+\sum_{k}^{minc}D_{k}/v_{k})+(\sum_{k=1}^{minr}*L/b)
+\end{equation}
+However, $T_{0}$ is not a general latency function, and it is very special status of networks which is also called zero-load latency.  Zero-load latency is the lowest bound of the latency where there is no contention between packets. In figure \ref{fig:latencyvsofferedtraffic}, a generic latency vs offered traffic curve is showed. Although they are the most accurate way to measure and determine ultimate performance, and we are using discrete event simulation to draw them. Theoretic latency bounds, which are topological and routing, and their corresponding throughputs are showed in figure. In formula 5.4, 5.5 and 5.6, zero latency values are all shown with minimum routing hops which means topology bounded zero latency, but actual zero-load latency, $T_{0}$ in figure, incorporates the constraints of topology along with actual performance, routing, flow control and line traversal latency\cite{0122007514}. As have seen obviously, if you increase the contention between packets through increasing offered traffic, the latency grows about exponentially. It is one of the most important factor support our proposes and encourage us to implement because of the fact that roughly loading memory and storing back to the hard disk\footnote{It is basically dumping memory} produce remarkable traffic which can lead considerable latency.
+
 \subsubsection*{Simulation Result}
-\subsubsection{Process Overhead Calculation}
-1 PipeLine Diagram
-Out of Order Case
+	\begin{figure}[h!]
+	    \centering
+	    \includegraphics[width=0.8\textwidth]{img/simulation.jpg}
+	    \caption{Our Simulation Topology\cite{0122007514}}
+	    \label{fig:simulation}
+	\end{figure}
+An accurate simulation is definitely one of the most important tools for analyzing interconnection networks and exploring design tradeoffs. The reason why we are using simulations instead of real systems is a bit similar with theoretic physic. There are many noises on information we gathered from real systems and they are extremely expensive and difficult to implement. Even one of the most acknowledged books about interconnection network, which is called "Principles and Practices of Interconnection Networks" repeatedly emphasizes that designer's intuition is the most important factor to design better performance on interconnection networks\cite{0122007514}. This book has a simulation tool freely available at http://cva.standford.edu/. Even though, every processor company invests their years and efforts to design better simulator, this tool is quite simple and totally free licensed. However, it is not designed for coherency purpose, so its model designed in flit level and includes many topologies and routing algorithms. Indeed, it can give us some important cues and ideas. 
+
+We designed it with an example topology which we use in multiprocessing systems. It is the inheritor topology of Fat tree. In figure \ref{fig:simulation}, the topology is shown which has two processors, 3 routers\footnote{Though we said 3 routers, we used in figure and topology design file 4 router. That is due to lack of simulation tools. We tried to give a latency between router 3 and shared memory} and shared memory. This designed is influenced by one of the most known ARM chips Samsung EXYNOS 5420. This latency values are rounded numbers, but they are close values which we obtained the concerned chip\footnote{we used CPU-Z program to measure cache latencies.}. One way channel length is about 3 cycles from L1 cache controller to L2 cache controller, 40 cycles from L2 cache controller to L4 cache controller. This contrast could be because of the difference between in-chip out-chip communication and also the complexity of caches internal operation. We assumed the routing delay is about 2 cycles, even though it could be a bit more. We used 1 cycle credit delay for flow control.
+
+The injection rate of simulation is the number of packets which it injects every cycle time. The book claims average rate is 0.15, but we consider that it is enormously high for our experiment. As we have said, injection rates could be really high during memory dumping; however, it could be decreased, if scanner avoids bad programming practice and exploit cache performance feature, it could be around one store and one load operation request  for each cache block from upper layer cache. If we take this into consideration, we assumed the injection rate 2 and 4 for each 100 cycles. It is also good to assume it lower for any cases. 
+
+One of the other important value about our experiment is the character of our generated traffic. We used a uniform traffic generator which means every nodes talk with each other. However, it is not actually appropriate for our attack. In our example, scanner $CPUA$ talks a lot, and other CPUs talks nominal, but $CPUX$ attacker CPU does not load or store, after it initializes. We can implement our own traffic generator for this simulator in the future. This simulator is also highly adaptive and extensible with plugins.
+
+In implementation of our topology, we decided to design two different modes to emphasize contention over network, which are small topology and crowed topology. In the small topology experiment, we assumed there are just two active nodes in the network and they are the ones which connected to $CPUA$ and $CPUX$. In this example, latency is mostly based on distance and pure logical complexity, rather than contention of routing or bandwidth. In the second experiment, we designed crowded topology which has four nodes connected to $router0$ four nodes connected to $router1$, and they are all connected to $router2$, and also we presumed there are two "slave nodes" which might be DMA devices and one GPU connected to $router2$.
+
+\begin{table}[h]
+\begin{tabular}{|l|c|c|c|c|}
+	\hline
+                  & \begin{tabular}[c]{@{}c@{}}Packet latency\\ Min/Avg/Max\end{tabular} & \begin{tabular}[c]{@{}c@{}}Network latency\\ Min/Avg/Max\end{tabular} & \begin{tabular}[c]{@{}c@{}}Flit latency\\ Min/Avg/Max\end{tabular} & Hops Avarage \\ \hline
+Crowded 2\%            & 164/68045/171627                                                     & 13/417/1487                                                           & 13/353/1487                                                        & 2.04442      \\ \hline
+Small 2\%            & 8/72/216                                                             & 8/72/216                                                              & 8/72/216                                                           & 2.30611      \\ \hline
+Crowded 4\%            & 15698/178598/458108                                                  & 13/410/1736                                                           & 13/353/1736                                                        & 2.04591      \\ \hline
+Small 4\%            & 8/322/1273                                                           & 8/129/376                                                             & 8/129/376                                                          & 2.33081    \\ \hline
+\end{tabular}
+\end{table}
+
 \subsection{The Big Picture}
 \subsubsection{Overall Obfuscation Rate Calculation}
 \section{Pitfalls and Fallacies}
-Deadlock Live Lock
-Latecy 
+

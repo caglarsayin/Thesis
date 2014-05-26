@@ -9,6 +9,7 @@
 \usepackage[dvips]{graphicx}
 	\usepackage[dvips]{hyperref}    % For cross references in pdf
 	\fi
+	\usepackage[final]{pdfpages}
 	\usepackage{mdwlist}
 	\usepackage{url}
 	\usepackage{float}
@@ -60,33 +61,20 @@ However, in order to act ethical responsibility, we tried to eliminate practice 
 
 \vspace{\baselineskip}
 \noindent Ivar Farup, \gucmasterthesisdate
-
 \tableofcontents
 \listoffigures
 \listoftables
-
 \include{introduction}
 \include{relatedworks}
-% \chapter{Malware Detection}
-% 	\section{Taxonomy}
-% 	\section{Scope of Model}
-% 	\section{Scope of Methods}
-% 	\section{Obfuscation Methods}
 \include{background}
 \include{body1}
 \include{body2}
 \include{body3}
-% \chapter{Implication and Discussion}
-%	\section{Theoretical Considerations}
-%	\section{Practical Implication Issues}
-%	\section{Summary}
 \chapter{Conclusion and Further Works}
-
-
 \bibliographystyle{gucmasterthesis}
 \bibliography{gucmasterthesis}
 \appendix
 \include{simulation}
-\chapter{Real Systems Cache Coherency Latency Simulation Results}
+\include{results}
 \end{document}
 
