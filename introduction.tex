@@ -1,41 +1,35 @@
+%!TEX root = thesis.tex
 \chapter{Introduction}
-The purpose of introduction chapter is giving the readers blueprint of the subject, the problems that we face, the change in the solutions, as well as motivation of its importance. In addition, It also purpose to form proper research question which will guide thesis. 
 
 \subsection{Topic covered by the project}
-The thesis purposes an architecture of the malware which process parallel, access memory concurrently, conceal itself systematically, shortly that it is likely to be rocket science. However, everything actually started with a simple mathematical theory by John Von Neumann \cite{von1966theory} and the first example of practical malware is written by Bob Thomas at BBN, and it was called Creeper 
+Everything actually started with a simple mathematical theory by John Von Neumann \cite{von1966theory} and the first example of practical malware is written by Bob Thomas at BBN, and it was called Creeper 
 
 The malware is abbreviation of malicious software. It could be any piece of code which is defined malicious. There is no formal definition of malicious, it could be some software advertise without any contest or it could be self-producing code piece which aim to distribute itself and steal your private information, and it turned an arm race between power holders today.
 
 With development of the first malware, their counter software are created and anti malware software have evolved with them so far. In this race, malware authors are always one step further, because of security's nature. This race between black and white side raised the bar above. The motivation of the information amount and severity influence both today, and that information can be sometimes vital. 
 
-
 \subsection{Keywords}
-Security, Concurrent Malware Design, Malware, Multi-processing Architectures, Parallelism and Concurrency, Cache Oriented Polymorphism, Cache Coherency Problems
+Security, Malware Design, Cache Oriented Polymorphism, Cache Coherency, Malware Evasion, Code Obfuscation
 
 \subsection{Problem description}
-The one of the main and indecipherable problem in security discipline is formulating general threat definition and recognizing malicious activity and all this problems unsurprisingly reflect on information and computer security concept. Security is defined by system's identification, which involve with purpose, crowd, design structures, network model and so on, and today's information system which is designed with various architectural forms is protected against malware by general purpose protection tools. In the market, The anti malware tools producers focused on pragmatic solutions to survive, but it leads to that most of these tools are utterly reverse engineering process which works on result instead of reason.
-
-With usual and pragmatic signature based methods, there are two mainstream techniques to detect malicious code which are called static and dynamic analysis.Static analysis identifies malware mainly with code flow graph and data flow graph on stored file which is not processing. However, On the dynamic side it is a bit more tricky to analyze process, because you are working on the running pieces of codes without knowledge of structures and worse than this, it must concern race condition and memory coherency flaws.
-
-The detection methods and techniques have been adequately worked so far because of the simplicity of architectures and usage of the massive generic computers, However, with increasing of the not standardized, parallel and popular devices like arm's SoC, it is not hard to estimate their new challenges. It is really likely to evade and obfuscate properly your on-the-fly processes with using uncertain characteristic of parallel processing, complexity of concurrent programming, and structure of “Non Uniform Memory Architecture".
 
 
 \subsection{Justification, motivation and benefits}
-If malware designing is superficially considered, you could fall in usual fallacy that It is not beneficial and exactly opposite. However, if we can design it, there is always more skillful author who already abuse this vulnerabilities on the black side of the moon. The work we are obligated to actually proof this vulnerabilities and design counter measure against them. In this way, our blessed motivation is finding possible vulnerabilities, and mitigate or eliminate their risk. Otherwise; if we confront with unknown attack, it could be too late to fix and analyze it. For example, some of the most sensational and beneficial papers are criticize malware as same as the thesis (\cite{moser2007limits},\cite{cavallaro2008limits},\cite{egele2012survey}), and their values are undoubted today. 
+If malware designing is superficially considered, you could fall in the usual fallacy that it is not beneficial, and maybe it is malicious. However, if we can design it, there is always a more skillful malicious author who might already abuse this vulnerability on the black side of the moon. The duty we are actually obligated to discover these vulnerabilities and design countermeasure against them. In this way, our blessed motivation is finding possible vulnerabilities, and mitigate or eliminate their risk. Otherwise; if we are lucky, we might detect these zero time vulnerability attacks, yet it could be too late to fix and analyze them. Besides, for example, some of the most sensational and beneficial papers(\cite{moser2007limits},\cite{cavallaro2008limits},\cite{egele2012survey}) are criticizing malware with designing them as like as we do, and their values over computer security are undoubted today. 
+
+In short, we are building brakes. Sometimes they are that thing slow us down, or sometimes they even stop us in our tracks. However, they are actually there to enable us to go faster and secure.
 
 \subsection{Research questions}\label{research:questions}
 
 \begin{enumerate}
-	\item Can a malware model be designed with using parallel and concurrent architecture in order to conceal its presence from detection mechanism?
-	\item If we can design the mentioned malware, can we build a detection mechanism against these kind of malware's presence?
-	\item If we build the detection mechanism, What is detection complexity of the algorithms?
+	\item How can an an obfuscation method, which exploits caches to conceal itself from memory scanning systems, be designed for tightly coupled, multiprocessor systems?
+	\item How can we design an attack to bypass snoop cache coherency?
+	\item How can we execute deobfuscated code on the Harvard Architecture without leakage to upper memories?
 \end{enumerate}
 
 
 \subsection{Planned contributions}
-This Master thesis is looking for better understanding on concurrent malware abilities and their counter-measure. Especially, It will try to show how possible to abuse concurrent memory accessing and how durable recent detection kits. It is quite unique work which we have to consider on the future. Ultimate goal is to eliminate any uncertainties which detection methods encounter with concurrent memory accessing.
-
-
+This Master thesis is looking for better understanding on cache usage with obfuscation techniques. Especially, It will try to show how possible to abuse tightly coupled systems accessing and how durable recent detection kits. It is quite unique work which we have to consider on the future. Ultimate goal is to eliminate any uncertainties which detection methods encounter with concurrent memory accessing.
 
 \section{Choice of methods}
 	This thesis will use a technical approach to the problem. It will use quantitative and model building approach. The methodology consist 8 circular step which are, asking question, building new hypothesis, planning methods, developing software, preparing generic testbed, testing, analyzing, reporting results. In addition to this, the large portion of the time will be given researching related topics, based architecture, and learning tools and technologies. Consequently, the accuracy of the thesis is lies on the proper scientific methodology.
@@ -51,13 +45,16 @@ This Master thesis is looking for better understanding on concurrent malware abi
 
 	The last question is a matter of measuring and analyzing algorithms complexity. It is totally mathematical scientific methodology. We have to analyze worst, best and average complexity rate. There are also several Quantitative approaches like measuring resource usage. It could be efficient some system like network which there are lots of uncertainties in.
 
-	In this project, there five inevitable risks which we can face during development.
 
-	\begin{itemize}
-		\item The thesis is highly dependent on the hardware, and the cost of the hardware constitute risk on its own. Any case of hardware defect leads to comprise obstacle.
-		\item Hardware dependency is also leads to logistical and time consuming risk which could result with latency on submit time.
-		\item Firmware codes which we are planning to work on are mostly undocumented. We could discover their usage by proper reverse engineering and fuzzing process when required, however it is obviously manpower.
-		\item Most important and highlighting risk is there isn't proper research on this particular area. That means there are strongly possibly hidden risks which could cause other mental and physical result.
-		\item During testing and purification part, Anti-malware tools could come out with unreliable result. To analyze result properly, we may need to inspect mentioned tools with reverse engineering process which could violate proper usage agreement. To mitigate that kind of risks, we could request research agreement from companies.  
-	\end{itemize}
-
+\section{Thesis Outline}
+	This section provide a brief summary listing of the content presented in this thesis. The listing is based on chapters, where each chapters and its content is described. First the related works and background studies are presented. Then, our designs is presented as well as further work and conclusion in a sequence. At the end of the thesis, we attached the simulation code which we wrote and the experiments results by Booksim v2.0 to appendix.
+\begin{itemize}
+\item Chapter 2
+\item Chapter 3
+\item Chapter 4
+\item Chapter 5
+\item Chapter 6
+\item Chapter 7
+\item Appendix A
+\item Appendix B
+\end{itemize}

@@ -24,7 +24,7 @@
 \begin{document}
 
 	\thesistitle{Obfuscating Malware through Cache Memory Architecture Features}
-	\thesisauthor{Caglar SAYIN}
+	\thesisauthor{Çağlar SAYIN}
 	\thesisdate{\gucmasterthesisdate}
 	\useyear{2014}
 \makefrontpages % make the frontpages
@@ -33,34 +33,31 @@
 
 \chapter*{Abstract}
 
-Have you ever realize how secure and safe environment they claim in security product companies' advertisement? Does Anti-Malware software really provide 100 percent security against Malware? As Everybody knows, It is not. Today, it is nothing more than cat and dog fight. Malware authors purpose an new architecture, an new approach and Anti Virus companies just try to fix vulnerabilities. Due to this fact, Parallel and concurrent architectures are elusive field for malware. They are new, trendy, popular, complex. 
+There is no doubt that malicious software(Malware) is one of the most important threat to computer systems and their security. With increasing the use of computers and their networks in the industrial and governmental infrastructures, their economy and impact over people are increasing. According to Symantec's report in 2008\cite{turner2008symantec}, "the release rate of malicious code and other unwanted programs may be exceeding that of legitimate software applications." The worst of all, their design is not as simple as it was before. A few years ago, we saw countries who developed malware as a professorial weapon for their political benefits, and it would not be surprising if one of these weapons were seen in the corporate world soon. This malware was utilized with many camouflaging techniques (e.g. polymorphism, metamorphism, etc.)
 
-In this thesis, we will try to show vulnerabilities on concurrent and parallel cpu schedulers and non-uniform memory architecture. The weaknesses on hardware layer of the computer are hard to be observed by software solution. Therefore; It is time to pay attention for them, since it is not hard to predict that attackers will focus them.
-
-This thesis purpose an offensive security approach, how malware can be evade autonomous malware detection systems, and also purpose and experimental method to detect and mitigate them. 
+Basically, most of camouflaging techniques obfuscate and hide the signatures to be stored in a non-volatile memory safe, and before they started to run on main memory, they deobfuscate the whole code to execute.  Consequently, security tools have simply started to search signatures in main memory. In this thesis, we designed a way to raise the bar from "disk to memory obfuscation" to "disk to cache obfuscation". More Specifically, we designed theoretical malware obfuscation methods which exploit caches to evade memory scanning systems on tightly coupled multi-processor systems. Additionally, this thesis discusses the implementation issues, which are cache coherency and the Harvard Architecture issues; then, we elaborately propose solutions for these obstacles.
 
 \chapter*{Preface}
 
-I would like to thank Erik Hjelmås for encouraging me to write this
-small \LaTeX\ class for GUC's master's theses, and in particular for
-making sure that I will not be responsible for maintaining and
-supporting it\dots
+I would like to express my gratitude to my supervisor Prof. Stephen D. Wolthusen for the useful comments, remarks and engagement through the learning process of this master thesis. I can simply say that every sentence which he built was enlightening not only during this this process, but also in his courses. Furthermore, I would like to thank Emre Tınaztepe for sharing his fabulous practical knowledge with me to the topic as well for the support on the way. Also, I like to thank the team in Stanford University who develops BookSim Simulation tool and willingly share experience. I would like to thank my family.  Words cannot express how grateful I am to my mother for all of the sacrifices that you've made on my behalf. I would also like to thank all of my friends who supported me in writing, and incited me to strive towards my goal.
+
+Finally, I would like to thank to all free software volunteers. 
+
+\vspace{\baselineskip}
+\noindent Çağlar Sayın \gucmasterthesisdate
 
 \chapter*{Ethical and legal considerations}
-\begin{quote}
 
-	"Virus don't harm, ignorance does."\\
-	- VxHeaven
-\end{quote}
-
-The content of this document could be used in order to malicious purpose, but any matter or information could be misused in the life and ignorance is not known well as a defense strategy. In this purpose, this thesis aims to enlighten security specialist and system developers against recent way of the possible attacks. 
+The content of this document could be used for malicious purpose, but any matter or information could be misused in the life. The risky threat is not the information in this thesis, but to be ignorant about them. For this purpose, this thesis aims to enlighten security specialist and system developers against the recent methods of the possible attacks. 
 
 However, in order to act ethical responsibility, we tried to eliminate practice of tools and piece of codes which could leads malicious usage. In any case, there is no doubt that it is critical to discover and publish vulnerabilities which could cause deep impact before malicious people discover and abuse them.
 
-\todo[inline]{rewrite here}
+\begin{quote}
 
-\vspace{\baselineskip}
-\noindent Ivar Farup, \gucmasterthesisdate
+	"Virus don't harm, but ignorance does."\\
+	- VxHeaven
+\end{quote}
+
 \tableofcontents
 \listoffigures
 \listoftables
