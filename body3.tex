@@ -13,7 +13,7 @@ In this chapter of the thesis, we proposed a method to solve implementation issu
 	\begin{figure}[h!]
 		\centering
 		\includegraphics[width=1\textwidth]{img/Cortex_A15_Block_Diagram.jpg}
-		\caption{Cortex A15 Block Diagram}
+		\caption{Cortex A15 Block Diagram \cite{sloss2004arm}}
 		\label{fig:blockdiagram}
 	\end{figure}
 
@@ -52,5 +52,3 @@ In this chapter of the thesis, we proposed a method to solve implementation issu
 	Throughout this chapter, we never modified the values in instruction chapter, which is the head of our gadget and involve with an interpreter and stub parts. In order to prevent misunderstanding, it is better to underline that we can modify the values in the instruction cache, but if we move values from the data cache to instruction cache, it will lose its stealthiness, but not vice verse. Therefore, we can move instruction cache values in the data cache and modify them freely. It gives us an ability to regenerate stub part again and again.
 
 	Abstract syntax tree method as an intermediate interpretation language is pretty compact and compressed representation of byte codes\cite{kistler1999tree}, but produce more overhead\cite{garen2008announcing}, so it is better to use it systems without cache coherency. Also, code density can vary from compilation method to method. Because we have limited space, it is better to fit as much as code in minimum space. Due to the division of data and instruction caches, Harvard systems have half sized cache for data.
-
-	\todo[inline]{Interpreter feeding}
