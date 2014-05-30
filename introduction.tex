@@ -2,7 +2,7 @@
 \chapter{Introduction}
 The purpose of this chapter is to give introduction of the subject and challenge in question, as well as justification and motivation of its importance. The chapter also propose research question to guide the thesis.The purpose of this chapter is to give introduction of the subject and challenge
 
-\subsection{Topic covered by the project}
+\section{Topic covered by the project}
 This thesis is mainly about a novel approach to specially malware obfuscation methods although software obfuscation concept is the more broad topic. Malware is the short malicious software and can cover any program or script that is harmful to a system or its user. One of the biggest discussion is a definition of harmful on computer security. It is quite hard to define what harmful is and what malicious is. Because of the reason why we cannot classify software easily, whether malicious or not, the most efficient and suitable way to detect them is a black or white listing. Basically, there are predefined list of software which claims they are good or evil. This black lists are comprised with signatures of the software which are presumed malicious; then, we are looking for these signatures in our computers to detect malware. 
 
 Even if these lists include every possible signature, malware can evade signature detection with obfuscating itself over and over again. For each attempt, it reproduces itself, and thus, it conceals the signature. However, there are many countermeasures against them\cite{moser2007limits}\cite{egele2012survey}. For example, memory dumping and scanning later is recently one of the trendy detection methods\footnote{Especially, after boot level rootkits.}. It is quite reasonable because while the malware is running over memory, it is naked and vulnerable.
@@ -10,17 +10,17 @@ Even if these lists include every possible signature, malware can evade signatur
 In this thesis, we are seeking possibilities to enhance "Disk-memory level" to cache level. It is a pretty novel contribution to the computer security field because there have been a few works, so far, about what we are searching for.
 
 
-\subsection{Keywords}
+\section{Keywords}
 Security, Malware Design, Cache Oriented Polymorphism, Cache Coherency, Malware Evasion, Code Obfuscation
 
-\subsection{Problem description}
+\section{Problem description}
 The conventional PC architecture is now which security researchers, developers and malware authors familiar with. However, the density of development spreads around other architecture instead of common PC arch.. For example, mobile devices recently have much higher profile at this point comparing with our conventional desktop systems.Besides, hardware platforms especially for mobile devices are increasing in complexity and sophistication with the use of multi-processor systems becoming common place as well as the use of many layer  memory architectures, such as NUMA, caches for performance and efficiency(esp. on power consumption).This opens new opportunities for obfuscation and concealment of malware.
 
 Apart from the basic signature-based methods known to be ineffective against unknown threats, there are two mainstream techniques to detect malicious code which are called static and dynamic analysis, but indeed, the main stream method is still signature-based ones. Static analysis identifies malware mainly with code flow graph and data flow graph obtained from static information, while dynamic analysis is taking account dynamic execution features. 
 
 There are number of techniques for obfuscating, some relying on the precise properties of the hardware and its behaviours, that can render static analysis ineffective as well as signature analysis. Some of the key techniques deployed by malware authors for obfuscation do include race condition and exploitation of memory uses. The detection algorithms and techniques have been adequately worked so far because of the simplicity of our conventional architectures and using generic PC architecture despite these systems also started to become more heterogeneous(e.g. Intel Haswell). However, with increasing deployment of multi-processor computing and other parallel processing devices, the implementation of local memories like NUMA and caches are increasing in order to increase efficiently and performance and decrease power consumption. It is obviously clear that these features will also be exploited by malware authors at some point. The project seeks to investigate the feasibility of such malware both from a theoretical viewpoint and through the development of a proof-of-concept.
 
-\subsection{Justification, motivation and benefits}
+\section{Justification, motivation and benefits}
 If malware designing is superficially considered, you could fall in the usual fallacy that it is not beneficial, and maybe it is malicious. However, if we can design it, there is always a more skillful malicious author who might already abuse this vulnerability on the black side of the moon. The duty we are actually obligated to discover these vulnerabilities and design countermeasure against them. In this way, our blessed motivation is finding possible vulnerabilities, and mitigate or eliminate their risk. Otherwise; if we are lucky, we might detect these zero time vulnerability attacks, yet it could be too late to fix and analyze them. Besides, for example, some of the most sensational and beneficial papers(\cite{moser2007limits},\cite{cavallaro2008limits},\cite{egele2012survey}) are criticizing malware with designing them as like as we do, and their values over computer security are undoubted today. 
 
 In short, we are building brakes. Sometimes they are that thing slow us down, or sometimes they even stop us in our tracks. However, they are actually there to enable us to go faster and secure.
@@ -28,7 +28,7 @@ In short, we are building brakes. Sometimes they are that thing slow us down, or
 \subsection{Research questions}\label{research:questions}
 \begin{enumerate}
 	\item How can an an obfuscation method, which exploits caches to conceal itself from memory scanning systems, be designed for tightly coupled and multiprocessor systems?
-	\item How can the efficiency optimisations of common cache coherency protocols found in multiprocessor and multi-core systems be exploited for probabilistically hiding and obfuscating malware?
+	\item How can the efficiency optimisations of common cache coherency protocols found in tightly coupled multiprocessor systems be exploited for probabilistically hiding and obfuscating malware?
 	\item How can we execute deobfuscated code on the Harvard Architecture without leakage to upper memories?
 \end{enumerate}
 
