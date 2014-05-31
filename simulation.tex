@@ -28,9 +28,12 @@ class Cache(object):
         self.addr_size = 32
         self.cache = list()
         self.line = size / (sets * block_size)
-        self.block_addr_len = self.__calculate_addr_len(self.block_size)
-        self.line_addr_len = self.__calculate_addr_len(self.line)
-        self.tag_addr_len = self.addr_size - self.block_addr_len - self.line_addr_len
+        self.block_addr_len =\
+         self.__calculate_addr_len(self.block_size)
+        self.line_addr_len = \
+        self.__calculate_addr_len(self.line)
+        self.tag_addr_len = self.addr_size -\
+         self.block_addr_len - self.line_addr_len
         self.super = None
         self.__build()
 
@@ -63,15 +66,18 @@ class Cache(object):
         mask = (1 << 32) - 1
         query = {"address": address,
                  "tag": address >> (self.addr_size - self.tag_addr_len),
-                 "index": (address >> (self.block_addr_len)) << ((self.addr_size - self.line_addr_len) & mask) >> (
+                 "index": (address >> (self.block_addr_len)) <<\
+                  ((self.addr_size - self.line_addr_len) & mask) >> (
                      self.addr_size - self.line_addr_len),
-                 "block": ((address << (self.addr_size - self.block_addr_len)) & mask) >> (
+                 "block": ((address << (self.addr_size - self.block_addr_len))\
+                  & mask) >> (
                      self.addr_size - self.block_addr_len)}
         return query
 
     def isvalid(self, query):
         for i in range(self.cache[query["index"]].sets):
-            if (self.cache[query["index"]].lines[i]["tag"] is query["tag"]) and (self.cache[query["index"]].lines[i]['valid'] is True):
+            if (self.cache[query["index"]].lines[i]["tag"] is query["tag"]) and\
+             (self.cache[query["index"]].lines[i]['valid'] is True):
                 self.cache[query["index"]].used = i
                 return self.cache[query["index"]].lines[i]
         return False
@@ -116,7 +122,8 @@ class Cache(object):
 
 class CacheLine(object):
     #CacheLine is a Class for defining each cache blocks in cache hierarchy
-    #During initialization it build a static block of given sets sized array with given block size as byte
+    #During initialization it build a static block of given 
+    #sets sized array with given block size as byte
     #It has only one method to fill remote block in.
     def __init__(self, index, size, sets):
         self.size = size
@@ -139,7 +146,8 @@ class CacheLine(object):
         #Build a line with default variables.
         #data is a byte array which is given length with size
         data = bytearray(self.size)
-        return {"tag": 0, "valid": False, "dirty": False, "used": False, "data": data}
+        return {"tag": 0, "valid": False, "dirty":\
+         False, "used": False, "data": data}
 
     def mark_used(self, line):
         self.used = line
