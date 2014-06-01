@@ -11,6 +11,7 @@ In this thesis, we are seeking possibilities to enhance "Disk-memory level" to c
 
 
 \section{Problem description}
+
 The conventional PC architecture is now which security researchers, developers and malware authors familiar with. However, the density of development spreads around other architecture instead of common PC arch.. For example, mobile devices recently have much higher profile at this point comparing with our conventional desktop systems.Besides, hardware platforms especially for mobile devices are increasing in complexity and sophistication with the use of multi-processor systems becoming common place as well as the use of many layer  memory architectures, such as NUMA, caches for performance and efficiency(esp. on power consumption).This opens new opportunities for obfuscation and concealment of malware.
 
 Apart from the basic signature-based methods known to be ineffective against unknown threats, there are two mainstream techniques to detect malicious code which are called static and dynamic analysis, but indeed, the main stream method is still signature-based ones. Static analysis identifies malware mainly with code flow graph and data flow graph obtained from static information, while dynamic analysis is taking account dynamic execution features. 
@@ -18,6 +19,7 @@ Apart from the basic signature-based methods known to be ineffective against unk
 There are number of techniques for obfuscating, some relying on the precise properties of the hardware and its behaviours, that can render static analysis ineffective as well as signature analysis. Some of the key techniques deployed by malware authors for obfuscation do include race condition and exploitation of memory uses. The detection algorithms and techniques have been adequately worked so far because of the simplicity of our conventional architectures and using generic PC architecture despite these systems also started to become more heterogeneous(e.g. Intel Haswell). However, with increasing deployment of multi-processor computing and other parallel processing devices, the implementation of local memories like NUMA and caches are increasing in order to increase efficiently and performance and decrease power consumption. It is obviously clear that these features will also be exploited by malware authors at some point. The project seeks to investigate the feasibility of such malware both from a theoretical viewpoint and through the development of a proof-of-concept.
 
 \section{Justification, motivation and benefits}
+
 If malware designing is superficially considered, you could fall in the usual fallacy that it is not beneficial, and maybe it is malicious. However, if we can design it, there is always a more skillful malicious author who might already abuse this vulnerability on the black side of the moon. The duty we are actually obligated to discover these vulnerabilities and design countermeasure against them. In this way, our blessed motivation is finding possible vulnerabilities, and mitigate or eliminate their risk. Otherwise; if we are lucky, we might detect these zero time vulnerability attacks, yet it could be too late to fix and analyze them. Besides, for example, some of the most sensational and beneficial papers(\cite{moser2007limits},\cite{cavallaro2008limits},\cite{egele2012survey}) are criticizing malware with designing them as like as we do, and their values over computer security are undoubted today. 
 
 In short, we are building brakes. Sometimes they are that thing slow us down, or sometimes they even stop us in our tracks. However, they are actually there to enable us to go faster and secure.
@@ -31,6 +33,7 @@ In short, we are building brakes. Sometimes they are that thing slow us down, or
 
 
 \section{Choice of methods}
+
 	In order to solve our problems, we followed particular research methodologies for each question.
 
 	In the first question, we limited the question with tightly coupled and multi-processor systems, and we chose the design science methodology to follow during our work and we supported it with literature review methodology. First, we started to seek cache memory architecture to understand how they work, interact with each other and affect performance. Then, we classified them in a proper way, and we noted all remarkable points in background studies chapter section 1. Besides, we try to seek practical implementation on new ARM based boards. We obtained ARM little big multi-processor based Samsung Exynos 5410 and 5420 systems on the chip boards to explore their cache memory implementation. Next, we proposed an attack vector under a constant isolated theoretical system which has the most basic tightly coupled, multiprocessor and Von Neumann architecture with write back cache policy and without cache coherency. At the end of the solution, we clearly stated possible implementation problems which we can encounter during implementation and gave references to the next questions.
@@ -41,6 +44,7 @@ In short, we are building brakes. Sometimes they are that thing slow us down, or
 	For the third question, at the end of the literature overview, we found a similar cases\cite{sparks2005shadow}\cite{yan2008revealing}, which can empower our solution. The problem which we try to solve is not what they are trying to do, but it simultaneously solved our problem. We built our model and concluded interpretation approach which has been seen in previous studies with our own model. When we designed our own model, we used our attack vector which we proposed in Chapter 4 and merge it with a interpreter to execute the code in DCache, which we can access, load and store, but we cannot execute. At the end of the studies, we discussed and criticized practical issues which we can fall during the implementation of our theoretical model. 
 
 \section{Thesis Outline}
+
 	This section provide a brief summary listing of the content presented in this thesis. The listing is based on chapters, where each chapters and its content is described. First the related works and background studies are presented. Then, our designs is presented as well as further work and conclusion in a sequence. At the end of the thesis, we attached the simulation code which we wrote and the experiments results by Booksim v2.0 to appendix.
 	
 \begin{itemize}
