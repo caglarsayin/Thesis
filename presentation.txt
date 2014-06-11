@@ -1,0 +1,19 @@
+presentation 
+Introduction page
+Beggining 
+	What is obfuscation
+	How was it before
+	How was counter measures
+	What is memory observation
+
+Body
+	What did we propose breifly
+	Our Attack vector
+	implemtation problems
+		Coherency
+		Harward Architecture
+	Coherency attack
+	Harward architecture bypass
+
+Conclusion
+
