@@ -102,6 +102,8 @@ University of Gjovik \\ % Your institution for the title page
 
 \begin{frame}
 \frametitle{Overview} % Table of contents slide, comment this block out to remove it
+\setcounter{tocdepth}{1}
+
 \tableofcontents % Throughout your presentation, if you choose to use \section{} and \subsection{} commands, these will automatically be printed on this slide as an overview of your presentation
 \end{frame}
 
@@ -113,17 +115,14 @@ University of Gjovik \\ % Your institution for the title page
 \section{Introduction} % Sections can be created in order to organize your presentation into discrete blocks, all sections and subsections are automatically printed in the table of contents as an overview of the talk
 %------------------------------------------------
 
-\subsection{Subsection Example} % A subsection can be created just before a set of slides with a common theme to further break down your presentation into chunks
-
+\subsection{Rootkits and APTs} 
 \begin{frame}
 \frametitle{Paragraphs of Text}
 Sed iaculis dapibus gravida. Morbi sed tortor erat, nec interdum arcu. Sed id lorem lectus. Quisque viverra augue id sem ornare non aliquam nibh tristique. Aenean in ligula nisl. Nulla sed tellus ipsum. Donec vestibulum ligula non lorem vulputate fermentum accumsan neque mollis.\\~\\
 
 Sed diam enim, sagittis nec condimentum sit amet, ullamcorper sit amet libero. Aliquam vel dui orci, a porta odio. Nullam id suscipit ipsum. Aenean lobortis commodo sem, ut commodo leo gravida vitae. Pellentesque vehicula ante iaculis arcu pretium rutrum eget sit amet purus. Integer ornare nulla quis neque ultrices lobortis. Vestibulum ultrices tincidunt libero, quis commodo erat ullamcorper id.
 \end{frame}
-
-%------------------------------------------------
-
+\subsection{Obfuscation mechanisms}
 \begin{frame}
 \frametitle{Bullet Points}
 \begin{itemize}
@@ -134,9 +133,7 @@ Sed diam enim, sagittis nec condimentum sit amet, ullamcorper sit amet libero. A
 \item Vestibulum faucibus velit a augue condimentum quis convallis nulla gravida
 \end{itemize}
 \end{frame}
-
-%------------------------------------------------
-
+\subsection{In-memory hiding techniques}
 \begin{frame}
 \frametitle{Blocks of Highlighted Text}
 \begin{block}{Block 1}
@@ -151,8 +148,7 @@ Pellentesque sed tellus purus. Class aptent taciti sociosqu ad litora torquent p
 Suspendisse tincidunt sagittis gravida. Curabitur condimentum, enim sed venenatis rutrum, ipsum neque consectetur orci, sed blandit justo nisi ac lacus.
 \end{block}
 \end{frame}
-
-%------------------------------------------------
+\subsection{Detection of obfuscation mechanisms}
 
 \begin{frame}
 \frametitle{Multiple Columns}
@@ -175,7 +171,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lectus nisl, ul
 %------------------------------------------------
 \section{Hide-and-Seek}
 %------------------------------------------------
-
+\subsection{Modern multi-core(NUMA) architectures} 
 \begin{frame}
 \frametitle{Table}
 \begin{table}
@@ -191,18 +187,14 @@ Treatment 3 & 0.0009271 & 0.296 \\
 \caption{Table caption}
 \end{table}
 \end{frame}
-
-%------------------------------------------------
-
+\subsection{Cache memory structures on current architectures}
 \begin{frame}
 \frametitle{Theorem}
 \begin{theorem}[Mass--energy equivalence]
 $E = mc^2$
 \end{theorem}
 \end{frame}
-
-%------------------------------------------------
-
+\subsection{Cost of memory observation in concurrent architectures}
 \begin{frame}[fragile] % Need to use the fragile option when verbatim is used in the slide
 \frametitle{Verbatim}
 \begin{example}[Theorem Slide Code]
@@ -215,9 +207,7 @@ $E = mc^2$
 \end{frame}\end{verbatim}
 \end{example}
 \end{frame}
-
-%------------------------------------------------
-
+\subsection{Hiding(and migrating) compact code from scanning and random searches on multi-core NUMA architectures}
 \begin{frame}
 \frametitle{Figure}
 Uncomment the code on this slide to include your own image from the same directory as the template .TeX file.
@@ -225,8 +215,7 @@ Uncomment the code on this slide to include your own image from the same directo
 %\includegraphics[width=0.8\linewidth]{test}
 %\end{figure}
 \end{frame}
-
-%------------------------------------------------
+\subsection{The Harvard Architecture as an obfuscation enabler: Using interpreted compact code}
 
 \begin{frame}[fragile] % Need to use the fragile option when verbatim is used in the slide
 \frametitle{Citation}
@@ -235,13 +224,68 @@ An example of the \verb|\cite| command to cite within the presentation:\\~
 This statement requires citation \cite{p1}.
 \end{frame}
 
+
+
 %------------------------------------------------
 \section{Proof of Concept}
 %------------------------------------------------
-
+\subsection{Attack vector design}
+\begin{frame}
+\frametitle{Bullet Points}
+\begin{itemize}
+\item Lorem ipsum dolor sit amet, consectetur adipiscing elit
+\item Aliquam blandit faucibus nisi, sit amet dapibus enim tempus eu
+\item Nulla commodo, erat quis gravida posuere, elit lacus lobortis est, quis porttitor odio mauris at libero
+\item Nam cursus est eget velit posuere pellentesque
+\item Vestibulum faucibus velit a augue condimentum quis convallis nulla gravida
+\end{itemize}
+\end{frame}
+\subsection{Coherency attack}
+\begin{frame}
+\frametitle{Bullet Points}
+\begin{itemize}
+\item Lorem ipsum dolor sit amet, consectetur adipiscing elit
+\item Aliquam blandit faucibus nisi, sit amet dapibus enim tempus eu
+\item Nulla commodo, erat quis gravida posuere, elit lacus lobortis est, quis porttitor odio mauris at libero
+\item Nam cursus est eget velit posuere pellentesque
+\item Vestibulum faucibus velit a augue condimentum quis convallis nulla gravida
+\end{itemize}
+\end{frame}
+\subsection{Harvard Architecture}
+\begin{frame}
+\frametitle{Bullet Points}
+\begin{itemize}
+\item Lorem ipsum dolor sit amet, consectetur adipiscing elit
+\item Aliquam blandit faucibus nisi, sit amet dapibus enim tempus eu
+\item Nulla commodo, erat quis gravida posuere, elit lacus lobortis est, quis porttitor odio mauris at libero
+\item Nam cursus est eget velit posuere pellentesque
+\item Vestibulum faucibus velit a augue condimentum quis convallis nulla gravida
+\end{itemize}
+\end{frame}
+\subsection{Realisation and implementation issues}
+\begin{frame}
+\frametitle{Bullet Points}
+\begin{itemize}
+\item Lorem ipsum dolor sit amet, consectetur adipiscing elit
+\item Aliquam blandit faucibus nisi, sit amet dapibus enim tempus eu
+\item Nulla commodo, erat quis gravida posuere, elit lacus lobortis est, quis porttitor odio mauris at libero
+\item Nam cursus est eget velit posuere pellentesque
+\item Vestibulum faucibus velit a augue condimentum quis convallis nulla gravida
+\end{itemize}
+\end{frame}
 %------------------------------------------------
 \section{Conclusion and Future Work}
 %------------------------------------------------
+\begin{frame}
+\frametitle{Bullet Points}
+\begin{itemize}
+\item Lorem ipsum dolor sit amet, consectetur adipiscing elit
+\item Aliquam blandit faucibus nisi, sit amet dapibus enim tempus eu
+\item Nulla commodo, erat quis gravida posuere, elit lacus lobortis est, quis porttitor odio mauris at libero
+\item Nam cursus est eget velit posuere pellentesque
+\item Vestibulum faucibus velit a augue condimentum quis convallis nulla gravida
+\end{itemize}
+\end{frame}
 
 
 \begin{frame}
