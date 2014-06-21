@@ -82,23 +82,28 @@
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
 %----------------------------------------------------------------------------------------
-
 \title[Cache Oriented Obfuscation]{Obfuscating Malware through Cache Memory Architecture Features} % The short title appears at the bottom of every slide, the full title is only on the title page
 
 \author{Caglar Sayin} % Your name
 \institute[HIG] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
 {
-University of Gjovik \\ % Your institution for the title page
+Gjovik University \\ % Your institution for the title page
 \medskip
 \textit{me@caglarsay.in} % Your email address
 }
-\date{\today} % Date, can be changed to a custom date
+\date{June 19, 2014} % Date, can be changed to a custom date
+
+%----------------------------------------------------------------------------------------
+%	PRESENTATION Begins
+%----------------------------------------------------------------------------------------
 
 \begin{document}
 
 \begin{frame}
 \titlepage % Print the title page as the first slide
 \end{frame}
+
+%------------------------------------------------
 
 \begin{frame}
 \frametitle{Overview} % Table of contents slide, comment this block out to remove it
@@ -111,198 +116,597 @@ University of Gjovik \\ % Your institution for the title page
 %	PRESENTATION SLIDES
 %----------------------------------------------------------------------------------------
 
-%------------------------------------------------
-\section{Introduction} % Sections can be created in order to organize your presentation into discrete blocks, all sections and subsections are automatically printed in the table of contents as an overview of the talk
-%------------------------------------------------
-
-\subsection{Rootkits and APTs} 
 \begin{frame}
-\frametitle{Paragraphs of Text}
-Sed iaculis dapibus gravida. Morbi sed tortor erat, nec interdum arcu. Sed id lorem lectus. Quisque viverra augue id sem ornare non aliquam nibh tristique. Aenean in ligula nisl. Nulla sed tellus ipsum. Donec vestibulum ligula non lorem vulputate fermentum accumsan neque mollis.\\~\\
-
-Sed diam enim, sagittis nec condimentum sit amet, ullamcorper sit amet libero. Aliquam vel dui orci, a porta odio. Nullam id suscipit ipsum. Aenean lobortis commodo sem, ut commodo leo gravida vitae. Pellentesque vehicula ante iaculis arcu pretium rutrum eget sit amet purus. Integer ornare nulla quis neque ultrices lobortis. Vestibulum ultrices tincidunt libero, quis commodo erat ullamcorper id.
+	\frametitle{What do we propose?}
+	\Large
+	Highly advanced APT Obfuscation method through cache memory features which can be availably empowered by complexity of concurrency.
 \end{frame}
+
+%------------------------------------------------
+\section{Background Studies} 
+%------------------------------------------------
+\subsection{APTs and Rootkits} 
+%------------------------------------------------
+
+\begin{frame}
+	\frametitle{Advanced Persistent Threats}
+	\begin{itemize}
+		\item No Standard Definition of APT
+		\item Set of Orchestrated Activities to Produce Stealth and Persistent Threats
+		\item Concentration of the Common Advanced Attack Vectors
+		\item Generally Targeted
+		\item APT loves Rootkit
+		\item 3\% of all known malware 
+	\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+	\frametitle{Rootkits}
+	\begin{itemize}
+		\item The original definition is the software kits to obtain root access maliciously or innocently.
+		\item Either Angel or Devil
+		\item To Break Integrity of the System
+		\item One of the Most important milestone is "Blue Pill" by Joanna Rutkowska.
+		\item Two concrete class depending on privilege level:\\ \centerline{{Kernel Mode or User Mode Rootkit}}
+	\end{itemize}
+\end{frame}
+
+%------------------------------------------------
 \subsection{Obfuscation mechanisms}
+%------------------------------------------------
+
 \begin{frame}
-\frametitle{Bullet Points}
-\begin{itemize}
-\item Lorem ipsum dolor sit amet, consectetur adipiscing elit
-\item Aliquam blandit faucibus nisi, sit amet dapibus enim tempus eu
-\item Nulla commodo, erat quis gravida posuere, elit lacus lobortis est, quis porttitor odio mauris at libero
-\item Nam cursus est eget velit posuere pellentesque
-\item Vestibulum faucibus velit a augue condimentum quis convallis nulla gravida
-\end{itemize}
+	\frametitle{Code Obfuscation}
+	\begin{itemize}
+		\LARGE
+		\item Stub-Body-Tail Based Obfuscations
+		\item Control Flow Obfuscation
+	\end{itemize}
 \end{frame}
-\subsection{In-memory hiding techniques}
-\begin{frame}
-\frametitle{Blocks of Highlighted Text}
-\begin{block}{Block 1}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lectus nisl, ultricies in feugiat rutrum, porttitor sit amet augue. Aliquam ut tortor mauris. Sed volutpat ante purus, quis accumsan dolor.
-\end{block}
 
-\begin{block}{Block 2}
-Pellentesque sed tellus purus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vestibulum quis magna at risus dictum tempor eu vitae velit.
-\end{block}
+%------------------------------------------------
+\begin{frame}[plain]
+	\frametitle{Stub-Body-Tail Based Obfuscations - Polymorphism}
+	\begin{columns}[c] % The "c" option specifies centered vertical alignment while the "t" option is used for top vertical alignment
 
-\begin{block}{Block 3}
-Suspendisse tincidunt sagittis gravida. Curabitur condimentum, enim sed venenatis rutrum, ipsum neque consectetur orci, sed blandit justo nisi ac lacus.
-\end{block}
-\end{frame}
-\subsection{Detection of obfuscation mechanisms}
-
-\begin{frame}
-\frametitle{Multiple Columns}
-\begin{columns}[c] % The "c" option specifies centered vertical alignment while the "t" option is used for top vertical alignment
-
-\column{.45\textwidth} % Left column and width
-\textbf{Heading}
-\begin{enumerate}
-\item Statement
-\item Explanation
-\item Example
-\end{enumerate}
+\column{.70\textwidth} % Left column and width
+\begin{description}
+	\small
+	\item[Stub] Deobfuscate and obfuscate code. Detectable because of being plain text.
+	\item[Body] Payload, and it is obfuscated code.
+	\item[Tail] Regeneration stub section for next time.
+\end{description}
 
 \column{.5\textwidth} % Right column and width
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lectus nisl, ultricies in feugiat rutrum, porttitor sit amet augue. Aliquam ut tortor mauris. Sed volutpat ante purus, quis accumsan dolor.
-
+	\begin{figure}
+		\includegraphics[width=1\linewidth]{img/code_illustration.png}
+	\end{figure}
 \end{columns}
 \end{frame}
 
 %------------------------------------------------
-\section{Hide-and-Seek}
+
+\begin{frame} 
+\frametitle{Control Flow Obfuscation - Metamorphism}
+\begin{itemize}
+\item Register Swaping
+\item Register Exchanging
+\item Filling NOP instruction randomly
+\item Build code semantic with JMP or CALL Instructions
+\item Independent Code Order Exchanging 
+\item Inserting junk codes and loops
+\end{itemize}
+\end{frame}
+
 %------------------------------------------------
-\subsection{Modern multi-core(NUMA) architectures} 
+\begin{frame}[plain, fragile] 
+\frametitle{Control Flow Obfuscation - Metamorphism}
+Task f(x) = 10 * sin(2 * x)
+\begin{example}[Payload Code]
+	\begin{verbatim}
+		t = x
+		t = t * 2
+		t = sin(t) 
+		t = t * 10\end{verbatim}
+	\end{example}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}[plain, fragile] 
+\frametitle{Control Flow Obfuscation - Metamorphism}
+Task f(x) = 10 * sin(2 * x), and lets change a bit order
+\begin{example}[Payload Code]
+	\begin{verbatim}
+		t = 2 * x 
+		a = sin(t) 
+		t = 10 * a\end{verbatim}
+	\end{example}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}[plain, fragile] 
+\frametitle{Control Flow Obfuscation - Metamorphism}
+Task f(x) = 10 * sin(2 * x), but it is semantically equal to f(x) = sin(x)*cos(x)*20, so
+\begin{example}[Payload Code]
+	\begin{verbatim}
+		t = x
+		a = sin(t)
+		b = cos(t)
+		t = a * b
+		t = t * 20\end{verbatim}
+	\end{example}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}[plain, fragile] 
+\frametitle{Control Flow Obfuscation - Metamorphism}
+Task f(x) = sin(x)*cos(x)*20, and we can change a bit order while preserving semantic
+\begin{example}[Payload Code]
+	\begin{verbatim}
+		b = cos(x)
+		t = 20 * b
+		a = sin(x)
+		t = t * a\end{verbatim}
+	\end{example}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame} % Need to use the fragile option when verbatim is used in the slide
+\frametitle{Hybrid Approach}
+\begin{itemize}
+	\item It is basically Polymorphic Obfuscation.
+	\item Stub part is obfuscated with metamorphism by tail section.
+	\item It is one of the most common method with APT malware.
+	\item They both empower each other's weakness.
+\end{itemize}
+\end{frame}
+
+\begin{frame} % Need to use the fragile option when verbatim is used in the slide
+\frametitle{On the Other Side of the Coin}
+\begin{itemize}
+	\item Obfuscation function is totally rocket science
+	\item Indistinguishability Obfuscator Function Proposed by Garg Et.al.
+	\item This function are also implementable for functional encryption.
+	\item Homomorphic Functions looks like the future of function.
+	\item Most Practical Example using XOR :).
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+\subsection{In-memory hiding techniques}
+%------------------------------------------------
+
 \begin{frame}
-\frametitle{Table}
-\begin{table}
-\begin{tabular}{l l l}
-\toprule
-\textbf{Treatments} & \textbf{Response 1} & \textbf{Response 2}\\
-\midrule
-Treatment 1 & 0.0003262 & 0.562 \\
-Treatment 2 & 0.0015681 & 0.910 \\
-Treatment 3 & 0.0009271 & 0.296 \\
-\bottomrule
+	\frametitle{In-memory hiding techniques}
+	\begin{block}{TLB Splitting}
+		Desynchronizing separated TLBs in the same system(DATA TLB and Instruction TLB). It is really useful for Rootkit to conceal specific region from read operations. 
+	\end{block}
+
+	\begin{block}{Architecture and OS Related MMU Evasion Methods}
+		\small{Because of the lack of privileged architecture of HW or OS, anybody can access control instructions, also the rootkit which works on kernel mode can access control instructions of MMU. Then, They can create their own NUMA - private memory sections. }
+	\end{block}
+
+	\begin{block}{Time of Check, Time of Use attack}
+		Driver Jumping Attack is one of the example of this kind.
+	\end{block}
+\end{frame}
+
+%------------------------------------------------
+
+%------------------------------------------------
+\subsection{Multi-Processing Malware Approach}
+%------------------------------------------------
+\begin{frame}
+	\frametitle{Multi-Processing Malware Approach}
+	\begin{itemize}
+		\item Multi-Processing Malware has extreme detection cost in concurrent architectures
+		\item The common aspect is stitching lots of benign code in a semantic order
+		\item Concurrent malware processing require concurrent memory observation
+		\item Concurrent memory observation cost increases exponentially.
+		\item It is pretty hot field for security researchers
+	\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+\subsection{Detection of Obfuscated Malware}
+%------------------------------------------------
+
+\begin{frame}
+	\frametitle{Detection of Obfuscated Malware}
+	\begin{itemize}
+		\item Control Flow and Data Flow Graphs
+		\item Entropy Analysis
+		\item Dynamic Methods Like Emulating, Debugging, Sandboxing
+		\item Behavioural Analysis
+		\item Memory Inspection
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Memory Inspection}
+	\begin{itemize}
+		\item Polymorphism is weak against memory inspection because it is disk to memory obfuscation.
+		\item Most of the rootkit scanners are based on memory inspection
+		\item If you switch off TLB usage during inspection, It can solves TLB splitting
+		\item Hardware Based Memory Inspector getting common (e.g CoPilot, GPU based example by C. Tsopokis)
+		\item it is still not combined with dynamic approaches or real time approach
+	\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%------------------------------------------------
+\section{Cache Oriented Obfuscation}
+%------------------------------------------------
+\begin{frame}
+	\frametitle{The First Answer}
+	\huge{\centerline{Cache Oriented Obfuscation}}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}
+	\frametitle{Tightly Coupled Memory Systems}
+		\begin{figure}
+			\includegraphics[width=0.6\linewidth]{img/tightly_coupled_memories.png}
+		\end{figure}
+\end{frame}
+
+%------------------------------------------------
+
+\subsection{Cache Memory Internals}
+\begin{frame}
+	\frametitle{How Do Caches Work?}
+	\Large{\centerline{The Answer is Locality}}
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}[plain]
+	\frametitle{Real Memory Locality Graph}
+		\begin{figure}
+			\includegraphics[width=0.9\linewidth]{img/localitygraph.jpg}
+		\end{figure}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}[plain]
+	\frametitle{Human Friendly Memory Locality Graph}
+		\begin{figure}
+			\includegraphics[width=0.9\linewidth]{img/localitygraph2.jpg}
+		\end{figure}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}[plain]
+	\frametitle{Human Friendly Memory Locality Graph}
+		\begin{figure}
+			\includegraphics[width=1\linewidth]{img/cacheinternals.jpg}
+		\end{figure}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+	\frametitle{The Cache Policies}
+	\begin{itemize}
+		\item Replacement Policies: LRU, Random, FIFO, Not Recently Used. 
+		\item Write Policies: \textbf{Write Back}, Write Through
+		\item Allocation Policies: No Write Allocate, Write Allocate
+	\end{itemize}
+
+\end{frame}
+
+%------------------------------------------------
+
+\subsection{The Design}
+\begin{frame}
+	\frametitle{The Design Highlights}
+	\begin{itemize}
+		\item It plays with rule of cache controller
+		\item Each design belongs a specific architecture
+		\item Cache size is the most important limitation
+		\item We proposed many small gadgets call each other with an order
+		\item It inherits the feature of polymorphism.
+		\item Body is called smaller gadgets which conserved in cache
+		\item Tail will invoke next gadget.
+		\item Theoretically, if you work in Ring 0, Nobody can interrupt your process.
+		\item In case of interruption, it is still not matter.
+	\end{itemize}
+
+\end{frame}
+
+\begin{frame}[plain]
+	\frametitle{Our Approaches on the Control Flows}
+		\begin{figure}
+			\includegraphics[width=1\linewidth]{img/control_flow.jpg}
+			\caption{1. Stepped Approach 2. All in Once Approach}
+
+		\end{figure}
+\end{frame}
+
+\subsection{Implementation Issues}
+\begin{frame}
+	\frametitle{Pitfalls and Fallacies}
+	\begin{itemize}
+		\item It is too much theoretical system
+		\item Cache Coherency is absent.
+		\item Real Systems are a lot more complicated and indeterministic.
+		\item Out-of-Order cpu can brake our stepped approach
+		\item Harvard Architecture leads a problem kind of TLB splitting
+	\end{itemize}
+\end{frame}
+
+
+
+
+
+
+
+%------------------------------------------------
+\section{Snoopy Cache Coherency Problem}
+%------------------------------------------------
+\begin{frame}
+	\frametitle{The Second Answer}
+	\huge{\centerline{Probabilistic Cache Coherency Attack}}
+\end{frame}
+
+%------------------------------------------------
+\subsection{What It is}
+\begin{frame}
+	\frametitle{Tightly Coupled Memory Systems}
+		\begin{figure}
+			\includegraphics[width=0.6\linewidth]{img/tightly_coupled_memories.png}
+		\end{figure}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}
+	\frametitle{Details about Snoopy Cache Coherency}
+	\begin{itemize}
+		\item Cache controllers are not simple anymore
+		\item There is a network between cache controllers
+		\item Each caches are obligated to snoop and log cache states
+		\item There are standard protocols to handle coherency with different simplicity levels such as MSI, MESI, MOSI
+		\item The systems consume more energy.
+		\item Traffic Filters can increase bandwidth enormously.
+	\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+\subsection{Snoopy Coherency Protocols}
+\begin{frame}[plain]
+	\frametitle{MSI Protocol}
+		\begin{figure}
+			\includegraphics[width=1\linewidth]{img/MSIstatediagram.jpg}
+		\end{figure}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}[plain]
+	\frametitle{MOESI Protocol}
+		\begin{figure}
+			\includegraphics[width=1\linewidth]{img/MOESIstatediagram.jpg}
+		\end{figure}
+\end{frame}
+
+%------------------------------------------------
+
+\subsection{Snoopy Coherency Weaknesses}
+\begin{frame}
+	\frametitle{The Dark Side of the Efficiency Optimizations}
+	\begin{enumerate}
+		\Large
+		\item Firm Vertical Line Fetching Direction
+		\item The Network Latency
+	\end{enumerate}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}[plain]
+	\frametitle{Firm Vertical Line Fetching Direction}
+		\begin{figure}
+			\includegraphics[width=1\linewidth]{img/vertical_instruction_iteration.jpg}
+		\end{figure}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}[plain]
+	\frametitle{The Network Latency}
+		\begin{figure}
+			\includegraphics[width=1\linewidth]{img/memory_latency.png}
+			\caption{2012 Sandy Bridge Latency illustration by Intel}
+		\end{figure}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}[plain]
+	\frametitle{The Congestion Effect over The Network Latency}
+		\begin{figure}
+			\includegraphics[width=1\linewidth]{img/latency_graph.jpg}
+		\end{figure}
+\end{frame}
+
+%------------------------------------------------
+
+\subsection{Simulation Results}
+\begin{frame}[plain]
+	\frametitle{Simulation Topology}
+		\begin{figure}
+			\includegraphics[width=0.8\linewidth]{img/simulation.jpg}
+		\end{figure}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}
+	\frametitle{Latency Simulation Results}
+\begin{table}[h]
+	\small
+\begin{tabular}{|l|c|c|c|c|}
+	\hline
+                  & \begin{tabular}[c]{@{}c@{}}Packet latency\\ Min/Avg/Max\end{tabular} & \begin{tabular}[c]{@{}c@{}}Network latency\\ Min/Avg/Max\end{tabular} & \begin{tabular}[c]{@{}c@{}}Flit latency\\ Min/Avg/Max\end{tabular} \\ \hline
+Crowded 2\%            & 164/68045/171627                                                     & 13/417/1487                                                           & 13/353/1487                                                       \\ \hline
+Small 2\%            & 8/72/216                                                             & 8/72/216                                                              & 8/72/216                                                          \\ \hline
+Crowded 4\%            & 15698/178598/458108                                                  & 13/410/1736                                                           & 13/353/1736         \\ \hline
+Small 4\%            & 8/322/1273                                                           & 8/129/376                                                             & 8/129/376        \\ \hline
 \end{tabular}
-\caption{Table caption}
 \end{table}
 \end{frame}
-\subsection{Cache memory structures on current architectures}
-\begin{frame}
-\frametitle{Theorem}
-\begin{theorem}[Mass--energy equivalence]
-$E = mc^2$
-\end{theorem}
-\end{frame}
-\subsection{Cost of memory observation in concurrent architectures}
-\begin{frame}[fragile] % Need to use the fragile option when verbatim is used in the slide
-\frametitle{Verbatim}
-\begin{example}[Theorem Slide Code]
-\begin{verbatim}
-\begin{frame}
-\frametitle{Theorem}
-\begin{theorem}[Mass--energy equivalence]
-$E = mc^2$
-\end{theorem}
-\end{frame}\end{verbatim}
-\end{example}
-\end{frame}
-\subsection{Hiding(and migrating) compact code from scanning and random searches on multi-core NUMA architectures}
-\begin{frame}
-\frametitle{Figure}
-Uncomment the code on this slide to include your own image from the same directory as the template .TeX file.
-%\begin{figure}
-%\includegraphics[width=0.8\linewidth]{test}
-%\end{figure}
-\end{frame}
-\subsection{The Harvard Architecture as an obfuscation enabler: Using interpreted compact code}
 
-\begin{frame}[fragile] % Need to use the fragile option when verbatim is used in the slide
-\frametitle{Citation}
-An example of the \verb|\cite| command to cite within the presentation:\\~
+%------------------------------------------------
 
-This statement requires citation \cite{p1}.
+\subsection{Our Probabilistic Attack}
+\begin{frame}
+	\frametitle{The Essences of Our Attack}
+	 \begin{itemize}
+	 	\item Horizontal Arrangement except stub section
+	 	\item Lazy Cache Protocol 
+	 	\item It is as obfuscated as how late the network is.
+	 \end{itemize}
 \end{frame}
 
+%------------------------------------------------
+
+\begin{frame}
+	\frametitle{Horizantal Arrangement}
+\begin{exampleblock}{Arrangement Formula}
+\[
+	I(i)=m*(i\bmod{(nb)})+((\left \lfloor i/nb \right \rfloor*thread)+c)\bmod{m}
+\]
+\end{exampleblock}
+\begin{exampleblock}{Bijection condition}
+\[
+	\forall\: m\bmod thread = 1\ :\  I()\ is\ bijective\ function
+\]
+\end{exampleblock}
+\end{frame}
+
+\subsection{Simulation Results}
+\begin{frame}[plain]
+	\frametitle{Simulation Topology}
+		\begin{figure}
+			\includegraphics[width=1.1\linewidth]{img/overall_timing_attack.jpg}
+		\end{figure}
+\end{frame}
 
 
 %------------------------------------------------
-\section{Proof of Concept}
+\section{Harvard Architecture Problem}
 %------------------------------------------------
-\subsection{Attack vector design}
 \begin{frame}
-\frametitle{Bullet Points}
-\begin{itemize}
-\item Lorem ipsum dolor sit amet, consectetur adipiscing elit
-\item Aliquam blandit faucibus nisi, sit amet dapibus enim tempus eu
-\item Nulla commodo, erat quis gravida posuere, elit lacus lobortis est, quis porttitor odio mauris at libero
-\item Nam cursus est eget velit posuere pellentesque
-\item Vestibulum faucibus velit a augue condimentum quis convallis nulla gravida
-\end{itemize}
+	\frametitle{The Third Answer}
+	\huge{\centerline{Flying Over Interpreter}}
 \end{frame}
-\subsection{Coherency attack}
-\begin{frame}
-\frametitle{Bullet Points}
-\begin{itemize}
-\item Lorem ipsum dolor sit amet, consectetur adipiscing elit
-\item Aliquam blandit faucibus nisi, sit amet dapibus enim tempus eu
-\item Nulla commodo, erat quis gravida posuere, elit lacus lobortis est, quis porttitor odio mauris at libero
-\item Nam cursus est eget velit posuere pellentesque
-\item Vestibulum faucibus velit a augue condimentum quis convallis nulla gravida
-\end{itemize}
-\end{frame}
+%------------------------------------------------
+
 \subsection{Harvard Architecture}
 \begin{frame}
-\frametitle{Bullet Points}
-\begin{itemize}
-\item Lorem ipsum dolor sit amet, consectetur adipiscing elit
-\item Aliquam blandit faucibus nisi, sit amet dapibus enim tempus eu
-\item Nulla commodo, erat quis gravida posuere, elit lacus lobortis est, quis porttitor odio mauris at libero
-\item Nam cursus est eget velit posuere pellentesque
-\item Vestibulum faucibus velit a augue condimentum quis convallis nulla gravida
-\end{itemize}
-\end{frame}
-\subsection{Realisation and implementation issues}
-\begin{frame}
-\frametitle{Bullet Points}
-\begin{itemize}
-\item Lorem ipsum dolor sit amet, consectetur adipiscing elit
-\item Aliquam blandit faucibus nisi, sit amet dapibus enim tempus eu
-\item Nulla commodo, erat quis gravida posuere, elit lacus lobortis est, quis porttitor odio mauris at libero
-\item Nam cursus est eget velit posuere pellentesque
-\item Vestibulum faucibus velit a augue condimentum quis convallis nulla gravida
-\end{itemize}
-\end{frame}
-%------------------------------------------------
-\section{Conclusion and Future Work}
-%------------------------------------------------
-\begin{frame}
-\frametitle{Bullet Points}
-\begin{itemize}
-\item Lorem ipsum dolor sit amet, consectetur adipiscing elit
-\item Aliquam blandit faucibus nisi, sit amet dapibus enim tempus eu
-\item Nulla commodo, erat quis gravida posuere, elit lacus lobortis est, quis porttitor odio mauris at libero
-\item Nam cursus est eget velit posuere pellentesque
-\item Vestibulum faucibus velit a augue condimentum quis convallis nulla gravida
-\end{itemize}
+	\frametitle{Harvard Architecture}
+		\begin{figure}
+			\includegraphics[width=0.75\linewidth]{img/harvard.png}
+		\end{figure}
 \end{frame}
 
+%------------------------------------------------
 
+\subsection{Our Solution}
 \begin{frame}
-\frametitle{References}
-\footnotesize{
-\begin{thebibliography}{99} % Beamer does not support BibTeX so references must be inserted manually as below
-\bibitem[Smith, 2012]{p1} John Smith (2012)
-\newblock Title of the publication
-\newblock \emph{Journal Name} 12(3), 45 -- 678.
-\end{thebibliography}
-}
+	\frametitle{Harvard Architecture}
+		\begin{figure}
+			\includegraphics[width=0.75\linewidth]{img/Harvard_implementation.png}
+		\end{figure}
 \end{frame}
 
 %------------------------------------------------
 
 \begin{frame}
-\Huge{\centerline{The End}}
+	\frametitle{Flying over Interpreter}
+	\begin{itemize}
+		\item Sparks, S. \& Butler, J. 2005. Shadow walker
+		\item Yan, W., Zhang, Z., \& Ansari, N. 2008. Revealing packed malware
+		\item FORTH Language is a treasury legitimate interpreter
+		\item Instead of executing instruction, we will interrupt script a language.
+	\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+
+
+
+
+
+
+
+
+%------------------------------------------------
+\section{Ending}
+%------------------------------------------------
+	\subsection{Realisation and Implementation Issues}
+%------------------------------------------------
+
+	\begin{frame}
+		\frametitle{Bullet Points}
+		\begin{itemize}
+			\item Time Constrains was the most important reason.
+			\item The latency values are also proved in real system but results are not isolated.
+			\item Allocating one cpu forever could be signature to detect it. 
+			\item Stepped approach could be formulated.
+		\end{itemize}
+	\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+	\frametitle{Conclusion}
+	\begin{itemize}
+		\item Detection methods must be discussed in another work.
+		\item New architectures are always tricky.
+		\item However, with increasing deployment of multi-processor computing and other parallel processing devices, the implementation of local memories like NUMA and caches are increasing in order to increase efficiently and performance and decrease power consumption. 
+		\item It is obviously clear that these features will also be exploited by malware authors at some point. 
+	\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+	\frametitle{Thanks}
+	\Huge{\centerline{Thank You}}
+	\large \centerline{Especially thanks to Prof. Stephen Wolthusen}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+	\Huge{\centerline{The End}}
+	\centerline{and}
+	\Huge{\centerline{Questions}}
 \end{frame}
 
 %----------------------------------------------------------------------------------------
